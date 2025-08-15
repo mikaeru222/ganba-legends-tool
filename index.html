@@ -3,44 +3,35 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ガンバレジェンズ ツール（GitHub CSV自動読込＋連動）</title>
+<title>ガンバレジェンズ ツール（CSV自動読込＋運用ビュー連動）</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";margin:24px;line-height:1.6}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";margin:24px;line-height:1.6;background:#fff}
   h1{margin:0 0 8px}
   .muted{color:#666;font-size:14px;margin-bottom:16px}
   .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
   input[type="text"]{width:520px;max-width:100%}
-  input[type="number"]{width:120px}
   button{cursor:pointer;border:1px solid #ddd;padding:8px 12px;border-radius:6px;background:#fff}
   button:hover{background:#f5f5f5}
-  .ok{color:#0a7d2e}
-  .err{color:#b00020;white-space:pre-wrap}
-  table{border-collapse:collapse;width:100%;margin-top:12px}
+  .ok{color:#0a7d2e}.err{color:#b00020;white-space:pre-wrap}
+  table{border-collapse:collapse;width:100%;margin-top:8px}
   th,td{border:1px solid #ddd;padding:6px 8px;font-size:14px}
   th{background:#fafafa;text-align:left}
   .small{font-size:12px;color:#666}
-  .pill{display:inline-block;background:#eef;border:1px solid #ccd;padding:2px 8px;border-radius:999px;font-size:12px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:12px}
   .card{border:1px solid #e5e5e5;border-radius:8px;padding:12px;background:#fff}
   code{background:#f6f6f6;padding:1px 6px;border-radius:4px}
+  .right{float:right}
 </style>
 </head>
 <body>
   <h1>ガンバレジェンズ ツール</h1>
-  <div class="muted">GitHub上のCSVを自動で読み込み、どこからアクセスしても同じデータを表示します。<br>※CSVはヘッダ <code>pattern,cylinder,position,id,rarity</code> を想定。</div>
+  <div class="muted">GitHubのCSVを自動で取得 → 運用ビューに連動します。ヘッダは <code>pattern,cylinder,position,id,rarity</code> を想定。</div>
 
-  <!-- ▼ 設定：あなたのリポジトリの Raw URL に変えてください（ページ上でも編集可） -->
   <div class="row">
     <label for="rawUrl"><strong>CSV Raw URL</strong>（編集可）</label>
-    <input id="rawUrl" type="text"
-      value="https://raw.githubusercontent.com/mikaeru222/ganba-legends-tool/main/test_patterns_full.csv" />
+    <input id="rawUrl" type="text" value="https://raw.githubusercontent.com/mikaeru222/ganba-legends-tool/main/test_patterns_full.csv"/>
     <button id="reloadBtn">最新を再読込</button>
     <span id="status" class="small"></span>
-  </div>
-
-  <div class="row">
-    <label><span class="pill">フォールバック</span> ローカルCSVを読み込む</label>
-    <input id="filePicker" type="file" accept=".csv" />
   </div>
 
   <div id="message" class="small"></div>
@@ -50,264 +41,183 @@
       <h3>概要</h3>
       <div id="stats">CSV未読み込み</div>
     </div>
+
     <div class="card">
-      <h3>ID検索</h3>
+      <h3>運用ビュー（パターン別）</h3>
       <div class="row">
-        <input id="searchId" type="text" placeholder="例: 038" />
-        <button id="btnFind">検索</button>
+        <label for="patternSel">パターン：</label>
+        <select id="patternSel"></select>
+        <button id="dlCurrent">このパターンをCSV保存</button>
       </div>
-      <div id="findResult" class="small"></div>
+      <div id="patternInfo" class="small"></div>
+      <div class="grid">
+        <div>
+          <h4>L（左）</h4>
+          <div id="listL"></div>
+        </div>
+        <div>
+          <h4>R（右）</h4>
+          <div id="listR"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <h3>プレビュー（読み込んだCSVを表で表示）</h3>
+  <h3>プレビュー（先頭100行）</h3>
   <div id="preview"></div>
 
 <script>
-/** =========================
- *  GitHub CSV 自動読込（キャッシュ無効）＋ 反映
- * ========================= */
+/* ===== 共通ユーティリティ ===== */
 const $ = (q)=>document.querySelector(q);
 const statusEl = $("#status");
 const msgEl = $("#message");
 const previewEl = $("#preview");
 const urlInput = $("#rawUrl");
 const reloadBtn = $("#reloadBtn");
-const filePicker = $("#filePicker");
 
 const statsEl = $("#stats");
-const searchId = $("#searchId");
-const btnFind = $("#btnFind");
-const findResult = $("#findResult");
+const patternSel = $("#patternSel");
+const listL = $("#listL");
+const listR = $("#listR");
+const patternInfo = $("#patternInfo");
+const dlCurrent = $("#dlCurrent");
 
-// 公開用ストア（他のスクリプトからも参照可能）
-window.SharedStore = { header: [], rows: [], byId: new Map() };
+window.SharedStore = { header: [], rows: [], byId: new Map(), byPattern: new Map() };
 
-document.addEventListener("DOMContentLoaded", () => {
-  autoLoadFromGitHub();
-});
+document.addEventListener("DOMContentLoaded", () => autoLoadFromGitHub());
+reloadBtn.addEventListener("click", ()=>autoLoadFromGitHub(true));
+dlCurrent.addEventListener("click", downloadCurrentPattern);
 
-reloadBtn.addEventListener("click", () => {
-  autoLoadFromGitHub(true);
-});
-
-filePicker.addEventListener("change", async (e) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
-  try {
-    const text = await file.text();
-    applyCSVText(text, { source: "local", name: file.name });
-  } catch (err) {
-    showError("ローカルCSVの読み込みに失敗しました。\\n" + err);
-  } finally {
-    filePicker.value = "";
-  }
-});
-
-btnFind.addEventListener("click", () => {
-  const key = (searchId.value || "").trim();
-  if (!key) { findResult.textContent = "IDを入力してください。"; return; }
-  const v = window.SharedStore.byId.get(key);
-  if (!v) { findResult.textContent = "見つかりませんでした。"; return; }
-  findResult.innerHTML = "ID <code>"+escapeHTML(key)+"</code> → pattern: <b>"+escapeHTML(v.pattern)+"</b>, cylinder: <b>"+escapeHTML(v.cylinder)+"</b>, position: <b>"+escapeHTML(String(v.position))+"</b>, rarity: <b>"+escapeHTML(v.rarity)+"</b>";
-});
-
-async function autoLoadFromGitHub(force=false) {
-  const baseUrl = (urlInput.value || "").trim();
-  if (!baseUrl) {
-    showError("Raw URL が空です。正しいURLを設定してください。");
-    return;
-  }
+async function autoLoadFromGitHub() {
+  const baseUrl = (urlInput.value||"").trim();
+  if (!baseUrl) return;
   const url = baseUrl + (baseUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
   setStatus("GitHubから取得中…");
   try {
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const text = await res.text();
-    applyCSVText(text, { source: "github", url: baseUrl });
-  } catch (err) {
-    showError("GitHub CSVの取得に失敗しました。\\n" +
-              "URL: " + baseUrl + "\\n" + err + "\\n\\n" +
-              "・URLが正しいか（raw.githubusercontent.com か）\\n" +
-              "・リポジトリに CSV が存在するか\\n" +
-              "・数十秒の反映待ちが必要な場合があります");
+    applyCSVText(text, { source:"github", url: baseUrl });
+  } catch (e) {
+    setError("CSV取得に失敗しました。URLを確認してください。\\n" + e);
   }
 }
 
-function setStatus(text, ok=false) {
-  statusEl.textContent = text || "";
-  statusEl.className = ok ? "small ok" : "small";
-}
-function showError(text) {
-  msgEl.innerHTML = `<div class="err">${escapeHTML(text)}</div>`;
-  setStatus("エラー", false);
-}
+function setStatus(t, ok=false){ statusEl.textContent=t; statusEl.className= ok? "small ok":"small"; }
+function setError(t){ msgEl.innerHTML = `<div class="err">${escapeHTML(t)}</div>`; setStatus("エラー", false); }
+function escapeHTML(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;"); }
 
-/** =========================
- *  CSVのパース & アプリ連動
- * ========================= */
-function applyCSVText(text, meta) {
-  const rows = parseCSV(text);
-  if (!rows.length) {
-    showError("CSVが空のようです。");
-    return;
-  }
-  msgEl.innerHTML = renderMeta(meta, rows);
-  renderTable(rows, previewEl);
-
-  // ヘッダとデータに分割
-  const [header, ...data] = rows;
-  // ヘッダ -> インデックス
-  const hmap = {};
-  header.forEach((h, i)=> { hmap[String(h).trim().toLowerCase()] = i; });
-
-  // 正規化してオブジェクト化
-  const normalized = data.filter(r=>r && r.length).map(r => ({
-    pattern : val(r, hmap, "pattern"),
-    cylinder: val(r, hmap, "cylinder"),
-    position: Number(val(r, hmap, "position")),
-    id      : String(val(r, hmap, "id")),
-    rarity  : val(r, hmap, "rarity")
-  })).filter(o=>o.id);
-
-  // ストアに保存（IDインデックスも用意）
-  window.SharedStore.header = header;
-  window.SharedStore.rows = normalized;
-  window.SharedStore.byId = new Map(normalized.map(o => [o.id, o]));
-
-  // ダッシュボード更新
-  renderStats(normalized);
-
-  // ここで、既存アプリの関数に渡したい場合は呼び出し
-  if (typeof window.onSharedCSVLoaded === "function") {
-    try { window.onSharedCSVLoaded(normalized); } catch (e) { console.error(e); }
-  }
-
-  setStatus(meta.source === "github" ? "GitHubから最新を取得しました" : "ローカルCSVを読み込みました", true);
-}
-
-function val(row, hmap, key) {
-  const idx = hmap[key];
-  return idx!=null ? String(row[idx]).trim() : "";
-}
-
-function renderTable(rows, container) {
-  const table = document.createElement("table");
-  const thead = document.createElement("thead");
-  const tbody = document.createElement("tbody");
-
-  const thTr = document.createElement("tr");
-  rows[0].forEach(h => {
-    const th = document.createElement("th");
-    th.textContent = h;
-    thTr.appendChild(th);
-  });
-  thead.appendChild(thTr);
-
-  rows.slice(1, 101).forEach(r => { // 表は先頭100行だけ表示（重い対策）
-    const tr = document.createElement("tr");
-    r.forEach(c => {
-      const td = document.createElement("td");
-      td.textContent = c;
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-
-  table.appendChild(thead);
-  table.appendChild(tbody);
-  container.innerHTML = "";
-  container.appendChild(table);
-}
-
-function renderStats(data) {
-  const total = data.length;
-  const byPattern = countBy(data, x=>x.pattern);
-  const byRarity  = countBy(data, x=>x.rarity);
-  statsEl.innerHTML = [
-    `総件数：<b>${total}</b>`,
-    `パターン数：${Object.keys(byPattern).length}`,
-    `レアリティ内訳：${Object.entries(byRarity).map(([k,v])=>`${k}:${v}`).join(" / ")}`
-  ].join("<br>");
-}
-
-function countBy(arr, keyFn) {
-  const m = {};
-  for (const x of arr) {
-    const k = keyFn(x) || "";
-    m[k] = (m[k]||0)+1;
-  }
-  return m;
-}
-
-function renderMeta(meta, rows){
-  const info = [];
-  if (meta.source === "github") {
-    info.push(`読み込み元：GitHub（<code>${escapeHTML(meta.url)}</code>）`);
-  } else if (meta.source === "local") {
-    info.push(`読み込み元：ローカル（<code>${escapeHTML(meta.name||"")}</code>）`);
-  }
-  info.push(`行数：${rows.length}（ヘッダ含む）`);
-  info.push(`更新：${new Date().toLocaleString()}`);
-  return `<div>${info.join(" / ")}</div>`;
-}
-
-/** かんたんCSVパーサ（ダブルクォート対応） */
-function parseCSV(text) {
-  const rows = [];
-  let cur = [''];
-  let inQuotes = false;
-  let i = 0;
-
-  const pushCell = () => { cur.push(''); };
-  const pushRow  = () => { rows.push(cur); cur = ['']; };
-
-  while (i < text.length) {
-    const ch = text[i];
-
-    if (ch === '"') {
-      const next = text[i + 1];
-      if (inQuotes && next === '"') {
-        cur[cur.length - 1] += '"';
-        i += 2;
-        continue;
-      }
-      inQuotes = !inQuotes;
-      i++;
-      continue;
-    }
-
-    if (!inQuotes && ch === ',') {
-      pushCell();
-      i++;
-      continue;
-    }
-
-    if (!inQuotes && (ch === '\n' || ch === '\r')) {
-      if (ch === '\r' && text[i+1] === '\n') i++;
-      pushRow();
-      i++;
-      continue;
-    }
-
-    cur[cur.length - 1] += ch;
-    i++;
+/* ===== CSVパーサ ===== */
+function parseCSV(text){
+  const rows=[]; let cur=['']; let inQ=false; let i=0;
+  const pushCell=()=>cur.push(''); const pushRow=()=>{ rows.push(cur); cur=['']; };
+  while(i<text.length){
+    const ch=text[i];
+    if(ch=='"'){ const nx=text[i+1]; if(inQ && nx=='"'){ cur[cur.length-1]+='"'; i+=2; continue; } inQ=!inQ; i++; continue; }
+    if(!inQ && ch==','){ pushCell(); i++; continue; }
+    if(!inQ && (ch=='\n'||ch=='\r')){ if(ch=='\r'&&text[i+1]=='\n') i++; pushRow(); i++; continue; }
+    cur[cur.length-1]+=ch; i++;
   }
   rows.push(cur);
-
-  if (rows.length && rows[0].length && rows[0][0] && rows[0][0].charCodeAt(0) === 0xFEFF) {
-    rows[0][0] = rows[0][0].slice(1);
-  }
+  if(rows.length && rows[0][0] && rows[0][0].charCodeAt(0)===0xFEFF){ rows[0][0]=rows[0][0].slice(1); }
   return rows;
 }
 
-function escapeHTML(s) {
-  return String(s)
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'","&#39;");
+/* ===== 適用 ===== */
+function applyCSVText(text, meta){
+  // プレビュー
+  const rows = parseCSV(text);
+  renderTable(rows, previewEl);
+
+  const [header,...data]=rows;
+  const hmap={}; header.forEach((h,i)=>hmap[String(h).trim().toLowerCase()]=i);
+  const norm = data.filter(r=>r&&r.length).map(r=> ({
+    pattern :(hmap.pattern!=null? String(r[hmap.pattern]).trim() : ""),
+    cylinder:(hmap.cylinder!=null? String(r[hmap.cylinder]).trim() : ""),
+    position:(hmap.position!=null? Number(String(r[hmap.position]).trim()) : NaN),
+    id      :(hmap.id!=null? String(r[hmap.id]).trim() : ""),
+    rarity  :(hmap.rarity!=null? String(r[hmap.rarity]).trim() : ""),
+  })).filter(o=>o.id);
+
+  // ストア
+  window.SharedStore.header = header;
+  window.SharedStore.rows = norm;
+  window.SharedStore.byId = new Map(norm.map(o=>[o.id,o]));
+
+  // byPattern: pattern -> {L:[], R:[]}
+  const byPattern = new Map();
+  for(const o of norm){
+    const key = o.pattern || "(blank)";
+    if(!byPattern.has(key)) byPattern.set(key, {L:[], R:[]});
+    const bucket = (String(o.cylinder).toUpperCase()==="R" ? byPattern.get(key).R : byPattern.get(key).L);
+    bucket.push(o);
+  }
+  // sort by position
+  for(const v of byPattern.values()){ v.L.sort((a,b)=>a.position-b.position); v.R.sort((a,b)=>a.position-b.position); }
+  window.SharedStore.byPattern = byPattern;
+
+  // 概要
+  const rarityCount = {};
+  for(const o of norm){ rarityCount[o.rarity]=(rarityCount[o.rarity]||0)+1; }
+  statsEl.innerHTML = `総件数：<b>${norm.length}</b><br>パターン数：${byPattern.size}<br>レアリティ内訳：${Object.entries(rarityCount).map(([k,v])=>`${k}:${v}`).join(" / ")}`;
+
+  // パターン選択の生成
+  patternSel.innerHTML = "";
+  [...byPattern.keys()].sort().forEach(p=>{
+    const opt=document.createElement("option"); opt.value=p; opt.textContent=p; patternSel.appendChild(opt);
+  });
+  patternSel.onchange = renderPattern;
+  renderPattern();
+  setStatus("GitHubから最新を取得しました", true);
+}
+
+function renderTable(rows, container){
+  const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
+  const thTr=document.createElement("tr"); rows[0].forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
+  rows.slice(1,101).forEach(r=>{ const tr=document.createElement("tr"); r.forEach(c=>{ const td=document.createElement("td"); td.textContent=c; tr.appendChild(td); }); tbody.appendChild(tr); });
+  table.appendChild(thead); table.appendChild(tbody); container.innerHTML=""; container.appendChild(table);
+}
+
+function renderPattern(){
+  const key = patternSel.value;
+  const group = window.SharedStore.byPattern.get(key);
+  if(!group){ listL.innerHTML=""; listR.innerHTML=""; return; }
+  patternInfo.textContent = `パターン ${key} / L:${group.L.length}件 / R:${group.R.length}件`;
+  listL.innerHTML = toHtmlList(group.L);
+  listR.innerHTML = toHtmlList(group.R);
+}
+
+function toHtmlList(arr){
+  const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
+  const thTr=document.createElement("tr");
+  ["position","id","rarity"].forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
+  arr.forEach(o=>{ const tr=document.createElement("tr");
+    [["position",o.position],["id",o.id],["rarity",o.rarity]].forEach(([k,v])=>{
+      const td=document.createElement("td"); td.textContent=String(v); tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(thead); table.appendChild(tbody);
+  return table.outerHTML;
+}
+
+function downloadCurrentPattern(){
+  const key = patternSel.value;
+  const group = window.SharedStore.byPattern.get(key);
+  if(!group) return;
+  // CSV: pattern,cylinder,position,id,rarity（選択パターンのみ）
+  const rows = [["pattern","cylinder","position","id","rarity"]];
+  const push=(o,cyl)=>rows.push([key,cyl,o.position,o.id,o.rarity]);
+  group.L.forEach(o=>push(o,"L")); group.R.forEach(o=>push(o,"R"));
+  const csv = rows.map(r=>r.map(cell=>{
+    const s=String(cell);
+    return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+  }).join(",")).join("\r\n");
+  const blob = new Blob([csv],{type:"text/csv"});
+  const a=document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `pattern_${key}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
 }
 </script>
 </body>
