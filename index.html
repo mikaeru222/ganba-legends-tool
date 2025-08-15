@@ -3,117 +3,239 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ガンバレジェンズ ツール（CSV自動読込＋運用ビュー連動）</title>
+<title>ガンバレジェンズ 管理ツール（黒UI + モバイル最適化 + CSV自動読込）</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";margin:24px;line-height:1.6;background:#fff}
-  h1{margin:0 0 8px}
-  .muted{color:#666;font-size:14px;margin-bottom:16px}
-  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
-  input[type="text"]{width:520px;max-width:100%}
-  button{cursor:pointer;border:1px solid #ddd;padding:8px 12px;border-radius:6px;background:#fff}
-  button:hover{background:#f5f5f5}
-  .ok{color:#0a7d2e}.err{color:#b00020;white-space:pre-wrap}
-  table{border-collapse:collapse;width:100%;margin-top:8px}
-  th,td{border:1px solid #ddd;padding:6px 8px;font-size:14px}
-  th{background:#fafafa;text-align:left}
-  .small{font-size:12px;color:#666}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:12px}
-  .card{border:1px solid #e5e5e5;border-radius:8px;padding:12px;background:#fff}
-  code{background:#f6f6f6;padding:1px 6px;border-radius:4px}
-  .right{float:right}
+  :root{
+    --bg:#0f1115; --panel:#161a22; --text:#e8eaed; --muted:#a3a6ad;
+    --border:#2a2f3a; --accent:#4f8cff; --accent-2:#7bd88f; --danger:#ff6b6b;
+    --btn-bg:#1d2430; --btn-bg-hover:#263042;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.6}
+  header{position:sticky;top:0;background:linear-gradient(180deg,rgba(15,17,21,.97),rgba(15,17,21,.92));backdrop-filter:saturate(1.2) blur(4px);border-bottom:1px solid var(--border);z-index:10}
+  .wrap{max-width:1100px;margin:0 auto;padding:16px}
+  h1{margin:0;font-size:20px;font-weight:650}
+  .muted{color:var(--muted);font-size:13px;margin-top:4px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  input[type="text"], input[type="password"], select{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+  input[type="text"]{min-width:280px;flex:1}
+  button{cursor:pointer;background:var(--btn-bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 14px}
+  button:hover{background:var(--btn-bg-hover)}
+  .btn-accent{border-color:transparent;background:var(--accent)}
+  .btn-green{border-color:transparent;background:var(--accent-2);color:#0a0f14}
+  .btn-danger{border-color:transparent;background:var(--danger)}
+  .grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{border-bottom:1px solid var(--border);padding:8px 10px;font-size:14px}
+  th{color:#cfd3da;text-align:left}
+  code{background:#0b0e13;border:1px solid var(--border);padding:2px 6px;border-radius:6px}
+  .pill{display:inline-block;background:#1f2633;border:1px solid var(--border);padding:2px 8px;border-radius:999px;font-size:12px;color:#cfd3da}
+  .ok{color:#7bd88f}.err{color:#ff9aa2;white-space:pre-wrap}
+  .footer{color:var(--muted);font-size:12px;margin:24px 0 40px}
+  /* モバイル最適化 */
+  @media (max-width: 820px){
+    .grid{grid-template-columns:1fr}
+    .row{gap:8px}
+    input[type="text"]{min-width:unset;width:100%}
+    .stack-sm{display:flex;flex-direction:column;gap:10px}
+    header .wrap{padding:12px}
+    .wrap{padding:12px}
+    button{width:auto}
+  }
+  /* モーダル */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:30}
+  .modal{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;max-width:500px;width:92vw}
+  .modal h3{margin-top:0}
 </style>
 </head>
 <body>
-  <h1>ガンバレジェンズ ツール</h1>
-  <div class="muted">GitHubのCSVを自動で取得 → 運用ビューに連動します。ヘッダは <code>pattern,cylinder,position,id,rarity</code> を想定。</div>
+<header>
+  <div class="wrap">
+    <h1>ガンバレジェンズ 管理ツール</h1>
+    <div class="muted">GitHubのCSVを自動取得 → 黒UIに連動。<span class="pill">ヘッダ: pattern,cylinder,position,id,rarity</span></div>
+  </div>
+</header>
 
-  <div class="row">
-    <label for="rawUrl"><strong>CSV Raw URL</strong>（編集可）</label>
-    <input id="rawUrl" type="text" value="https://raw.githubusercontent.com/mikaeru222/ganba-legends-tool/main/test_patterns_full.csv"/>
-    <button id="reloadBtn">最新を再読込</button>
-    <span id="status" class="small"></span>
+<main class="wrap">
+  <!-- 管理ログイン -->
+  <div id="adminBox" class="card" style="margin-bottom:16px;">
+    <div class="row stack-sm">
+      <div class="pill">管理者ログイン</div>
+      <input id="adminPass" type="password" placeholder="管理パスワード" />
+      <button id="btnLogin" class="btn-accent">ログイン</button>
+      <span id="loginStatus" class="muted"></span>
+    </div>
+    <div class="muted">既定: <code>LEGENDS2025</code>（ソース内 <code>ADMIN_PASSWORD</code> を変更してご利用ください）</div>
   </div>
 
-  <div id="message" class="small"></div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>概要</h3>
-      <div id="stats">CSV未読み込み</div>
+  <!-- CSV設定 -->
+  <div class="card">
+    <div class="row stack-sm">
+      <label for="rawUrl"><strong>CSV Raw URL</strong></label>
+      <input id="rawUrl" type="text" placeholder="https://raw.githubusercontent.com/.../main/xxx.csv"/>
+      <button id="reloadBtn" class="btn-accent">最新を再読込</button>
+      <button id="btnSaveUrl">URL保存</button>
+      <span id="status" class="muted"></span>
     </div>
+    <div id="message" class="muted" style="margin-top:8px;"></div>
+  </div>
 
+  <section class="grid" style="margin-top:16px;">
     <div class="card">
-      <h3>運用ビュー（パターン別）</h3>
       <div class="row">
+        <div class="pill">概要</div>
+      </div>
+      <div id="stats" style="margin-top:8px;">CSV未読み込み</div>
+
+      <div class="row" style="margin-top:12px;">
         <label for="patternSel">パターン：</label>
         <select id="patternSel"></select>
-        <button id="dlCurrent">このパターンをCSV保存</button>
+
+        <label for="raritySel">レアリティ：</label>
+        <select id="raritySel">
+          <option value="">(すべて)</option>
+          <option>N</option><option>R</option><option>SR</option><option>UR</option><option>SEC</option>
+        </select>
+
+        <button id="dlCurrent" class="btn-green">このパターンをCSV保存</button>
+        <button id="dlAll">全データCSV保存</button>
       </div>
-      <div id="patternInfo" class="small"></div>
-      <div class="grid">
+
+      <div class="grid" style="margin-top:12px;">
         <div>
-          <h4>L（左）</h4>
+          <h3>L（左）</h3>
           <div id="listL"></div>
         </div>
         <div>
-          <h4>R（右）</h4>
+          <h3>R（右）</h3>
           <div id="listR"></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <h3>プレビュー（先頭100行）</h3>
-  <div id="preview"></div>
+    <div class="card">
+      <div class="row">
+        <div class="pill">ID検索 & 編集</div>
+      </div>
+      <div class="row stack-sm" style="margin-top:8px;">
+        <input id="searchId" type="text" placeholder="例: 038" />
+        <button id="btnFind">検索</button>
+        <button id="btnEdit" disabled>編集</button>
+      </div>
+      <div id="findResult" class="muted"></div>
+
+      <h3 style="margin-top:16px;">プレビュー（先頭100行）</h3>
+      <div id="preview"></div>
+    </div>
+  </section>
+
+  <div class="footer">© GANBA LEGENDS Ops</div>
+</main>
+
+<!-- 編集モーダル -->
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <h3>行の編集</h3>
+    <div class="row stack-sm">
+      <label>ID</label>
+      <input id="editId" type="text" readonly />
+    </div>
+    <div class="row stack-sm">
+      <label>pattern</label>
+      <input id="editPattern" type="text" />
+    </div>
+    <div class="row stack-sm">
+      <label>cylinder</label>
+      <select id="editCylinder"><option>L</option><option>R</option></select>
+    </div>
+    <div class="row stack-sm">
+      <label>position</label>
+      <input id="editPosition" type="number" min="0" />
+    </div>
+    <div class="row stack-sm">
+      <label>rarity</label>
+      <input id="editRarity" type="text" />
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <button id="btnSaveEdit" class="btn-green">保存</button>
+      <button id="btnCancelEdit">キャンセル</button>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ===== 共通ユーティリティ ===== */
+/* ===== 設定 ===== */
+const ADMIN_PASSWORD = "LEGENDS2025"; // ← 公開前に変更推奨
 const $ = (q)=>document.querySelector(q);
-const statusEl = $("#status");
-const msgEl = $("#message");
-const previewEl = $("#preview");
-const urlInput = $("#rawUrl");
-const reloadBtn = $("#reloadBtn");
 
-const statsEl = $("#stats");
-const patternSel = $("#patternSel");
-const listL = $("#listL");
-const listR = $("#listR");
-const patternInfo = $("#patternInfo");
-const dlCurrent = $("#dlCurrent");
+const els = {
+  adminPass: $("#adminPass"), btnLogin: $("#btnLogin"), loginStatus: $("#loginStatus"),
+  rawUrl: $("#rawUrl"), reloadBtn: $("#reloadBtn"), btnSaveUrl: $("#btnSaveUrl"),
+  status: $("#status"), message: $("#message"),
+  stats: $("#stats"), patternSel: $("#patternSel"), raritySel: $("#raritySel"),
+  listL: $("#listL"), listR: $("#listR"),
+  searchId: $("#searchId"), btnFind: $("#btnFind"), btnEdit: $("#btnEdit"),
+  findResult: $("#findResult"), preview: $("#preview"),
+  modalBackdrop: $("#modalBackdrop"), editId: $("#editId"), editPattern: $("#editPattern"),
+  editCylinder: $("#editCylinder"), editPosition: $("#editPosition"), editRarity: $("#editRarity"),
+  btnSaveEdit: $("#btnSaveEdit"), btnCancelEdit: $("#btnCancelEdit"),
+};
 
-window.SharedStore = { header: [], rows: [], byId: new Map(), byPattern: new Map() };
+let isAdmin = false;
+let store = { header:[], rows:[], byId:new Map(), byPattern:new Map() };
 
-document.addEventListener("DOMContentLoaded", () => autoLoadFromGitHub());
-reloadBtn.addEventListener("click", ()=>autoLoadFromGitHub(true));
-dlCurrent.addEventListener("click", downloadCurrentPattern);
+/* ===== ログイン ===== */
+els.btnLogin.addEventListener("click", ()=>{
+  if(els.adminPass.value === ADMIN_PASSWORD){
+    isAdmin = true;
+    els.loginStatus.textContent = "ログイン中（管理編集が有効）";
+    els.btnEdit.disabled = false;
+  }else{
+    els.loginStatus.textContent = "パスワードが違います";
+  }
+});
 
-async function autoLoadFromGitHub() {
-  const baseUrl = (urlInput.value||"").trim();
-  if (!baseUrl) return;
+/* ===== URL保存（localStorage） ===== */
+const URL_KEY = "gl_csv_raw_url";
+els.btnSaveUrl.addEventListener("click", ()=>{
+  const v = (els.rawUrl.value||"").trim();
+  if(!v){ alert("URLを入力してください"); return; }
+  localStorage.setItem(URL_KEY, v);
+  toast("URLを保存しました（この端末で記憶）");
+});
+
+/* ===== 初期化 ===== */
+document.addEventListener("DOMContentLoaded", ()=>{
+  const saved = localStorage.getItem(URL_KEY);
+  if(saved) els.rawUrl.value = saved;
+  autoLoadFromGitHub();
+});
+els.reloadBtn.addEventListener("click", ()=>autoLoadFromGitHub(true));
+
+/* ===== GitHub CSV 取得 ===== */
+async function autoLoadFromGitHub(){
+  const baseUrl = (els.rawUrl.value||"").trim();
+  if(!baseUrl){ setError("Raw URL を入力してください。"); return; }
   const url = baseUrl + (baseUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
   setStatus("GitHubから取得中…");
-  try {
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error("HTTP " + res.status);
+  try{
+    const res = await fetch(url, { cache:"no-store" });
+    if(!res.ok) throw new Error("HTTP " + res.status);
     const text = await res.text();
-    applyCSVText(text, { source:"github", url: baseUrl });
-  } catch (e) {
-    setError("CSV取得に失敗しました。URLを確認してください。\\n" + e);
+    applyCSVText(text, { url: baseUrl });
+  }catch(e){
+    setError("CSVの取得に失敗しました。URLを確認してください。\\n" + e.message);
   }
 }
 
-function setStatus(t, ok=false){ statusEl.textContent=t; statusEl.className= ok? "small ok":"small"; }
-function setError(t){ msgEl.innerHTML = `<div class="err">${escapeHTML(t)}</div>`; setStatus("エラー", false); }
-function escapeHTML(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;"); }
-
-/* ===== CSVパーサ ===== */
+/* ===== CSVパースと適用 ===== */
 function parseCSV(text){
   const rows=[]; let cur=['']; let inQ=false; let i=0;
   const pushCell=()=>cur.push(''); const pushRow=()=>{ rows.push(cur); cur=['']; };
   while(i<text.length){
     const ch=text[i];
-    if(ch=='"'){ const nx=text[i+1]; if(inQ && nx=='"'){ cur[cur.length-1]+='"'; i+=2; continue; } inQ=!inQ; i++; continue; }
+    if(ch=='"'){ const nx=text[i+1]; if(inQ&&nx=='"'){ cur[cur.length-1]+='"'; i+=2; continue; } inQ=!inQ; i++; continue; }
     if(!inQ && ch==','){ pushCell(); i++; continue; }
     if(!inQ && (ch=='\n'||ch=='\r')){ if(ch=='\r'&&text[i+1]=='\n') i++; pushRow(); i++; continue; }
     cur[cur.length-1]+=ch; i++;
@@ -123,101 +245,167 @@ function parseCSV(text){
   return rows;
 }
 
-/* ===== 適用 ===== */
 function applyCSVText(text, meta){
-  // プレビュー
   const rows = parseCSV(text);
-  renderTable(rows, previewEl);
+  renderPreview(rows);
 
   const [header,...data]=rows;
   const hmap={}; header.forEach((h,i)=>hmap[String(h).trim().toLowerCase()]=i);
   const norm = data.filter(r=>r&&r.length).map(r=> ({
-    pattern :(hmap.pattern!=null? String(r[hmap.pattern]).trim() : ""),
-    cylinder:(hmap.cylinder!=null? String(r[hmap.cylinder]).trim() : ""),
-    position:(hmap.position!=null? Number(String(r[hmap.position]).trim()) : NaN),
-    id      :(hmap.id!=null? String(r[hmap.id]).trim() : ""),
-    rarity  :(hmap.rarity!=null? String(r[hmap.rarity]).trim() : ""),
+    pattern : getCell(r,hmap,"pattern"),
+    cylinder: getCell(r,hmap,"cylinder").toUpperCase()==="R" ? "R":"L",
+    position: Number(getCell(r,hmap,"position")),
+    id      : String(getCell(r,hmap,"id")),
+    rarity  : getCell(r,hmap,"rarity"),
   })).filter(o=>o.id);
 
-  // ストア
-  window.SharedStore.header = header;
-  window.SharedStore.rows = norm;
-  window.SharedStore.byId = new Map(norm.map(o=>[o.id,o]));
+  store.header = header; store.rows = norm; store.byId = new Map(norm.map(o=>[o.id,o]));
 
-  // byPattern: pattern -> {L:[], R:[]}
   const byPattern = new Map();
   for(const o of norm){
     const key = o.pattern || "(blank)";
     if(!byPattern.has(key)) byPattern.set(key, {L:[], R:[]});
-    const bucket = (String(o.cylinder).toUpperCase()==="R" ? byPattern.get(key).R : byPattern.get(key).L);
+    const bucket = (o.cylinder==="R") ? byPattern.get(key).R : byPattern.get(key).L;
     bucket.push(o);
   }
-  // sort by position
   for(const v of byPattern.values()){ v.L.sort((a,b)=>a.position-b.position); v.R.sort((a,b)=>a.position-b.position); }
-  window.SharedStore.byPattern = byPattern;
+  store.byPattern = byPattern;
 
-  // 概要
-  const rarityCount = {};
-  for(const o of norm){ rarityCount[o.rarity]=(rarityCount[o.rarity]||0)+1; }
-  statsEl.innerHTML = `総件数：<b>${norm.length}</b><br>パターン数：${byPattern.size}<br>レアリティ内訳：${Object.entries(rarityCount).map(([k,v])=>`${k}:${v}`).join(" / ")}`;
-
-  // パターン選択の生成
-  patternSel.innerHTML = "";
-  [...byPattern.keys()].sort().forEach(p=>{
-    const opt=document.createElement("option"); opt.value=p; opt.textContent=p; patternSel.appendChild(opt);
-  });
-  patternSel.onchange = renderPattern;
-  renderPattern();
+  // UI更新
+  renderStats(norm, byPattern);
+  renderPatternOptions([...byPattern.keys()].sort());
+  renderPatternLists();
   setStatus("GitHubから最新を取得しました", true);
+  toast("CSVを読み込みました");
 }
 
-function renderTable(rows, container){
-  const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
-  const thTr=document.createElement("tr"); rows[0].forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
-  rows.slice(1,101).forEach(r=>{ const tr=document.createElement("tr"); r.forEach(c=>{ const td=document.createElement("td"); td.textContent=c; tr.appendChild(td); }); tbody.appendChild(tr); });
-  table.appendChild(thead); table.appendChild(tbody); container.innerHTML=""; container.appendChild(table);
-}
+function getCell(row,hmap,key){ const idx=hmap[key]; return idx!=null ? String(row[idx]).trim() : ""; }
 
-function renderPattern(){
-  const key = patternSel.value;
-  const group = window.SharedStore.byPattern.get(key);
-  if(!group){ listL.innerHTML=""; listR.innerHTML=""; return; }
-  patternInfo.textContent = `パターン ${key} / L:${group.L.length}件 / R:${group.R.length}件`;
-  listL.innerHTML = toHtmlList(group.L);
-  listR.innerHTML = toHtmlList(group.R);
-}
-
-function toHtmlList(arr){
+/* ===== UI描画 ===== */
+function renderPreview(rows){
   const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
   const thTr=document.createElement("tr");
-  ["position","id","rarity"].forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
-  arr.forEach(o=>{ const tr=document.createElement("tr");
+  (rows[0]||[]).forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
+  rows.slice(1,101).forEach(r=>{ const tr=document.createElement("tr"); r.forEach(c=>{ const td=document.createElement("td"); td.textContent=c; tr.appendChild(td); }); tbody.appendChild(tr); });
+  table.appendChild(thead); table.appendChild(tbody);
+  els.preview.innerHTML=""; els.preview.appendChild(table);
+}
+function renderStats(norm, byPattern){
+  const rarityCount = {}; for(const o of norm){ rarityCount[o.rarity]=(rarityCount[o.rarity]||0)+1; }
+  els.stats.innerHTML = `総件数：<b>${norm.length}</b><br>パターン数：${byPattern.size}<br>レアリティ内訳：${Object.entries(rarityCount).map(([k,v])=>`${k}:${v}`).join(" / ")}`;
+}
+function renderPatternOptions(keys){
+  els.patternSel.innerHTML = ""; keys.forEach(p=>{ const opt=document.createElement("option"); opt.value=p; opt.textContent=p; els.patternSel.appendChild(opt); });
+}
+els.patternSel.addEventListener("change", renderPatternLists);
+els.raritySel.addEventListener("change", renderPatternLists);
+
+function renderPatternLists(){
+  const key = els.patternSel.value;
+  const filterRarity = (els.raritySel.value||"").trim();
+  const group = store.byPattern.get(key) || {L:[],R:[]};
+  const f = (arr)=>arr.filter(o=>!filterRarity || o.rarity===filterRarity);
+
+  els.listL.innerHTML = toHtmlList(f(group.L), "L");
+  els.listR.innerHTML = toHtmlList(f(group.R), "R");
+}
+
+function toHtmlList(arr, cyl){
+  const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
+  const thTr=document.createElement("tr"); ["position","id","rarity","操作"].forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
+  arr.forEach(o=>{
+    const tr=document.createElement("tr");
     [["position",o.position],["id",o.id],["rarity",o.rarity]].forEach(([k,v])=>{
       const td=document.createElement("td"); td.textContent=String(v); tr.appendChild(td);
     });
+    const tdOp=document.createElement("td");
+    const btn=document.createElement("button"); btn.textContent="編集"; btn.onclick=()=>openEdit(o);
+    tdOp.appendChild(btn); tr.appendChild(tdOp);
     tbody.appendChild(tr);
   });
   table.appendChild(thead); table.appendChild(tbody);
   return table.outerHTML;
 }
 
-function downloadCurrentPattern(){
-  const key = patternSel.value;
-  const group = window.SharedStore.byPattern.get(key);
-  if(!group) return;
-  // CSV: pattern,cylinder,position,id,rarity（選択パターンのみ）
-  const rows = [["pattern","cylinder","position","id","rarity"]];
-  const push=(o,cyl)=>rows.push([key,cyl,o.position,o.id,o.rarity]);
-  group.L.forEach(o=>push(o,"L")); group.R.forEach(o=>push(o,"R"));
-  const csv = rows.map(r=>r.map(cell=>{
-    const s=String(cell);
-    return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+/* ===== 検索 & 編集 ===== */
+els.btnFind.addEventListener("click", ()=>{
+  const key=(els.searchId.value||"").trim();
+  if(!key){ els.findResult.textContent="IDを入力してください。"; return; }
+  const v=store.byId.get(key);
+  if(!v){ els.findResult.textContent="見つかりませんでした。"; els.btnEdit.disabled=true; return; }
+  els.findResult.innerHTML = `ID <code>${key}</code> → pattern: <b>${v.pattern}</b>, cylinder: <b>${v.cylinder}</b>, position: <b>${v.position}</b>, rarity: <b>${v.rarity}</b>`;
+  els.btnEdit.disabled = !isAdmin;
+  els.btnEdit.onclick = ()=>openEdit(v);
+});
+
+function openEdit(o){
+  if(!isAdmin){ alert("編集は管理者のみです。"); return; }
+  els.editId.value = o.id; els.editPattern.value = o.pattern; els.editCylinder.value = o.cylinder; els.editPosition.value = String(o.position); els.editRarity.value = o.rarity;
+  els.modalBackdrop.style.display="flex";
+}
+els.btnCancelEdit.addEventListener("click", ()=>{ els.modalBackdrop.style.display="none"; });
+els.btnSaveEdit.addEventListener("click", ()=>{
+  const id=els.editId.value;
+  const v=store.byId.get(id); if(!v) return;
+  v.pattern = els.editPattern.value.trim();
+  v.cylinder = els.editCylinder.value.trim().toUpperCase()==="R" ? "R":"L";
+  v.position = Number(els.editPosition.value)||0;
+  v.rarity = els.editRarity.value.trim();
+
+  // 再構築
+  const byPattern = new Map();
+  for(const x of store.rows){
+    const src = (x.id===id) ? v : x;
+    const key = src.pattern || "(blank)";
+    if(!byPattern.has(key)) byPattern.set(key, {L:[],R:[]});
+    const bucket = (src.cylinder==="R") ? byPattern.get(key).R : byPattern.get(key).L;
+    bucket.push(src);
+  }
+  for(const g of byPattern.values()){ g.L.sort((a,b)=>a.position-b.position); g.R.sort((a,b)=>a.position-b.position); }
+  store.byPattern = byPattern;
+  store.byId.set(id, v);
+  renderPatternOptions([...byPattern.keys()].sort());
+  renderPatternLists();
+  els.modalBackdrop.style.display="none";
+  toast("編集を反映しました。必要ならCSV保存してGitHubに上書きしてください。");
+});
+
+/* ===== エクスポート ===== */
+function toCSV(rows){
+  const header=["pattern","cylinder","position","id","rarity"];
+  const lines=[header, ...rows.map(o=>[o.pattern,o.cylinder,o.position,o.id,o.rarity])].map(r=>r.map(s=>{
+    const str=String(s);
+    return /[",\n\r]/.test(str) ? '"' + str.replace(/"/g,'""') + '"' : str;
   }).join(",")).join("\r\n");
-  const blob = new Blob([csv],{type:"text/csv"});
-  const a=document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `pattern_${key}.csv`;
-  document.body.appendChild(a); a.click(); a.remove();
+  return lines;
+}
+document.getElementById("dlAll").addEventListener("click", ()=>{
+  const csv=toCSV(store.rows);
+  downloadBlob(csv, "all_data.csv");
+});
+document.getElementById("dlCurrent").addEventListener("click", ()=>{
+  const key = els.patternSel.value;
+  const g = store.byPattern.get(key); if(!g) return;
+  const rows=[...g.L, ...g.R];
+  const csv=toCSV(rows);
+  downloadBlob(csv, `pattern_${key}.csv`);
+});
+function downloadBlob(text, name){
+  const blob = new Blob([text], {type:"text/csv"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ===== ステータス / トースト ===== */
+function setStatus(text, ok=false){ els.status.textContent=text; els.status.className = ok? "ok muted":"muted"; }
+function setError(text){ els.message.innerHTML=`<span class="err">${text}</span>`; }
+function toast(text){
+  const div=document.createElement("div");
+  div.textContent=text;
+  div.style.position="fixed"; div.style.left="50%"; div.style.bottom="28px"; div.style.transform="translateX(-50%)";
+  div.style.background="#1e252f"; div.style.color="#e8eaed"; div.style.border="1px solid #2a2f3a";
+  div.style.padding="10px 14px"; div.style.borderRadius="10px"; div.style.zIndex=50;
+  document.body.appendChild(div);
+  setTimeout(()=>div.remove(), 2200);
 }
 </script>
 </body>
