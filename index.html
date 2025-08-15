@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>カードゲームツール｜運用＋管理（GitHub連携）</title>
+  <title>カードゲームツール｜運用＋管理（GitHub連携／検索は従来のまま）</title>
   <style>
     :root{
       --bg:#0b1020; --panel:#0f1530; --muted:#8ea0c0; --text:#eaf0ff; --brand:#5aa5ff; --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
@@ -63,7 +63,7 @@
         <div class="brand">
           <div class="dot"></div>
           <h1>カードゲームツール</h1>
-          <span class="muted">検索＋管理（GitHub連携／CSV一括）</span>
+          <span class="muted">検索（運用）を従来のまま維持／管理はGitHub連携</span>
         </div>
         <div class="tabs" role="tablist" aria-label="モード切替">
           <div id="tab-run" class="tab active" role="tab" aria-selected="true">運用モード</div>
@@ -71,16 +71,16 @@
         </div>
       </header>
 
-      <!-- 運用モード（従来どおり） -->
+      <!-- 運用モード（従来どおり・検索UIは変更なし） -->
       <section id="run-section" class="grid" aria-labelledby="tab-run">
         <div class="panel">
           <div class="row">
             <input id="q" class="input" placeholder="カード番号やコードを入力（例: A023 / P07-B-076 / 76b）" style="flex:1" />
             <select id="filter-pattern">
               <option value="">パターン（すべて）</option>
-              <option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
-              <option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
-              <option>11</option><option>12</option>
+              <option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option>
+              <option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option>
+              <option value="11">11</option><option value="12">12</option>
             </select>
             <select id="filter-cylinder">
               <option value="">シリンダー（A/B）</option>
@@ -88,13 +88,19 @@
             </select>
             <button id="btn-clear" class="btn ghost">クリア</button>
           </div>
-          <div class="help">読み込み済みデータ：<span id="data-count">0</span> 件 ｜ データソース：<span id="source-label" class="pill">ローカル</span></div>
+          <div class="help">読み込み済みデータ：<span id="data-count">0</span> 件　|　データソース：<span id="source-label" class="pill">ローカル</span></div>
         </div>
 
         <div class="panel">
           <table class="table" aria-describedby="res-info">
             <thead>
-              <tr><th>パターン</th><th>シリンダー</th><th>番号</th><th>コード</th><th>備考</th></tr>
+              <tr>
+                <th>パターン</th>
+                <th>シリンダー</th>
+                <th>番号</th>
+                <th>コード</th>
+                <th>備考</th>
+              </tr>
             </thead>
             <tbody id="result-body"></tbody>
           </table>
@@ -124,11 +130,11 @@
         </div>
 
         <div id="admin-logged-in" class="hidden">
-          <!-- CSV群 -->
+          <!-- CSV 一括 -->
           <div class="panel">
             <div class="row" style="justify-content:space-between;align-items:center">
               <div>
-                <div style="font-weight:700">管理者メニュー</div>
+                <div style="font-weight:700">管理者メニュー（CSV一括）</div>
                 <div class="help">CSVヘッダ：pattern(01-12), cylinder(A/B), card_no(001-100), label(任意)</div>
               </div>
               <div class="row"><button id="btn-admin-logout" class="btn ghost">ログアウト</button></div>
@@ -158,12 +164,12 @@
             <div class="help">ここで設定した JSON を各端末が参照します。GitHub連携を使うと自動設定できます。</div>
           </div>
 
-          <!-- ★ GitHub 連携（NEW） -->
+          <!-- GitHub 連携 -->
           <div class="panel">
-            <div style="font-weight:700;margin-bottom:6px">GitHub連携（一括CSVの取り込み後、このボタンで公開）</div>
+            <div style="font-weight:700;margin-bottom:6px">GitHub連携（CSV取り込み→ローカル保存後に公開）</div>
             <div class="row">
               <input id="gh-owner" class="input" placeholder="owner（例：mikaeru222）" />
-              <input id="gh-repo"  class="input" placeholder="repo（例：ganba-legends-tool）" />
+              <input id="gh-repo"  class="input" placeholder="repo（例：card-tool）" />
               <input id="gh-branch" class="input" placeholder="branch（例：main）" value="main" />
             </div>
             <div class="row">
@@ -204,137 +210,191 @@
   const KEY_GH = 'carddb/github';
 
   // --- State
-  let staged = []; // 管理側で読み込んだ未保存データ
-  let db = [];     // 実運用データ
+  let staged = []; // 管理者アップロード後、保存前の一時領域
+  let db = [];     // 実運用データ（ローカル保存 or リモート同期後）
 
   // --- Util
-  const $ = (s)=>document.querySelector(s);
+  const $ = (sel)=>document.querySelector(sel);
   const pad2 = (n)=> String(n).padStart(2,'0');
   const pad3 = (n)=> String(n).padStart(3,'0');
-  const norm = (s)=> (s??'').toString().trim();
-  const toast = (m)=> alert(m);
+  const normText = (s)=> (s||'').toString().trim();
+  const toast = (msg)=>{ alert(msg); };
 
-  // --- DB I/O
+  function updateSourceLabel(){
+    const r = getRemote();
+    $('#source-label').textContent = r.url ? 'リモート＋ローカル' : 'ローカル';
+  }
+
+  // --- Local DB
   function loadLocal(){
-    try{ db = JSON.parse(localStorage.getItem(KEY_DB) || '[]'); }catch{ db=[]; }
+    try{ db = JSON.parse(localStorage.getItem(KEY_DB) || '[]'); }catch{ db = []; }
     $('#data-count').textContent = db.length;
   }
-  function saveLocal(next){
-    db = next;
-    localStorage.setItem(KEY_DB, JSON.stringify(db));
+  function saveLocal(data){
+    localStorage.setItem(KEY_DB, JSON.stringify(data));
+    db = data;
     $('#data-count').textContent = db.length;
   }
 
   // --- Admin settings
   function loadAdmin(){
-    const def={pass:'admin123',remoteUrl:'',remoteAuto:false};
-    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_ADMIN)||'{}')); }catch{ return def; }
+    const def={ pass:'admin123', remoteUrl:'', remoteAuto:false };
+    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_ADMIN)||'{}')); }
+    catch{ return def; }
   }
   function saveAdmin(a){ localStorage.setItem(KEY_ADMIN, JSON.stringify(a)); }
 
-  function getRemote(){ try{ return Object.assign({url:'',auto:false}, JSON.parse(localStorage.getItem(KEY_REMOTE)||'{}')); }catch{ return {url:'',auto:false}; } }
-  function setRemote(url, auto){ localStorage.setItem(KEY_REMOTE, JSON.stringify({url,auto})); updateSourceLabel(); }
-
-  // --- GitHub settings
-  function loadGH(){
-    const def={owner:'',repo:'',branch:'main',path:'data/cards.json',token:''};
-    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_GH)||'{}')); }catch{ return def; }
+  // --- Remote
+  function getRemote(){
+    const def={ url:'', auto:false };
+    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_REMOTE)||'{}')); }
+    catch{ return def; }
   }
-  function saveGH(v){ localStorage.setItem(KEY_GH, JSON.stringify(v)); }
+  function setRemote(url, auto){
+    localStorage.setItem(KEY_REMOTE, JSON.stringify({url,auto}));
+    updateSourceLabel();
+  }
 
-  // --- UI helpers
-  function updateSourceLabel(){
-    const r=getRemote();
-    $('#source-label').textContent = r.url ? 'リモート＋ローカル' : 'ローカル';
+  // --- CSV 取込
+  function parseCsvFiles(fileList, done){
+    let all = []; let remaining = (fileList&&fileList.length)||0;
+    if(!remaining){ toast('CSVファイルを選択してください'); return; }
+    Array.from(fileList).forEach(file=>{
+      Papa.parse(file,{
+        header:true, skipEmptyLines:true,
+        complete:(res)=>{
+          const rows = (res.data||[]).map(normalizeRow).filter(Boolean);
+          all = all.concat(rows);
+          remaining--; if(remaining===0) done(all);
+        },
+        error:()=>{ remaining--; if(remaining===0) done(all); }
+      });
+    });
+  }
+  function normalizeRow(r){
+    const p = normText(r.pattern).replace(/^(?:p|P)/,'');
+    const pattern = pad2(parseInt(p||'0',10));
+    if(!(+pattern>=1 && +pattern<=12)) return null;
+    let cylinder = normText(r.cylinder).toUpperCase();
+    if(!(cylinder==='A'||cylinder==='B')) return null;
+    let num = normText(r.card_no).replace(/\D/g,'');
+    const card_no = pad3(parseInt(num||'0',10));
+    if(!(+card_no>=1 && +card_no<=100)) return null;
+    const label = normText(r.label||'');
+    const code = `P${pattern}-${cylinder}-${card_no}`;
+    return {pattern, cylinder, card_no, label, code};
+  }
+
+  // --- Search
+  function queryToFilter(q){
+    q = (q||'').toString().trim().toUpperCase();
+    if(!q) return {};
+    // 例: P07-B-076 / A023 / 76b
+    const m = q.match(/P?(\d{1,2})?\s*[- ]?\s*([AB])?\s*[- ]?\s*(\d{1,3})?/i);
+    let pattern = m && m[1] ? pad2(m[1]) : '';
+    let cylinder = m && m[2] ? m[2].toUpperCase() : '';
+    let card_no = m && m[3] ? pad3(m[3]) : '';
+    if(!cylinder){
+      const tail = q.match(/([AB])$/);
+      if(tail) cylinder = tail[1].toUpperCase();
+    }
+    return {pattern, cylinder, card_no};
+  }
+  function search(){
+    const q = $('#q').value;
+    const f = queryToFilter(q);
+    const pat = $('#filter-pattern').value || f.pattern;
+    const cyl = $('#filter-cylinder').value || f.cylinder;
+    const no  = f.card_no;
+    let rows = db;
+    if(pat) rows = rows.filter(r=>r.pattern===pat);
+    if(cyl) rows = rows.filter(r=>r.cylinder===cyl);
+    if(no)  rows = rows.filter(r=>r.card_no===no);
+    renderRows(rows);
   }
   function renderRows(rows){
-    const tb = $('#result-body'); tb.innerHTML='';
+    const tbody = $('#result-body');
+    tbody.innerHTML = '';
     const frag = document.createDocumentFragment();
     rows.slice(0,500).forEach(r=>{
-      const tr=document.createElement('tr');
+      const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><span class="badge">P${r.pattern}</span></td>
         <td><span class="badge ${r.cylinder==='A'?'a':'b'}">${r.cylinder}</span></td>
         <td>${r.card_no}</td>
         <td class="help">${r.code}</td>
-        <td>${(r.label||'')}</td>`;
+        <td>${r.label||''}</td>
+      `;
       frag.appendChild(tr);
     });
-    tb.appendChild(frag);
+    tbody.appendChild(frag);
     $('#hit-count').textContent = rows.length;
   }
 
-  // --- CSV normalize
-  function normalizeRow(r){
-    const p = norm(r.pattern).replace(/^(?:p|P)/,'');
-    const pattern = pad2(parseInt(p||'0',10));
-    if(!(+pattern>=1 && +pattern<=12)) return null;
-    let cylinder = norm(r.cylinder).toUpperCase();
-    if(!(cylinder==='A'||cylinder==='B')) return null;
-    let n = norm(r.card_no).replace(/\\D/g,'');
-    const card_no = pad3(parseInt(n||'0',10));
-    if(!(+card_no>=1 && +card_no<=100)) return null;
-    const label = norm(r.label);
-    const code = `P${pattern}-${cylinder}-${card_no}`;
-    return {pattern,cylinder,card_no,label,code};
+  // --- エクスポート
+  function exportJson(){
+    const blob = new Blob([JSON.stringify(db,null,2)], {type:'application/json'});
+    saveAs(blob, 'cards.json');
   }
 
-  function parseCsvFiles(fileList, done){
-    if(!fileList || !fileList.length){ toast('CSVファイルを選択してください'); return; }
-    let remain=fileList.length, all=[];
-    [...fileList].forEach(file=>{
-      Papa.parse(file,{header:true, skipEmptyLines:true,
-        complete:(res)=>{
-          const rows=(res.data||[]).map(normalizeRow).filter(Boolean);
-          all=all.concat(rows); remain--; if(remain===0) done(all);
-        },
-        error:()=>{ remain--; if(remain===0) done(all); }
-      });
-    });
-  }
-
-  // --- Search
-  function queryToFilter(q){
-    q=(q||'').toString().trim().toUpperCase();
-    if(!q) return {};
-    const m = q.match(/P?(\\d{1,2})?\\s*[- ]?\\s*([AB])?\\s*[- ]?\\s*(\\d{1,3})?/i);
-    let pattern = m && m[1] ? pad2(m[1]) : '';
-    let cylinder = m && m[2] ? m[2].toUpperCase() : '';
-    let card_no = m && m[3] ? pad3(m[3]) : '';
-    if(!cylinder){
-      const tail=q.match(/([AB])$/); if(tail) cylinder=tail[1].toUpperCase();
-    }
-    return {pattern,cylinder,card_no};
-  }
-  function search(){
-    const q=$('#q').value;
-    const f=queryToFilter(q);
-    const pat=$('#filter-pattern').value || f.pattern;
-    const cyl=$('#filter-cylinder').value || f.cylinder;
-    const no=f.card_no;
-    let rows=db;
-    if(pat) rows=rows.filter(r=>r.pattern===pat);
-    if(cyl) rows=rows.filter(r=>r.cylinder===cyl);
-    if(no)  rows=rows.filter(r=>r.card_no===no);
-    renderRows(rows);
-  }
-
-  // --- Remote sync
+  // --- リモート同期
   async function syncRemote(){
-    const r=getRemote();
+    const r = getRemote();
     if(!r.url){ toast('リモートURLが未設定です（管理者モードで設定）'); return; }
     try{
-      const res=await fetch(r.url,{cache:'no-store'}); if(!res.ok) throw new Error(res.statusText);
-      const json=await res.json(); if(!Array.isArray(json)) throw new Error('JSON配列ではありません');
-      const map=new Map(db.map(x=>[x.code,x])); json.forEach(x=>{ if(x&&x.code) map.set(x.code,x); });
-      const merged=[...map.values()];
+      const res = await fetch(r.url,{cache:'no-store'});
+      if(!res.ok) throw new Error(res.statusText);
+      const json = await res.json();
+      if(!Array.isArray(json)) throw new Error('JSON配列ではありません');
+      const map = new Map(db.map(x=>[x.code,x]));
+      json.forEach(x=>{ if(x && x.code) map.set(x.code, x); });
+      const merged = Array.from(map.values());
       saveLocal(merged);
       toast(`リモート同期完了：${json.length} 件 / 総計 ${merged.length} 件`);
       search();
-    }catch(e){ toast('同期に失敗しました：'+e.message); }
+    }catch(e){
+      toast('同期に失敗しました：'+ e.message);
+    }
   }
 
-  // --- GitHub API helpers
+  // --- タブ & ログイン
+  function activateTab(which){
+    if(which==='run'){
+      $('#tab-run').classList.add('active');
+      $('#tab-admin').classList.remove('active');
+      $('#run-section').classList.remove('hidden');
+      $('#admin-section').classList.add('hidden');
+    }else{
+      $('#tab-admin').classList.add('active');
+      $('#tab-run').classList.remove('active');
+      $('#admin-section').classList.remove('hidden');
+      $('#run-section').classList.add('hidden');
+    }
+  }
+  function isLoggedIn(){ return sessionStorage.getItem(KEY_ADMIN+':in')==='1'; }
+  function requireLogin(){
+    const logged = isLoggedIn();
+    $('#admin-logged-out').classList.toggle('hidden', logged);
+    $('#admin-logged-in').classList.toggle('hidden', !logged);
+  }
+  function login(pass){
+    const a = loadAdmin();
+    if(pass===a.pass){
+      sessionStorage.setItem(KEY_ADMIN+':in','1'); requireLogin(); toast('管理者ログインしました');
+    }else{
+      toast('パスコードが違います');
+    }
+  }
+  function logout(){ sessionStorage.removeItem(KEY_ADMIN+':in'); requireLogin(); }
+
+  // --- GitHub API
+  function loadGH(){
+    const def={owner:'',repo:'',branch:'main',path:'data/cards.json',token:''};
+    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_GH)||'{}')); }
+    catch{ return def; }
+  }
+  function saveGH(v){ localStorage.setItem(KEY_GH, JSON.stringify(v)); }
+
   function getGHHeaders(token){
     return {
       'Authorization': 'token '+token,
@@ -342,16 +402,13 @@
       'Content-Type': 'application/json'
     };
   }
-  function b64(str){
-    // UTF-8 → base64
-    return btoa(unescape(encodeURIComponent(str)));
-  }
+  function b64(str){ return btoa(unescape(encodeURIComponent(str))); }
   async function ghGetContent(owner,repo,path,branch,token){
     const u=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
     const r=await fetch(u,{headers:getGHHeaders(token)});
     if(r.status===404) return null;
     if(!r.ok) throw new Error('GitHub API error '+r.status);
-    return await r.json(); // {sha, content(base64), ...}
+    return await r.json(); // may include .sha
   }
   async function ghPutContent(owner,repo,path,branch,token,content, message, sha){
     const u=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
@@ -361,141 +418,135 @@
     return await r.json();
   }
 
-  // --- Init
-  function init(){
-    // tabs
-    $('#tab-run').addEventListener('click',()=>activateTab('run'));
-    $('#tab-admin').addEventListener('click',()=>activateTab('admin'));
-
-    // run
-    loadLocal(); updateSourceLabel(); renderRows(db.slice(0,50)); search();
-    $('#q').addEventListener('input',search);
-    $('#filter-pattern').addEventListener('change',search);
-    $('#filter-cylinder').addEventListener('change',search);
-    $('#btn-clear').addEventListener('click',()=>{ $('#q').value=''; $('#filter-pattern').value=''; $('#filter-cylinder').value=''; search(); });
-    $('#btn-export-json').addEventListener('click',()=> saveAs(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),'cards.json'));
-    $('#btn-reload-remote').addEventListener('click',syncRemote);
-    $('#btn-reset-local').addEventListener('click',()=>{ if(confirm('ローカル保存のカードデータを全て削除します。よろしいですか？')){ saveLocal([]); renderRows([]); search(); }});
-
-    // admin
-    requireLogin();
-    $('#btn-admin-login').addEventListener('click',()=>login($('#admin-pass').value));
-    $('#btn-admin-logout').addEventListener('click',logout);
-
-    // CSV取り込み
-    $('#btn-import').addEventListener('click',()=>{
-      parseCsvFiles($('#file-csv').files,(rows)=>{
-        staged=rows; $('#import-count').textContent=staged.length; toast(`読み込み完了：${staged.length} 件`);
-      });
-    });
-    $('#btn-save-local').addEventListener('click',()=>{
-      if(!staged.length){ toast('読み込みデータがありません'); return; }
-      const map=new Map(db.map(x=>[x.code,x])); staged.forEach(x=>map.set(x.code,x));
-      const merged=[...map.values()];
-      saveLocal(merged); staged=[]; $('#import-count').textContent='0'; search();
-      toast('ローカル保存しました');
-    });
-    $('#btn-clear-staged').addEventListener('click',()=>{ staged=[]; $('#import-count').textContent='0'; });
-
-    // CSVテンプレZIP
-    $('#btn-gen-templates').addEventListener('click',generateAllPatterns);
-
-    // Remote設定
-    const a = loadAdmin();
-    $('#remote-url').value = a.remoteUrl||'';
-    $('#remote-auto').checked = !!a.remoteAuto;
-    if(a.remoteUrl){ setRemote(a.remoteUrl, !!a.remoteAuto); }
-    if(a.remoteAuto && a.remoteUrl){ syncRemote(); }
-    $('#btn-save-remote').addEventListener('click',()=>{
-      const url=$('#remote-url').value.trim(), auto=$('#remote-auto').checked;
-      const a2=loadAdmin(); a2.remoteUrl=url; a2.remoteAuto=auto; saveAdmin(a2); setRemote(url,auto); toast('リモート設定を保存しました');
-    });
-
-    // GitHub連携UI初期化
-    const gh=loadGH();
-    $('#gh-owner').value=gh.owner; $('#gh-repo').value=gh.repo; $('#gh-branch').value=gh.branch; $('#gh-path').value=gh.path; $('#gh-token').value=gh.token;
-    $('#btn-gh-save').addEventListener('click',()=>{
-      const v={owner:$('#gh-owner').value.trim(), repo:$('#gh-repo').value.trim(), branch:$('#gh-branch').value.trim()||'main', path:$('#gh-path').value.trim()||'data/cards.json', token:$('#gh-token').value.trim()};
-      saveGH(v); toast('GitHub設定を保存しました');
-    });
-    $('#btn-gh-publish').addEventListener('click', ghPublish);
-    $('#btn-gh-fetch').addEventListener('click', ghFetchIntoLocal);
-  }
-
-  // --- CSVテンプレ生成（ZIP）
-  function generateAllPatterns(){
-    const zip = new JSZip();
-    for(let p=1;p<=12;p++){
-      const pattern=pad2(p);
-      const rows=['pattern,cylinder,card_no,label'];
-      ['A','B'].forEach(C=>{
-        const nums=Array.from({length:100},(_,i)=>pad3(i+1));
-        for(let i=nums.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [nums[i],nums[j]]=[nums[j],nums[i]]; }
-        nums.forEach(n=> rows.push(`${pattern},${C},${n},`));
-      });
-      zip.file(`pattern_${pattern}.csv`, rows.join('\\n'));
-    }
-    zip.generateAsync({type:'blob'}).then(blob=> saveAs(blob, `card_patterns_12csv_${Date.now()}.zip`));
-  }
-
-  // --- GitHub publish/fetch
   async function ghPublish(){
-    const gh=loadGH();
+    const gh={
+      owner: $('#gh-owner').value.trim(),
+      repo: $('#gh-repo').value.trim(),
+      branch: $('#gh-branch').value.trim()||'main',
+      path: $('#gh-path').value.trim()||'data/cards.json',
+      token: $('#gh-token').value.trim()
+    };
     if(!gh.owner||!gh.repo||!gh.branch||!gh.path||!gh.token){ toast('GitHub設定を入力して保存してください'); return; }
     try{
-      // 既存SHAを取得（無ければnull）
       const current = await ghGetContent(gh.owner, gh.repo, gh.path, gh.branch, gh.token);
       const sha = current && current.sha;
-      // JSON本文
       const payload = JSON.stringify(db, null, 2);
-      await ghPutContent(gh.owner, gh.repo, gh.path, gh.branch, gh.token, payload, 'feat: cards.json を更新（ツールから自動公開）', sha);
-      // Raw URL を自動設定
+      await ghPutContent(gh.owner, gh.repo, gh.path, gh.branch, gh.token, payload, 'feat: cards.json を更新（管理画面から自動公開）', sha);
       const raw = `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${gh.path}`;
-      const a=loadAdmin(); a.remoteUrl = raw; a.remoteAuto = false; saveAdmin(a); setRemote(raw,false);
+      // 配信先に自動設定
+      const a = loadAdmin(); a.remoteUrl = raw; saveAdmin(a); setRemote(raw, a.remoteAuto||false);
       $('#remote-url').value = raw;
-      toast('GitHub公開に成功しました。配信先URLを自動設定しました。運用端末は「リモートを同期」で反映されます。');
+      toast('GitHubに公開しました。配信先URLを自動設定しました。運用端末は「リモートを同期」で反映されます。');
     }catch(e){ toast('GitHub公開エラー：'+e.message); }
   }
 
   async function ghFetchIntoLocal(){
     const gh=loadGH();
     if(!gh.owner||!gh.repo||!gh.branch||!gh.path){ toast('GitHub設定が不足しています'); return; }
-    // Raw から取得（トークン不要）
     const raw = `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${gh.path}`;
     try{
       const r=await fetch(raw,{cache:'no-store'}); if(!r.ok) throw new Error(r.statusText);
       const arr=await r.json(); if(!Array.isArray(arr)) throw new Error('配列JSONではありません');
       const map=new Map(db.map(x=>[x.code,x])); arr.forEach(x=>{ if(x&&x.code) map.set(x.code,x); });
       saveLocal([...map.values()]);
-      // 配信先も自動でそのRawにあわせる
       const a=loadAdmin(); a.remoteUrl=raw; saveAdmin(a); setRemote(raw, a.remoteAuto||false); $('#remote-url').value=raw;
       toast(`GitHubから取り込みました（${arr.length}件）。`);
       search();
     }catch(e){ toast('GitHub取得エラー：'+e.message); }
   }
 
-  // --- Tab & Auth
-  function activateTab(which){
-    if(which==='run'){
-      $('#tab-run').classList.add('active'); $('#tab-admin').classList.remove('active');
-      $('#run-section').classList.remove('hidden'); $('#admin-section').classList.add('hidden');
-    }else{
-      $('#tab-admin').classList.add('active'); $('#tab-run').classList.remove('active');
-      $('#admin-section').classList.remove('hidden'); $('#run-section').classList.add('hidden');
+  // --- 初期化
+  function init(){
+    // Tabs
+    $('#tab-run').addEventListener('click',()=>activateTab('run'));
+    $('#tab-admin').addEventListener('click',()=>activateTab('admin'));
+
+    // 運用：検索UIイベント
+    loadLocal(); updateSourceLabel(); renderRows(db.slice(0,50)); search();
+    $('#q').addEventListener('input', search);
+    $('#filter-pattern').addEventListener('change', search);
+    $('#filter-cylinder').addEventListener('change', search);
+    $('#btn-clear').addEventListener('click', ()=>{ $('#q').value=''; $('#filter-pattern').value=''; $('#filter-cylinder').value=''; search(); });
+    $('#btn-export-json').addEventListener('click', exportJson);
+    $('#btn-reload-remote').addEventListener('click', syncRemote);
+    $('#btn-reset-local').addEventListener('click', ()=>{ if(confirm('ローカル保存のカードデータを全て削除します。よろしいですか？')){ saveLocal([]); renderRows([]); search(); }});
+
+    // 管理：ログイン
+    requireLogin();
+    $('#btn-admin-login').addEventListener('click', ()=>login($('#admin-pass').value));
+    $('#btn-admin-logout').addEventListener('click', logout);
+
+    // 管理：CSV
+    $('#btn-import').addEventListener('click', ()=>{
+      const files = $('#file-csv').files;
+      parseCsvFiles(files,(rows)=>{
+        staged = rows; $('#import-count').textContent = staged.length;
+        toast(`読み込み完了：${staged.length} 件`);
+      });
+    });
+    $('#btn-save-local').addEventListener('click', ()=>{
+      if(staged.length===0){ toast('読み込みデータがありません'); return; }
+      const map = new Map(db.map(x=>[x.code,x]));
+      staged.forEach(x=>map.set(x.code,x));
+      const merged = Array.from(map.values());
+      saveLocal(merged);
+      staged = []; $('#import-count').textContent = '0';
+      toast('ローカル保存しました'); search();
+    });
+    $('#btn-clear-staged').addEventListener('click', ()=>{ staged=[]; $('#import-count').textContent='0'; });
+
+    // 管理：テンプレ生成
+    $('#btn-gen-templates').addEventListener('click', generateAllPatterns);
+
+    // リモート設定
+    const a = loadAdmin();
+    $('#remote-url').value = a.remoteUrl||'';
+    $('#remote-auto').checked = !!a.remoteAuto;
+    if(a.remoteUrl){ setRemote(a.remoteUrl, !!a.remoteAuto); }
+    if(a.remoteAuto && a.remoteUrl){ syncRemote(); }
+    $('#btn-save-remote').addEventListener('click', ()=>{
+      const url = $('#remote-url').value.trim();
+      const auto = $('#remote-auto').checked;
+      const a2 = loadAdmin(); a2.remoteUrl = url; a2.remoteAuto = auto; saveAdmin(a2);
+      setRemote(url, auto);
+      toast('リモート設定を保存しました');
+    });
+
+    // GitHub 連携
+    const gh = (function(){ try{return JSON.parse(localStorage.getItem(KEY_GH)||'{}')}catch{return{}} })();
+    $('#gh-owner').value = gh.owner||'';
+    $('#gh-repo').value  = gh.repo||'';
+    $('#gh-branch').value= gh.branch||'main';
+    $('#gh-path').value  = gh.path||'data/cards.json';
+    $('#gh-token').value = gh.token||'';
+
+    $('#btn-gh-save').addEventListener('click', ()=>{
+      const v={owner:$('#gh-owner').value.trim(),repo:$('#gh-repo').value.trim(),branch:$('#gh-branch').value.trim()||'main',path:$('#gh-path').value.trim()||'data/cards.json',token:$('#gh-token').value.trim()};
+      localStorage.setItem(KEY_GH, JSON.stringify(v));
+      toast('GitHub設定を保存しました');
+    });
+    $('#btn-gh-publish').addEventListener('click', ghPublish);
+    $('#btn-gh-fetch').addEventListener('click', ghFetchIntoLocal);
+
+    // 初回検索
+    search();
+  }
+
+  // --- 12パターン生成（ZIP）
+  function generateAllPatterns(){
+    const zip = new JSZip();
+    for(let p=1;p<=12;p++){
+      const pattern = pad2(p);
+      const csv = [ 'pattern,cylinder,card_no,label' ];
+      ['A','B'].forEach(C=>{
+        const nums = Array.from({length:100}, (_,i)=>pad3(i+1));
+        for(let i=nums.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [nums[i],nums[j]]=[nums[j],nums[i]]; }
+        nums.forEach(n=> csv.push(`${pattern},${C},${n},`));
+      });
+      zip.file(`pattern_${pattern}.csv`, csv.join('\n'));
     }
+    zip.generateAsync({type:'blob'}).then(content=> saveAs(content, `card_patterns_12csv_${Date.now()}.zip`));
   }
-  function isLoggedIn(){ return sessionStorage.getItem(KEY_ADMIN+':in')==='1'; }
-  function requireLogin(){
-    const logged=isLoggedIn();
-    $('#admin-logged-out').classList.toggle('hidden', logged);
-    $('#admin-logged-in').classList.toggle('hidden', !logged);
-  }
-  function login(pass){
-    const a=loadAdmin();
-    if(pass===a.pass){ sessionStorage.setItem(KEY_ADMIN+':in','1'); requireLogin(); toast('管理者ログインしました'); }
-    else { toast('パスコードが違います'); }
-  }
-  function logout(){ sessionStorage.removeItem(KEY_ADMIN+':in'); requireLogin(); }
 
   // --- Boot
   document.addEventListener('DOMContentLoaded', init);
