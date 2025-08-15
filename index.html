@@ -1,584 +1,80 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ガンバレジェンズ 排出順トラッカー＆LR予測（自動パターン検知）</title>
+<!-- === GANBA CSV GitHub Uploader Widget (drop-in) === -->
 <style>
-  :root { color-scheme: dark; }
-  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; background:#0f172a; color:#e5e7eb; margin:0; }
-  /* 中央寄せ＆幅制限 */
-  .container { max-width: 960px; margin: 0 auto; width: 100%; }
-  .pad { padding:16px; box-sizing:border-box; }
-
-  header { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:12px 16px; background:#111827; border-bottom:1px solid #1f2937; position:sticky; top:0; z-index:10; }
-  h1 { font-size:16px; margin:0; }
-  .muted { color:#9ca3af; font-size:12px; }
-  .btn { background:#0ea5e9; color:#fff; border:none; border-radius:6px; padding:8px 12px; cursor:pointer; font-weight:600; }
-  .btn.secondary { background:#374151; }
-  .btn.warn { background:#ef4444; }
-  .btn:disabled { opacity:.6; cursor:not-allowed; }
-  .bar { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-
-  .tabs { display:flex; gap:8px; border-bottom:1px solid #1f2937; }
-  .tab { padding:10px 12px; border-bottom:2px solid transparent; cursor:pointer; color:#9ca3af; }
-  .tab.active { color:#e5e7eb; border-color:#0ea5e9; }
-
-  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  @media (max-width: 840px){ .grid-2 { grid-template-columns:1fr; } }
-
-  .card { background:#1f2937; border:1px solid #374151; border-radius:12px; padding:16px; }
-  label { display:block; font-size:12px; color:#9ca3af; margin-bottom:6px; }
-  input[type="text"], input[type="password"], select, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #374151; background:#0b1220; color:#e5e7eb; }
-  textarea { min-height:240px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:13px; }
-  table { width:100%; border-collapse:collapse; }
-  th, td { padding:8px; border-bottom:1px solid #374151; font-size:13px; }
-  th { text-align:left; color:#9ca3af; font-weight:600; }
-  .list { max-height:220px; overflow:auto; border:1px solid #374151; border-radius:10px; }
-  .hidden { display:none !important; }
-  .ok { color:#34d399; }
-  .warntext { color:#f59e0b; }
-  .err { color:#ef4444; }
-  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid #374151; background:#111827; }
-  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .gl-fab{position:fixed;right:16px;bottom:16px;z-index:9999;background:#1677ff;color:#fff;border:none;border-radius:24px;padding:10px 14px;box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:pointer;font-weight:600}
+  .gl-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:9998}
+  .gl-modal{width:min(640px,92vw);background:#111827;color:#e5e7eb;border:1px solid #1f2937;border-radius:12px;padding:16px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  .gl-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+  .gl-input{flex:1;min-width:140px;background:#0b1220;border:1px solid #22314b;border-radius:8px;color:#e5e7eb;padding:8px 10px}
+  .gl-btn{background:#1f2937;border:1px solid #374151;color:#e5e7eb;border-radius:8px;padding:8px 12px;cursor:pointer}
+  .gl-btn:hover{background:#2b3647}
+  .gl-btn-danger{background:#ef4444;border-color:#dc2626;color:#fff}
+  .gl-ok{color:#86efac}.gl-err{color:#fca5a5;white-space:pre-wrap}
+  .gl-small{font-size:12px;color:#9ca3af}
 </style>
-</head>
-<body>
-<header class="container">
-  <div>
-    <h1>ガンバレジェンズ 排出順トラッカー＆LR予測</h1>
-    <div class="muted">A/B各100枚 × 12パターン｜CSV/JSON対応｜運用は自動パターン検知</div>
-  </div>
-  <div class="bar">
-    <button id="btnLoginOpen" class="btn secondary">管理者ログイン</button>
-    <span id="loginState" class="pill">未ログイン</span>
-    <button id="btnLogout" class="btn warn hidden">ログアウト</button>
-  </div>
-</header>
-
-<main class="container pad">
-  <!-- タブ -->
-  <div class="tabs">
-    <div class="tab active" data-tab="run" id="tabRun">運用モード（自動パターン検知）</div>
-    <div class="tab" data-tab="manage" id="tabManage" title="管理者ログインが必要" aria-disabled="true">管理モード（パターン管理）</div>
-  </div>
-
-  <!-- 運用モード：観測から自動同定 -->
-  <section id="panel-run" class="pad" style="padding-left:0;padding-right:0;">
-    <div class="grid-2">
-      <!-- A -->
-      <div class="card">
-        <h3>シリンダーA 観測</h3>
-        <label>直近の排出カード番号（<b>番号だけでもOK</b>：015 / GG3-015）</label>
-        <div class="row">
-          <input type="text" id="obsInputA" placeholder="例: 015 / GG3-015" />
-          <button class="btn" id="btnAddA">追加</button>
-          <button class="btn secondary" id="btnUndoA">取り消し</button>
-          <button class="btn secondary" id="btnResetA">リセット</button>
-        </div>
-        <div class="row">
-          <span class="pill">観測件数: <b id="obsCountA">0</b></span>
-          <span class="pill">候補: <b id="candCountA">1200</b></span>
-        </div>
-        <div class="list" style="margin-top:8px">
-          <table><thead><tr><th>#</th><th>ID</th></tr></thead><tbody id="obsTableA"></tbody></table>
-        </div>
-        <div class="muted" id="statusA" style="margin-top:8px;">観測を追加していくと自動で候補が絞られます。</div>
-      </div>
-
-      <!-- B -->
-      <div class="card">
-        <h3>シリンダーB 観測</h3>
-        <label>直近の排出カード番号（<b>番号だけでもOK</b>：017 / GG3-017）</label>
-        <div class="row">
-          <input type="text" id="obsInputB" placeholder="例: 017 / GG3-017" />
-          <button class="btn" id="btnAddB">追加</button>
-          <button class="btn secondary" id="btnUndoB">取り消し</button>
-          <button class="btn secondary" id="btnResetB">リセット</button>
-        </div>
-        <div class="row">
-          <span class="pill">観測件数: <b id="obsCountB">0</b></span>
-          <span class="pill">候補: <b id="candCountB">1200</b></span>
-        </div>
-        <div class="list" style="margin-top:8px">
-          <table><thead><tr><th>#</th><th>ID</th></tr></thead><tbody id="obsTableB"></tbody></table>
-        </div>
-        <div class="muted" id="statusB" style="margin-top:8px;">観測を追加していくと自動で候補が絞られます。</div>
-      </div>
+<button class="gl-fab" id="glFab">CSV一括アップロード</button>
+<div class="gl-modal-bg" id="glModalBg" aria-hidden="true">
+  <div class="gl-modal">
+    <h3 style="margin:0 0 8px">CSVをGitHubに上書き</h3>
+    <div class="gl-small">画面はそのまま、CSVだけを <b>GitHubの指定パス</b> に上書きします。トークンは保存しません。</div>
+    <div class="gl-row">
+      <input id="glOwner" class="gl-input" placeholder="owner 例: mikaeru222">
+      <input id="glRepo"  class="gl-input" placeholder="repo 例: ganba-legends-tool">
+      <input id="glBranch"class="gl-input" placeholder="branch" value="main" style="max-width:160px">
     </div>
-
-    <!-- 推定まとめ -->
-    <div class="card" style="margin-top:16px;">
-      <h3>推定結果とLR予測</h3>
-      <div class="row">
-        <div class="pill">A 候補: <b id="candListA">—</b></div>
-        <div class="pill">B 候補: <b id="candListB">—</b></div>
-      </div>
-      <div class="grid-2" style="margin-top:8px;">
-        <div>
-          <h4 class="muted">Aの推定</h4>
-          <div id="estA" class="muted">—</div>
-        </div>
-        <div>
-          <h4 class="muted">Bの推定</h4>
-          <div id="estB" class="muted">—</div>
-        </div>
-      </div>
+    <div class="gl-row">
+      <input id="glPath"  class="gl-input" placeholder="path 例: test_patterns_full.csv" value="test_patterns_full.csv">
     </div>
-  </section>
-
-  <!-- 管理モード：CSV/JSONと手動編集 -->
-  <section id="panel-manage" class="pad hidden" style="padding-left:0;padding-right:0;">
-    <div class="card">
-      <div class="row" style="justify-content:space-between;">
-        <div class="row">
-          <label style="margin:0;">編集中のパターン</label>
-          <select id="patternSelect"></select>
-          <button class="btn secondary" id="btnExportJSON">全パターンJSON書出</button>
-          <input type="file" id="importJSON" accept=".json" class="hidden" />
-          <button class="btn secondary" id="btnImportJSON">JSON読み込み</button>
-        </div>
-      </div>
-      <div class="muted" id="patternInfo">A/B 各100行（レア: LR/SR/R/N・省略時N）</div>
+    <div class="gl-row">
+      <input id="glToken" class="gl-input" type="password" placeholder="GitHub Personal Access Token（repo権限）">
     </div>
-
-    <div class="grid-2" style="margin-top:16px;">
-      <div class="card">
-        <h3>シリンダーA（100行）</h3>
-        <label>形式：<code>ID[, rarity]</code>（例：<code>001, LR</code> / <code>GG3-001, R</code> / <code>015</code>）</label>
-        <textarea id="taA" placeholder="001, N&#10;...&#10;100, N"></textarea>
-        <div class="row" style="justify-content:space-between;">
-          <button class="btn" id="btnApplyA">Aを置き換え</button>
-          <span id="cntA" class="muted">0/100</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>シリンダーB（100行）</h3>
-        <label>形式：<code>ID[, rarity]</code></label>
-        <textarea id="taB" placeholder="001, N&#10;...&#10;100, N"></textarea>
-        <div class="row" style="justify-content:space-between;">
-          <button class="btn" id="btnApplyB">Bを置き換え</button>
-          <span id="cntB" class="muted">0/100</span>
-        </div>
-      </div>
+    <div class="gl-row">
+      <input id="glMsg"   class="gl-input" placeholder="commit message" value="update csv via admin upload">
     </div>
-
-    <div class="card" style="margin-top:16px;">
-      <h3>CSVインポート／エクスポート</h3>
-      <div class="grid-2">
-        <div>
-          <h4>① 単一パターンCSV読み込み</h4>
-          <div class="muted">ヘッダ：<code>cylinder,id,rarity</code>（A/B各100行）</div>
-          <div class="row" style="margin-top:8px;">
-            <input type="file" id="csvPatternFile" accept=".csv" />
-            <button class="btn" id="btnImportPatternCSV">単一パターンCSV読み込み</button>
-            <button class="btn secondary" id="btnExportPatternCSV">単一パターンCSVテンプレ出力</button>
-          </div>
-        </div>
-        <div>
-          <h4>② 全パターンCSV読み込み（12パターン一括）</h4>
-          <div class="muted">ヘッダ：<code>pattern,cylinder,position,id,rarity</code>（position=1..100）</div>
-          <div class="row" style="margin-top:8px;">
-            <input type="file" id="csvAllFile" accept=".csv" />
-            <button class="btn" id="btnImportAllCSV">全パターンCSV読み込み</button>
-            <button class="btn secondary" id="btnExportAllCSV">全パターンCSVテンプレ出力</button>
-          </div>
-        </div>
-      </div>
-      <div id="csvMsg" class="muted" style="margin-top:8px;">CSVの読み込み状況がここに表示されます</div>
+    <div class="gl-row">
+      <input id="glFile" type="file" accept=".csv" class="gl-input" style="border:none;padding:6px 0;background:transparent">
+      <button id="glPush" class="gl-btn gl-btn-danger">GitHubに上書きアップロード</button>
+      <button id="glClose" class="gl-btn">閉じる</button>
     </div>
-
-    <div class="grid-2" style="margin-top:16px;">
-      <div class="card">
-        <h3>現在のA</h3>
-        <table id="tblA"><thead><tr><th>#</th><th>ID</th><th>Rarity</th></tr></thead><tbody></tbody></table>
-      </div>
-      <div class="card">
-        <h3>現在のB</h3>
-        <table id="tblB"><thead><tr><th>#</th><th>ID</th><th>Rarity</th></tr></thead><tbody></tbody></table>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- ログインモーダル -->
-<div id="loginModal" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center;">
-  <div class="card" style="width:min(420px, 92vw);">
-    <h3>管理者ログイン</h3>
-    <label>パスワード</label>
-    <input type="password" id="adminPass" placeholder="********" />
-    <div class="row" style="justify-content:flex-end; margin-top:8px;">
-      <button class="btn secondary" id="btnLoginCancel">キャンセル</button>
-      <button class="btn" id="btnLoginDo">ログイン</button>
-    </div>
-    <div class="muted" style="margin-top:8px;">仮パスワード：<code>ganba2025</code></div>
+    <div id="glStatus" class="gl-small" style="margin-top:6px"></div>
   </div>
 </div>
-
 <script>
-/* ========= 基本定数 ========= */
-const ADMIN_PASSWORD = "ganba2025";
-const PATTERN_COUNT = 12;
-const CYL_SIZE = 100;
-const RAR_SET = new Set(["LR","SR","R","N"]);
+(function(){
+  const $=q=>document.querySelector(q);
+  const fab=$("#glFab"), bg=$("#glModalBg"), pushBtn=$("#glPush"), closeBtn=$("#glClose");
+  const owner=$("#glOwner"), repo=$("#glRepo"), branch=$("#glBranch"), path=$("#glPath");
+  const token=$("#glToken"), msg=$("#glMsg"), file=$("#glFile"), status=$("#glStatus");
 
-/* ========= 状態／データ ========= */
-const patterns = {}; // { "1": {A:[{id,rarity}], B:[...]}, ... }
-for (let p = 1; p <= PATTERN_COUNT; p++) patterns[String(p)] = { A: [], B: [] };
-let admin = false;
-let currentPattern = "1";
+  fab.onclick=()=>{ bg.style.display='flex'; };
+  closeBtn.onclick=()=>{ bg.style.display='none'; status.textContent=''; file.value=''; };
 
-/* ========= DOM ========= */
-const tabRun = document.getElementById('tabRun');
-const tabManage = document.getElementById('tabManage');
-const panelRun = document.getElementById('panel-run');
-const panelManage = document.getElementById('panel-manage');
-
-const btnLoginOpen = document.getElementById('btnLoginOpen');
-const btnLogout = document.getElementById('btnLogout');
-const loginState = document.getElementById('loginState');
-const loginModal = document.getElementById('loginModal');
-const adminPass = document.getElementById('adminPass');
-const btnLoginCancel = document.getElementById('btnLoginCancel');
-const btnLoginDo = document.getElementById('btnLoginDo');
-
-const patternSelect = document.getElementById('patternSelect');
-
-const taA = document.getElementById('taA');
-const taB = document.getElementById('taB');
-const btnApplyA = document.getElementById('btnApplyA');
-const btnApplyB = document.getElementById('btnApplyB');
-const cntA = document.getElementById('cntA');
-const cntB = document.getElementById('cntB');
-
-const tblA = document.getElementById('tblA').querySelector('tbody');
-const tblB = document.getElementById('tblB').querySelector('tbody');
-const patternInfo = document.getElementById('patternInfo');
-
-const btnExportJSON = document.getElementById('btnExportJSON');
-const btnImportJSON = document.getElementById('btnImportJSON');
-const importJSON = document.getElementById('importJSON');
-
-const csvMsg = document.getElementById('csvMsg');
-const csvPatternFile = document.getElementById('csvPatternFile');
-const csvAllFile = document.getElementById('csvAllFile');
-const btnImportPatternCSV = document.getElementById('btnImportPatternCSV');
-const btnExportPatternCSV = document.getElementById('btnExportPatternCSV');
-const btnImportAllCSV = document.getElementById('btnImportAllCSV');
-const btnExportAllCSV = document.getElementById('btnExportAllCSV');
-
-/* 運用（自動検知）DOM */
-const obsInputA = document.getElementById('obsInputA');
-const obsInputB = document.getElementById('obsInputB');
-const btnAddA = document.getElementById('btnAddA');
-const btnAddB = document.getElementById('btnAddB');
-const btnUndoA = document.getElementById('btnUndoA');
-const btnUndoB = document.getElementById('btnUndoB');
-const btnResetA = document.getElementById('btnResetA');
-const btnResetB = document.getElementById('btnResetB');
-const obsCountA = document.getElementById('obsCountA');
-const obsCountB = document.getElementById('obsCountB');
-const candCountA = document.getElementById('candCountA');
-const candCountB = document.getElementById('candCountB');
-const obsTableA = document.getElementById('obsTableA');
-const obsTableB = document.getElementById('obsTableB');
-const candListA = document.getElementById('candListA');
-const candListB = document.getElementById('candListB');
-const statusA = document.getElementById('statusA');
-const statusB = document.getElementById('statusB');
-const estA = document.getElementById('estA');
-const estB = document.getElementById('estB');
-
-/* ========= ユーティリティ ========= */
-const digits = s => String(s||'').replace(/[^0-9]/g,'');
-function normRarity(r){ r=(r||'').toUpperCase().trim(); return RAR_SET.has(r)? r:'N'; }
-function idEqualLoose(a,b){ // 完全一致 or 数字3桁一致
-  const al=String(a||'').toLowerCase().trim(), bl=String(b||'').toLowerCase().trim();
-  if(al===bl) return true;
-  const ad=digits(a), bd=digits(b);
-  return ad && bd && ad===bd;
-}
-
-/* ========= 画面反映 ========= */
-function downloadText(filename, text){
-  const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
-  const url = URL.createObjectURL(blob);
-  const a=document.createElement("a"); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url);
-}
-function renderABTables(){
-  const a = patterns[currentPattern].A;
-  const b = patterns[currentPattern].B;
-  tblA.innerHTML = a.map((c,i)=>`<tr><td>${i+1}</td><td>${c.id}</td><td>${c.rarity}</td></tr>`).join("");
-  tblB.innerHTML = b.map((c,i)=>`<tr><td>${i+1}</td><td>${c.id}</td><td>${c.rarity}</td></tr>`).join("");
-  cntA.textContent = `${a.length}/${CYL_SIZE}`; cntB.textContent = `${b.length}/${CYL_SIZE}`;
-  patternInfo.textContent = `パターン${currentPattern}：A ${a.length}行 / B ${b.length}行`;
-}
-
-/* ========= 初期化 ========= */
-function initPatternSelects(){
-  patternSelect.innerHTML = "";
-  for (let p=1;p<=PATTERN_COUNT;p++){
-    const k=String(p);
-    patternSelect.insertAdjacentHTML("beforeend", `<option value="${k}">パターン ${p}</option>`);
+  async function getSha(owner,repo,path,branch,token){
+    const url=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+    const res=await fetch(url, {headers:{Authorization:`token ${token}`,Accept:"application/vnd.github+json"}});
+    if(res.ok){ const j=await res.json(); return j.sha||null; }
+    return null; // 新規作成はOK
   }
-  patternSelect.value=currentPattern;
-}
-initPatternSelects(); renderABTables();
+  function b64(txt){ return btoa(unescape(encodeURIComponent(txt))); }
+  function toast(t, ok=true){ status.innerHTML = (ok? "<span class='gl-ok'>":"<span class='gl-err'>")+t+"</span>"; }
 
-/* ========= タブ制御 ========= */
-function setTab(tab){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  if(tab==='run'){ tabRun.classList.add('active'); panelRun.classList.remove('hidden'); panelManage.classList.add('hidden'); }
-  if(tab==='manage'){
-    if(!admin){ alert("管理者ログインが必要です"); return; }
-    tabManage.classList.add('active'); panelManage.classList.remove('hidden'); panelRun.classList.add('hidden');
-  }
-}
-tabRun.addEventListener('click',()=>setTab('run'));
-tabManage.addEventListener('click',()=>setTab('manage'));
-
-/* ========= ログイン制御 ========= */
-btnLoginOpen.addEventListener('click', ()=>{ adminPass.value=""; loginModal.classList.remove('hidden'); });
-btnLoginCancel.addEventListener('click', ()=> loginModal.classList.add('hidden'));
-btnLoginDo.addEventListener('click', ()=>{
-  if(adminPass.value===ADMIN_PASSWORD){
-    admin=true; loginModal.classList.add('hidden');
-    loginState.textContent="管理者"; btnLogout.classList.remove('hidden');
-    tabManage.removeAttribute('aria-disabled'); tabManage.title="";
-    alert("管理モードが有効になりました");
-  }else{ alert("パスワードが違います"); }
-});
-btnLogout.addEventListener('click', ()=>{
-  admin=false; setTab('run'); loginState.textContent="未ログイン"; btnLogout.classList.add('hidden');
-  tabManage.setAttribute('aria-disabled','true'); tabManage.title="管理者ログインが必要";
-  alert("ログアウトしました");
-});
-
-/* ========= 管理：テキスト貼り付け ========= */
-function parseLinesToArr(text){
-  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l.length>0);
-  const arr = [];
-  for (const l of lines) {
-    const parts = l.split(",").map(x => x.trim());
-    let rawId = parts[0] || "";
-    // 001 のような数字だけ or GG3-001 どちらも許可
-    const id = digits(rawId).padStart(3,'0');
-    const rarity = normRarity(parts[1]||"N");
-    if (!id || id==='000') throw new Error(`IDが不正: "${l}"`);
-    arr.push({id,rarity});
-  }
-  return arr;
-}
-function validate100(arr,label="A/B"){ if(arr.length!==CYL_SIZE) throw new Error(`${label} は ${CYL_SIZE} 行が必要です（現在 ${arr.length} 行）`); }
-
-btnApplyA.addEventListener('click', ()=>{
-  try{ const arr=parseLinesToArr(taA.value); validate100(arr,"A"); patterns[currentPattern].A=arr; renderABTables(); alert("Aを更新しました"); }
-  catch(e){ alert("Aの更新エラー: "+e.message); }
-});
-btnApplyB.addEventListener('click', ()=>{
-  try{ const arr=parseLinesToArr(taB.value); validate100(arr,"B"); patterns[currentPattern].B=arr; renderABTables(); alert("Bを更新しました"); }
-  catch(e){ alert("Bの更新エラー: "+e.message); }
-});
-patternSelect.addEventListener('change', ()=>{ currentPattern=patternSelect.value; renderABTables(); setTextareasFromCurrent(); });
-function setTextareasFromCurrent(){
-  const a = patterns[currentPattern].A, b = patterns[currentPattern].B;
-  taA.value = a.map(x => `${x.id}, ${x.rarity}`).join("\n");
-  taB.value = b.map(x => `${x.id}, ${x.rarity}`).join("\n");
-  cntA.textContent = `${a.length}/${CYL_SIZE}`; cntB.textContent = `${b.length}/${CYL_SIZE}`;
-}
-
-/* ========= JSON入出力 ========= */
-btnExportJSON.addEventListener('click', ()=> downloadText('ganba_patterns_12.json', JSON.stringify({patterns}, null, 2)));
-btnImportJSON.addEventListener('click', ()=> importJSON.click());
-importJSON.addEventListener('change', async (e)=>{
-  const f=e.target.files[0]; if(!f) return;
-  try{
-    const obj=JSON.parse(await f.text());
-    if(!obj.patterns) throw new Error("patterns がありません");
-    for(let p=1;p<=PATTERN_COUNT;p++){
-      const k=String(p); const P=obj.patterns[k]; if(!P) throw new Error(`pattern ${k} がありません`);
-      patterns[k] = { A: (P.A||[]).map(x=>({id:digits(String(x.id)).padStart(3,'0'),rarity:normRarity(x.rarity)})),
-                      B: (P.B||[]).map(x=>({id:digits(String(x.id)).padStart(3,'0'),rarity:normRarity(x.rarity)})) };
-    }
-    currentPattern="1"; renderABTables(); setTextareasFromCurrent(); alert("JSON読み込み完了");
-  }catch(err){ alert("JSON読み込みエラー: "+err.message); }
-  finally{ e.target.value=""; }
-});
-
-/* ========= CSV：単一パターン ========= */
-btnExportPatternCSV.addEventListener('click', ()=>{
-  const a=patterns[currentPattern].A, b=patterns[currentPattern].B;
-  let out="cylinder,id,rarity\n"; a.forEach(x=> out+=`A,${x.id},${x.rarity}\n`); b.forEach(x=> out+=`B,${x.id},${x.rarity}\n`);
-  downloadText(`pattern_${currentPattern}_A_B.csv`, out);
-});
-btnImportPatternCSV.addEventListener('click', async ()=>{
-  const f = csvPatternFile.files?.[0]; if(!f){ alert("単一パターンCSVを選択してください"); return; }
-  try{
-    const text = await f.text();
-    const lines = text.split(/\r?\n/).filter(l=>l.trim().length>0);
-    if (!/^cylinder\s*,\s*id\s*,\s*rarity/i.test(lines[0])) throw new Error("ヘッダは cylinder,id,rarity で始まる必要があります");
-    const A=[], B=[];
-    for (let i=1;i<lines.length;i++){
-      const parts = lines[i].split(",").map(x=>x.trim());
-      if (parts.length<2) continue;
-      const cyl=(parts[0]||"").toUpperCase();
-      const id=digits(parts[1]||"").padStart(3,'0');
-      const rarity=normRarity(parts[2]||"N");
-      if (!id || id==='000') throw new Error(`IDが不正（行${i+1}）`);
-      if (!(cyl==="A"||cyl==="B")) throw new Error(`cylinder は A/B（行${i+1}）`);
-      (cyl==="A"?A:B).push({id,rarity});
-    }
-    validate100(A,"A"); validate100(B,"B");
-    patterns[currentPattern].A=A; patterns[currentPattern].B=B; renderABTables(); setTextareasFromCurrent();
-    csvMsg.innerHTML = `<span class="ok">単一パターンCSVを取り込みました（パターン${currentPattern}）</span>`;
-  }catch(err){ csvMsg.innerHTML = `<span class="err">単一パターンCSVエラー：${err.message}</span>`; }
-  finally{ csvPatternFile.value=""; }
-});
-
-/* ========= CSV：全パターン一括 ========= */
-btnExportAllCSV.addEventListener('click', ()=>{
-  let out="pattern,cylinder,position,id,rarity\n";
-  for(let p=1;p<=PATTERN_COUNT;p++){
-    const k=String(p);
-    patterns[k].A.forEach((x,i)=> out+=`${k},A,${i+1},${x.id},${x.rarity}\n`);
-    patterns[k].B.forEach((x,i)=> out+=`${k},B,${i+1},${x.id},${x.rarity}\n`);
-  }
-  downloadText(`patterns_all_${PATTERN_COUNT}p_${CYL_SIZE}x2.csv`, out);
-});
-btnImportAllCSV.addEventListener('click', async ()=>{
-  const f = csvAllFile.files?.[0]; if(!f){ alert("全パターンCSVを選択してください"); return; }
-  try{
-    const text = await f.text();
-    const lines = text.split(/\r?\n/).filter(l=>l.trim().length>0);
-    if (!/^pattern\s*,\s*cylinder\s*,\s*position\s*,\s*id\s*,\s*rarity/i.test(lines[0])) {
-      throw new Error("ヘッダは pattern,cylinder,position,id,rarity で始まる必要があります");
-    }
-    const buf={}; for(let p=1;p<=PATTERN_COUNT;p++) buf[String(p)]={A:Array(CYL_SIZE),B:Array(CYL_SIZE)};
-    for (let i=1;i<lines.length;i++){
-      const parts = lines[i].split(",").map(x=>x.trim());
-      if (parts.length<4) continue;
-      const pat=String(parseInt(parts[0],10));
-      const cyl=(parts[1]||"").toUpperCase();
-      const pos=parseInt(parts[2],10);
-      const id=digits(parts[3]||"").padStart(3,'0');
-      const rarity=normRarity(parts[4]||"N");
-      if (!(pat in buf)) throw new Error(`pattern は 1..${PATTERN_COUNT}（行${i+1}）`);
-      if (!(cyl==="A"||cyl==="B")) throw new Error(`cylinder は A/B（行${i+1}）`);
-      if (!(pos>=1 && pos<=CYL_SIZE)) throw new Error(`position は 1..${CYL_SIZE}（行${i+1}）`);
-      if (!id || id==='000') throw new Error(`IDが不正（行${i+1}）`);
-      buf[pat][cyl][pos-1] = {id,rarity};
-    }
-    for (let p=1;p<=PATTERN_COUNT;p++){
-      const k=String(p), A=buf[k].A, B=buf[k].B;
-      if (A.length!==CYL_SIZE || B.length!==CYL_SIZE || A.some(v=>!v) || B.some(v=>!v)) {
-        throw new Error(`pattern ${k} の A/B に欠損があります（各${CYL_SIZE}行必要）`);
-      }
-      patterns[k].A=A; patterns[k].B=B;
-    }
-    currentPattern="1"; renderABTables(); setTextareasFromCurrent();
-    csvMsg.innerHTML = `<span class="ok">全パターンCSVを取り込みました（12パターン一括）</span>`;
-  }catch(err){ csvMsg.innerHTML = `<span class="err">全パターンCSVエラー：${err.message}</span>`; }
-  finally{ csvAllFile.value=""; }
-});
-
-/* ========= 運用：自動パターン検知 & LR予測 ========= */
-let obsA = [], obsB = [];
-let candidatesA = null; // [{p, off}]
-let candidatesB = null;
-
-function candidateAll(){
-  const list=[]; for(let p=1;p<=PATTERN_COUNT;p++){ for(let off=0; off<CYL_SIZE; off++){ list.push({p, off}); } }
-  return list; // 12*100 = 1200候補
-}
-function fitsAt(seq, off, obs){
-  for(let t=0;t<obs.length;t++){
-    const idx = (off + t) % seq.length;
-    if(!idEqualLoose(seq[idx].id, obs[t])) return false;
-  }
-  return true;
-}
-function narrow(cyl, obs, prev){
-  const base = prev || candidateAll();
-  const out=[];
-  for(const c of base){
-    const seq = patterns[String(c.p)][cyl];
-    if(seq.length!==CYL_SIZE) continue; // 未設定はスキップ
-    if(fitsAt(seq, c.off, obs)) out.push(c);
-  }
-  return out;
-}
-function nextLRInfo(cyl, cand, obs){
-  if(!cand || !cand.length) return null;
-  if(cand.length!==1) return {note:'候補が複数のため、LR距離は未確定'};
-  const {p, off} = cand[0];
-  const seq = patterns[String(p)][cyl];
-  const k = obs.length;
-  const start = (off + k - 1 + seq.length) % seq.length;
-  for(let step=1; step<=seq.length; step++){
-    const idx = (start + step) % seq.length;
-    if((seq[idx].rarity||'N').toUpperCase()==='LR'){
-      return {distance:step, next:seq[idx], pattern:p, offset:off};
-    }
-  }
-  return {distance:null};
-}
-function renderObs(which){
-  const arr = which==='A'? obsA: obsB;
-  const tbody = which==='A'? obsTableA: obsTableB;
-  tbody.innerHTML = arr.map((id,i)=>`<tr><td>${i+1}</td><td>${id}</td></tr>`).join('');
-  (which==='A'? obsCountA: obsCountB).textContent = arr.length;
-
-  const cands = which==='A'? candidatesA: candidatesB;
-  (which==='A'? candCountA: candCountB).textContent = cands? cands.length: 1200;
-  const list = (cands||[]).slice(0,12).map(c=>`P${c.p}@${c.off}`).join(', ');
-  (which==='A'? candListA: candListB).textContent = list || '—';
-
-  const info = nextLRInfo(which, cands, arr);
-  const statusEl = which==='A'? statusA: statusB;
-  const estEl = which==='A'? estA: estB;
-
-  if(!arr.length){
-    statusEl.innerHTML = '観測を追加すると自動で候補が絞られます。';
-    estEl.textContent = '—';
-    return;
-  }
-  if(!cands || !cands.length){
-    statusEl.innerHTML = '<span class="err">候補なし：入力に誤りがある可能性があります</span>';
-    estEl.textContent = '—';
-    return;
-  }
-  if(info && info.distance!=null){
-    statusEl.innerHTML = (cands.length===1)
-      ? `確定：パターン <b class="ok">P${info.pattern}</b>（オフセット ${info.offset}）。次のLRまで <b class="ok">${info.distance}枚</b>（ID: ${info.next.id}）`
-      : `候補 <b>${cands.length}</b>。さらに観測を増やしてください。`;
-    estEl.textContent = (cands.length===1) ? `P${info.pattern} / offset ${info.offset}` : '—';
-  }else{
-    statusEl.innerHTML = 'LRが登録されていません（管理モードでレア設定を確認）';
-    estEl.textContent = '—';
-  }
-}
-function addObs(which, value){
-  const v = String(value||'').trim();
-  if(!v) return;
-  (which==='A'? obsA: obsB).push(v);
-  const now = narrow(which, (which==='A'? obsA: obsB), (which==='A'? candidatesA: candidatesB));
-  if(which==='A') candidatesA = now; else candidatesB = now;
-  renderObs(which);
-}
-
-/* ボタン紐付け（運用） */
-btnAddA.addEventListener('click', ()=>{ addObs('A', obsInputA.value); obsInputA.value=''; obsInputA.focus(); });
-btnAddB.addEventListener('click', ()=>{ addObs('B', obsInputB.value); obsInputB.value=''; obsInputB.focus(); });
-obsInputA.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); btnAddA.click(); }});
-obsInputB.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); btnAddB.click(); }});
-btnUndoA.addEventListener('click', ()=>{ obsA.pop(); candidatesA = narrow('A', obsA, null); renderObs('A'); });
-btnUndoB.addEventListener('click', ()=>{ obsB.pop(); candidatesB = narrow('B', obsB, null); renderObs('B'); });
-btnResetA.addEventListener('click', ()=>{ obsA=[]; candidatesA=null; renderObs('A'); });
-btnResetB.addEventListener('click', ()=>{ obsB=[]; candidatesB=null; renderObs('B'); });
-
-/* 初期表示 */
-renderObs('A'); renderObs('B');
-setTimeout(()=>setTextareasFromCurrent(), 0);
+  pushBtn.onclick=async()=>{
+    try{
+      const ow=(owner.value||"").trim(), rp=(repo.value||"").trim(), br=(branch.value||"main").trim()||"main";
+      const p =(path.value||"").trim(), tk=(token.value||"").trim(), m=(msg.value||"update").trim();
+      if(!ow||!rp||!p||!tk){ toast("owner/repo/path/token を入力してください", false); return; }
+      const f=file.files&&file.files[0]; if(!f){ toast("CSVファイルを選択してください", false); return; }
+      toast("アップロード中…");
+      const text=await f.text();
+      const sha=await getSha(ow,rp,p,br,tk);
+      const body={message:m, content:b64(text), branch:br}; if(sha) body.sha=sha;
+      const res=await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${encodeURIComponent(p)}`, {
+        method:"PUT", headers:{Authorization:`token ${tk}`,Accept:"application/vnd.github+json"}, body:JSON.stringify(body)
+      });
+      if(!res.ok){ const t=await res.text(); throw new Error(t); }
+      const raw=`https://raw.githubusercontent.com/${ow}/${rp}/${br}/${p}`;
+      toast("完了：GitHubに上書きしました。Raw: "+raw+"  ページは再読込で反映されます。", true);
+    }catch(e){ toast("失敗: "+e.message, false); }
+  };
+})();
 </script>
-</body>
-</html>
+<!-- === /GANBA CSV GitHub Uploader Widget === -->
