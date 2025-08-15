@@ -1,0 +1,9676 @@
+{
+  "patterns": {
+    "1": {
+      "A": [
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "R"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "LR"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "SR"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "R"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "SR"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "R"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "LR"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "SR"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "R"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "SR"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "R"
+        },
+        {
+          "id": "049",
+          "rarity": "LR"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "SR"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "R"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "SR"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "LR"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "SR"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "R"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "SR"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "LR"
+        },
+        {
+          "id": "040",
+          "rarity": "R"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "SR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "R"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "R"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "SR"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "LR"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "R"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "SR"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "R"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "LR"
+        },
+        {
+          "id": "087",
+          "rarity": "SR"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "R"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "SR"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "R"
+        },
+        {
+          "id": "080",
+          "rarity": "LR"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "SR"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "R"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "SR"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "LR"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "R"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "SR"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "R"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "LR"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "R"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "SR"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "R"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "2": {
+      "A": [
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "R"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "SR"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "LR"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "SR"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "R"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "SR"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "LR"
+        },
+        {
+          "id": "006",
+          "rarity": "R"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "SR"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "R"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "SR"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "LR"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "R"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "SR"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "R"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "SR"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "LR"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "R"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "SR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "R"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "SR"
+        },
+        {
+          "id": "028",
+          "rarity": "LR"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "R"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "R"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "SR"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "R"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "SR"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "LR"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "R"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "SR"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "R"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "LR"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "R"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "SR"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "R"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "LR"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "SR"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "R"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "SR"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "LR"
+        },
+        {
+          "id": "044",
+          "rarity": "R"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "SR"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "R"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "SR"
+        },
+        {
+          "id": "031",
+          "rarity": "LR"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "R"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "3": {
+      "A": [
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "R"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "SR"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "R"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "SR"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "LR"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "R"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "SR"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "R"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "SR"
+        },
+        {
+          "id": "033",
+          "rarity": "LR"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "R"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "SR"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "R"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "LR"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "R"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "SR"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "R"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "LR"
+        },
+        {
+          "id": "018",
+          "rarity": "SR"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "R"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "SR"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "R"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "LR"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "LR"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "R"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "SR"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "R"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "SR"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "R"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "SR"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "LR"
+        },
+        {
+          "id": "016",
+          "rarity": "R"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "SR"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "R"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "SR"
+        },
+        {
+          "id": "047",
+          "rarity": "LR"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "R"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "SR"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "R"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "LR"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "SR"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "R"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "SR"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "LR"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "SR"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "R"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "4": {
+      "A": [
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "LR"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "SR"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "R"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "SR"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "R"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "LR"
+        },
+        {
+          "id": "088",
+          "rarity": "SR"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "R"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "SR"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "R"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "LR"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "SR"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "R"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "SR"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "R"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "LR"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "SR"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "R"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "SR"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "R"
+        },
+        {
+          "id": "011",
+          "rarity": "LR"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "SR"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "R"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "R"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "SR"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "LR"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "R"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "SR"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "R"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "SR"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "R"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "SR"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "LR"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "SR"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "R"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "SR"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "LR"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "R"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "SR"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "R"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "LR"
+        },
+        {
+          "id": "050",
+          "rarity": "SR"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "R"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "SR"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "R"
+        },
+        {
+          "id": "020",
+          "rarity": "LR"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "5": {
+      "A": [
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "R"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "SR"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "LR"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "R"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "SR"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "R"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "SR"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "R"
+        },
+        {
+          "id": "059",
+          "rarity": "LR"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "SR"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "R"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "SR"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "LR"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "SR"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "R"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "SR"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "LR"
+        },
+        {
+          "id": "079",
+          "rarity": "R"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "SR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "R"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "SR"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "LR"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "R"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "R"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "LR"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "SR"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "R"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "SR"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "LR"
+        },
+        {
+          "id": "010",
+          "rarity": "R"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "SR"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "R"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "SR"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "R"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "SR"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "R"
+        },
+        {
+          "id": "008",
+          "rarity": "LR"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "SR"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "R"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "SR"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "LR"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "R"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "SR"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "R"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "LR"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "R"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "6": {
+      "A": [
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "R"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "SR"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "R"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "LR"
+        },
+        {
+          "id": "057",
+          "rarity": "SR"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "R"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "SR"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "R"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "SR"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "LR"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "R"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "SR"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "R"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "SR"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "LR"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "R"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "SR"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "R"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "SR"
+        },
+        {
+          "id": "010",
+          "rarity": "LR"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "R"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "SR"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "R"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "LR"
+        }
+      ],
+      "B": [
+        {
+          "id": "078",
+          "rarity": "LR"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "R"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "SR"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "R"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "LR"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "SR"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "R"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "SR"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "LR"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "SR"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "R"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "SR"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "R"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "SR"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "R"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "LR"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "SR"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "R"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "SR"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "LR"
+        },
+        {
+          "id": "098",
+          "rarity": "R"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "SR"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "R"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "7": {
+      "A": [
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "R"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "LR"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "SR"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "R"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "SR"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "R"
+        },
+        {
+          "id": "084",
+          "rarity": "LR"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "SR"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "R"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "SR"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "R"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "LR"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "R"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "SR"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "R"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "LR"
+        },
+        {
+          "id": "068",
+          "rarity": "SR"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "R"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "SR"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "R"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "LR"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "SR"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "R"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "R"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "SR"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "LR"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "R"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "SR"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "R"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "LR"
+        },
+        {
+          "id": "037",
+          "rarity": "SR"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "R"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "SR"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "R"
+        },
+        {
+          "id": "031",
+          "rarity": "LR"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "SR"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "R"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "SR"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "R"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "SR"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "R"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "LR"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "SR"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "R"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "SR"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "LR"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "8": {
+      "A": [
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "R"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "SR"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "LR"
+        },
+        {
+          "id": "039",
+          "rarity": "R"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "SR"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "R"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "SR"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "LR"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "R"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "SR"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "R"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "SR"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "R"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "LR"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "SR"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "R"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "SR"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "R"
+        },
+        {
+          "id": "090",
+          "rarity": "LR"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "SR"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "R"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "SR"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "LR"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "R"
+        },
+        {
+          "id": "047",
+          "rarity": "LR"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "SR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "R"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "SR"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "LR"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "R"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "SR"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "R"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "LR"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "R"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "SR"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "R"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "LR"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "SR"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "R"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "SR"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "R"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "SR"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "R"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "LR"
+        },
+        {
+          "id": "091",
+          "rarity": "SR"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "R"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "9": {
+      "A": [
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "LR"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "R"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "SR"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "R"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "SR"
+        },
+        {
+          "id": "056",
+          "rarity": "LR"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "R"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "SR"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "R"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "LR"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "R"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "SR"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "R"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "SR"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "LR"
+        },
+        {
+          "id": "005",
+          "rarity": "R"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "SR"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "R"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "SR"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "LR"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "R"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "SR"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "R"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "R"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "SR"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "R"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "LR"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "SR"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "R"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "SR"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "LR"
+        },
+        {
+          "id": "093",
+          "rarity": "R"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "SR"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "R"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "SR"
+        },
+        {
+          "id": "094",
+          "rarity": "LR"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "R"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "SR"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "R"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "LR"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "SR"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "R"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "SR"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "R"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "SR"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "R"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "LR"
+        }
+      ]
+    },
+    "10": {
+      "A": [
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "R"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "LR"
+        },
+        {
+          "id": "027",
+          "rarity": "SR"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "R"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "SR"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "R"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "LR"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "SR"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "R"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "SR"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "R"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "LR"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "SR"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "R"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "SR"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "R"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "SR"
+        },
+        {
+          "id": "037",
+          "rarity": "LR"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "R"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "SR"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "R"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "LR"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "R"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "R"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "SR"
+        },
+        {
+          "id": "091",
+          "rarity": "LR"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "R"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "SR"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "R"
+        },
+        {
+          "id": "058",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "LR"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "SR"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "R"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "SR"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "LR"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "SR"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "R"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "SR"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "LR"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "R"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "SR"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "R"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "LR"
+        },
+        {
+          "id": "056",
+          "rarity": "SR"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "R"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "SR"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "R"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "11": {
+      "A": [
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "R"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "SR"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "R"
+        },
+        {
+          "id": "085",
+          "rarity": "LR"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "SR"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "R"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "SR"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "LR"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "SR"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "R"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "SR"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "LR"
+        },
+        {
+          "id": "092",
+          "rarity": "R"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "SR"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "R"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "SR"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "R"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "LR"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "SR"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "R"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "SR"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "R"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "LR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "R"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "SR"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "R"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "SR"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "LR"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "R"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "SR"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "R"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "LR"
+        },
+        {
+          "id": "030",
+          "rarity": "SR"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "R"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "SR"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "R"
+        },
+        {
+          "id": "051",
+          "rarity": "LR"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "SR"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "R"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "029",
+          "rarity": "SR"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "LR"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "010",
+          "rarity": "R"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "SR"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "R"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "LR"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "R"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "SR"
+        }
+      ]
+    },
+    "12": {
+      "A": [
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "LR"
+        },
+        {
+          "id": "053",
+          "rarity": "R"
+        },
+        {
+          "id": "019",
+          "rarity": "N"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "SR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "R"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "SR"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "N"
+        },
+        {
+          "id": "086",
+          "rarity": "LR"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "R"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "SR"
+        },
+        {
+          "id": "091",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "R"
+        },
+        {
+          "id": "045",
+          "rarity": "N"
+        },
+        {
+          "id": "040",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "SR"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "LR"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "N"
+        },
+        {
+          "id": "024",
+          "rarity": "R"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "SR"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "N"
+        },
+        {
+          "id": "012",
+          "rarity": "R"
+        },
+        {
+          "id": "028",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "027",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "SR"
+        },
+        {
+          "id": "036",
+          "rarity": "LR"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "006",
+          "rarity": "R"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "SR"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "039",
+          "rarity": "R"
+        },
+        {
+          "id": "017",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "SR"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "N"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "LR"
+        },
+        {
+          "id": "038",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "N"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "069",
+          "rarity": "SR"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "R"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "SR"
+        }
+      ],
+      "B": [
+        {
+          "id": "027",
+          "rarity": "LR"
+        },
+        {
+          "id": "010",
+          "rarity": "N"
+        },
+        {
+          "id": "066",
+          "rarity": "N"
+        },
+        {
+          "id": "080",
+          "rarity": "N"
+        },
+        {
+          "id": "034",
+          "rarity": "R"
+        },
+        {
+          "id": "024",
+          "rarity": "N"
+        },
+        {
+          "id": "049",
+          "rarity": "N"
+        },
+        {
+          "id": "042",
+          "rarity": "N"
+        },
+        {
+          "id": "098",
+          "rarity": "N"
+        },
+        {
+          "id": "091",
+          "rarity": "SR"
+        },
+        {
+          "id": "069",
+          "rarity": "N"
+        },
+        {
+          "id": "100",
+          "rarity": "N"
+        },
+        {
+          "id": "004",
+          "rarity": "N"
+        },
+        {
+          "id": "056",
+          "rarity": "N"
+        },
+        {
+          "id": "094",
+          "rarity": "R"
+        },
+        {
+          "id": "039",
+          "rarity": "N"
+        },
+        {
+          "id": "057",
+          "rarity": "N"
+        },
+        {
+          "id": "079",
+          "rarity": "N"
+        },
+        {
+          "id": "023",
+          "rarity": "N"
+        },
+        {
+          "id": "055",
+          "rarity": "SR"
+        },
+        {
+          "id": "086",
+          "rarity": "N"
+        },
+        {
+          "id": "003",
+          "rarity": "N"
+        },
+        {
+          "id": "021",
+          "rarity": "N"
+        },
+        {
+          "id": "035",
+          "rarity": "N"
+        },
+        {
+          "id": "043",
+          "rarity": "R"
+        },
+        {
+          "id": "095",
+          "rarity": "N"
+        },
+        {
+          "id": "001",
+          "rarity": "N"
+        },
+        {
+          "id": "036",
+          "rarity": "N"
+        },
+        {
+          "id": "018",
+          "rarity": "N"
+        },
+        {
+          "id": "038",
+          "rarity": "SR"
+        },
+        {
+          "id": "012",
+          "rarity": "N"
+        },
+        {
+          "id": "026",
+          "rarity": "N"
+        },
+        {
+          "id": "017",
+          "rarity": "LR"
+        },
+        {
+          "id": "007",
+          "rarity": "N"
+        },
+        {
+          "id": "061",
+          "rarity": "R"
+        },
+        {
+          "id": "097",
+          "rarity": "N"
+        },
+        {
+          "id": "020",
+          "rarity": "N"
+        },
+        {
+          "id": "013",
+          "rarity": "N"
+        },
+        {
+          "id": "073",
+          "rarity": "N"
+        },
+        {
+          "id": "058",
+          "rarity": "SR"
+        },
+        {
+          "id": "063",
+          "rarity": "N"
+        },
+        {
+          "id": "016",
+          "rarity": "N"
+        },
+        {
+          "id": "090",
+          "rarity": "N"
+        },
+        {
+          "id": "067",
+          "rarity": "N"
+        },
+        {
+          "id": "030",
+          "rarity": "R"
+        },
+        {
+          "id": "050",
+          "rarity": "N"
+        },
+        {
+          "id": "083",
+          "rarity": "N"
+        },
+        {
+          "id": "014",
+          "rarity": "N"
+        },
+        {
+          "id": "031",
+          "rarity": "N"
+        },
+        {
+          "id": "075",
+          "rarity": "LR"
+        },
+        {
+          "id": "025",
+          "rarity": "N"
+        },
+        {
+          "id": "064",
+          "rarity": "N"
+        },
+        {
+          "id": "009",
+          "rarity": "N"
+        },
+        {
+          "id": "059",
+          "rarity": "N"
+        },
+        {
+          "id": "045",
+          "rarity": "R"
+        },
+        {
+          "id": "087",
+          "rarity": "N"
+        },
+        {
+          "id": "048",
+          "rarity": "N"
+        },
+        {
+          "id": "096",
+          "rarity": "N"
+        },
+        {
+          "id": "044",
+          "rarity": "N"
+        },
+        {
+          "id": "019",
+          "rarity": "SR"
+        },
+        {
+          "id": "068",
+          "rarity": "N"
+        },
+        {
+          "id": "081",
+          "rarity": "N"
+        },
+        {
+          "id": "037",
+          "rarity": "N"
+        },
+        {
+          "id": "060",
+          "rarity": "N"
+        },
+        {
+          "id": "028",
+          "rarity": "R"
+        },
+        {
+          "id": "065",
+          "rarity": "N"
+        },
+        {
+          "id": "099",
+          "rarity": "LR"
+        },
+        {
+          "id": "041",
+          "rarity": "N"
+        },
+        {
+          "id": "015",
+          "rarity": "N"
+        },
+        {
+          "id": "051",
+          "rarity": "SR"
+        },
+        {
+          "id": "089",
+          "rarity": "N"
+        },
+        {
+          "id": "093",
+          "rarity": "N"
+        },
+        {
+          "id": "033",
+          "rarity": "N"
+        },
+        {
+          "id": "008",
+          "rarity": "N"
+        },
+        {
+          "id": "062",
+          "rarity": "R"
+        },
+        {
+          "id": "053",
+          "rarity": "N"
+        },
+        {
+          "id": "085",
+          "rarity": "N"
+        },
+        {
+          "id": "011",
+          "rarity": "N"
+        },
+        {
+          "id": "074",
+          "rarity": "N"
+        },
+        {
+          "id": "047",
+          "rarity": "SR"
+        },
+        {
+          "id": "084",
+          "rarity": "N"
+        },
+        {
+          "id": "002",
+          "rarity": "N"
+        },
+        {
+          "id": "088",
+          "rarity": "N"
+        },
+        {
+          "id": "082",
+          "rarity": "LR"
+        },
+        {
+          "id": "040",
+          "rarity": "R"
+        },
+        {
+          "id": "071",
+          "rarity": "N"
+        },
+        {
+          "id": "054",
+          "rarity": "N"
+        },
+        {
+          "id": "092",
+          "rarity": "N"
+        },
+        {
+          "id": "070",
+          "rarity": "N"
+        },
+        {
+          "id": "005",
+          "rarity": "SR"
+        },
+        {
+          "id": "029",
+          "rarity": "N"
+        },
+        {
+          "id": "076",
+          "rarity": "N"
+        },
+        {
+          "id": "077",
+          "rarity": "N"
+        },
+        {
+          "id": "032",
+          "rarity": "N"
+        },
+        {
+          "id": "078",
+          "rarity": "R"
+        },
+        {
+          "id": "006",
+          "rarity": "N"
+        },
+        {
+          "id": "046",
+          "rarity": "N"
+        },
+        {
+          "id": "072",
+          "rarity": "N"
+        },
+        {
+          "id": "022",
+          "rarity": "N"
+        },
+        {
+          "id": "052",
+          "rarity": "SR"
+        }
+      ]
+    }
+  }
+}
