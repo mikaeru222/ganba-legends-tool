@@ -581,93 +581,45 @@ renderObs('A'); renderObs('B');
 setTimeout(()=>setTextareasFromCurrent(), 0);
 </script>
 
-<!-- ===== Admin GitHub panel injection (does NOT touch RUN UI) ===== -->
+<!-- Auto-fetch remote patterns JSON on startup (no UI changes) -->
 <script>
 (function(){
-  // use unique IDs to avoid collisions
-  const KEY_GH = 'ganba/github/v1';
-  function loadGH(){
-    try{ return Object.assign({owner:'',repo:'',branch:'main',path:'data/cards.json',token:''}, JSON.parse(localStorage.getItem(KEY_GH)||'{}')); }
-    catch{ return {owner:'',repo:'',branch:'main',path:'data/cards.json',token:''}; }
-  }
-  function saveGH(v){ localStorage.setItem(KEY_GH, JSON.stringify(v)); }
-  function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
-  function ghHeaders(t){ return {'Authorization':'token '+t, 'Accept':'application/vnd.github+json', 'Content-Type':'application/json'}; }
-  async function ghGet(owner,repo,path,branch,token){
-    const u=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
-    const r=await fetch(u,{headers:ghHeaders(token)});
-    if(r.status===404) return null;
-    if(!r.ok) throw new Error('GitHub API '+r.status);
-    return await r.json();
-  }
-  async function ghPut(owner,repo,path,branch,token,content,message,sha){
-    const u=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
-    const body={message, content:b64(content), branch}; if(sha) body.sha=sha;
-    const r=await fetch(u,{method:'PUT', headers:ghHeaders(token), body:JSON.stringify(body)});
-    if(!r.ok){ const t=await r.text(); throw new Error('PUT失敗: '+t); }
-    return await r.json();
-  }
+  // 公開済みのJSON（必要に応じて書き換え可）
+  const REMOTE_JSON_URL = "https://raw.githubusercontent.com/mikaeru222/ganba-legends-tool/main/data/cards.json";
 
-  function toast(msg){ try{ alert(msg); }catch(e){} }
+  function onlyDigits(s){ return String(s||"").replace(/[^0-9]/g,""); }
 
-  function ensurePanel(){
-    const host = document.querySelector('#panel-manage');
-    if(!host) return;
-    // Build panel HTML
-    const wrap = document.createElement('div');
-    wrap.className = 'card';
-    wrap.innerHTML = `
-      <h3>GitHub連携（JSONコミット）</h3>
-      <div class="row" style="margin-bottom:8px">
-        <input id="gh2-owner" class="" placeholder="owner（例：yourname）" />
-        <input id="gh2-repo"  class="" placeholder="repo（例：yourrepo）" />
-        <input id="gh2-branch" class="" placeholder="branch（例：main）" value="main" />
-      </div>
-      <div class="row" style="margin-bottom:8px">
-        <input id="gh2-path" class="" placeholder="保存パス（例：data/cards.json）" value="data/cards.json" style="flex:1" />
-      </div>
-      <div class="row" style="margin-bottom:8px">
-        <input id="gh2-token" class="" placeholder="GitHub Personal Access Token（repo 権限）" type="password" style="flex:1" />
-      </div>
-      <div class="row">
-        <button id="btn-gh2-save" class="btn secondary">設定を保存</button>
-        <button id="btn-gh2-publish" class="btn">GitHubに公開（JSONコミット）</button>
-      </div>
-      <div class="muted" style="margin-top:6px">※ 共同PCでのトークン保存は避けてください（localStorage保存）。</div>
-    `;
-    host.appendChild(wrap);
+  async function fetchAndApply(){
+    try{
+      const res = await fetch(REMOTE_JSON_URL, {cache:"no-store"});
+      if(!res.ok) return;
+      const obj = await res.json();
+      if(!obj || !obj.patterns) return;
 
-    // bind
-    const gh = loadGH();
-    const $ = (s)=>wrap.querySelector(s);
-    $('#gh2-owner').value = gh.owner;
-    $('#gh2-repo').value  = gh.repo;
-    $('#gh2-branch').value= gh.branch;
-    $('#gh2-path').value  = gh.path;
-    $('#gh2-token').value = gh.token;
-
-    $('#btn-gh2-save').addEventListener('click', ()=>{
-      const v={owner:$('#gh2-owner').value.trim(), repo:$('#gh2-repo').value.trim(), branch:$('#gh2-branch').value.trim()||'main', path:$('#gh2-path').value.trim()||'data/cards.json', token:$('#gh2-token').value.trim()};
-      saveGH(v); toast('GitHub設定を保存しました');
-    });
-
-    $('#btn-gh2-publish').addEventListener('click', async ()=>{
-      const v={owner:$('#gh2-owner').value.trim(), repo:$('#gh2-repo').value.trim(), branch:$('#gh2-branch').value.trim()||'main', path:$('#gh2-path').value.trim()||'data/cards.json', token:$('#gh2-token').value.trim()};
-      if(!v.owner||!v.repo||!v.branch||!v.path||!v.token){ toast('GitHub設定を入力して保存してください'); return; }
-      try{
-        // patterns が存在する前提（管理モードのJSON書出と同形）
-        const payload = JSON.stringify({patterns}, null, 2);
-        const cur = await ghGet(v.owner,v.repo,v.path,v.branch,v.token);
-        const sha = cur && cur.sha;
-        await ghPut(v.owner,v.repo,v.path,v.branch,v.token,payload,'feat: patterns JSON を更新（管理画面から自動公開）',sha);
-        toast('GitHubに公開しました');
-      }catch(e){ toast('GitHub公開エラー：'+e.message); }
-    });
+      // 既存の global `patterns` を上書き（運用画面はそのまま）
+      for(let p=1;p<=12;p++){
+        const k=String(p);
+        if(!obj.patterns[k]) continue;
+        const A = (obj.patterns[k].A||[]).map(x=>({ id: onlyDigits(x.id).padStart(3,"0"), rarity: String(x.rarity||"N").toUpperCase() }));
+        const B = (obj.patterns[k].B||[]).map(x=>({ id: onlyDigits(x.id).padStart(3,"0"), rarity: String(x.rarity||"N").toUpperCase() }));
+        // 100行なければスキップせず、そのまま適用（ツール側で確認できるようにする）
+        patterns[k] = {A,B};
+      }
+      // 再描画（既存関数を利用）
+      try{ currentPattern = "1"; }catch(_){}
+      try{ renderABTables && renderABTables(); }catch(_){}
+      try{ setTextareasFromCurrent && setTextareasFromCurrent(); }catch(_){}
+      console.log("[auto-fetch] patterns loaded from", REMOTE_JSON_URL);
+    }catch(e){
+      console.warn("[auto-fetch] failed:", e);
+    }
   }
 
-  // wait DOM
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', ensurePanel); }
-  else{ ensurePanel(); }
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", fetchAndApply);
+  }else{
+    fetchAndApply();
+  }
 })();
 </script>
 
