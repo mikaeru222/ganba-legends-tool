@@ -1,556 +1,675 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>カードゲームツール｜運用＋管理（GitHub連携／検索は従来のまま）</title>
-  <style>
-    :root{
-      --bg:#0b1020; --panel:#0f1530; --muted:#8ea0c0; --text:#eaf0ff; --brand:#5aa5ff; --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
-      --ring:rgba(90,165,255,.35);
-    }
-    html,body{height:100%}
-    body{margin:0;background:linear-gradient(120deg,#0b1020,#091427 60%,#081024);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
-      color:var(--text);
-    }
-    .container{max-width:980px;margin:24px auto;padding:16px}
-    .card{background:linear-gradient(180deg,#0f1530 0 60%, #0c1229);border:1px solid rgba(255,255,255,.06);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);}
-    .card-inner{padding:18px 18px 22px}
-    header.top{display:flex;align-items:center;gap:12px;justify-content:space-between;margin-bottom:14px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand .dot{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#8bd0ff,#5aa5ff 40%,#3163ff 100%);box-shadow:0 0 0 4px rgba(90,165,255,.15)}
-    .brand h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
-    .tabs{display:flex;gap:6px;background:rgba(255,255,255,.04);padding:6px;border-radius:12px}
-    .tab{padding:8px 14px;border-radius:10px;border:1px solid transparent;cursor:pointer;user-select:none}
-    .tab.active{background:rgba(90,165,255,.12);border-color:rgba(90,165,255,.35);box-shadow:inset 0 0 0 1px rgba(90,165,255,.15)}
-    .muted{color:var(--muted)}
-    .grid{display:grid;grid-template-columns: 1fr; gap:14px}
-    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .input, select, button{background:#0a1128;border:1px solid rgba(255,255,255,.08);color:var(--text);border-radius:12px;padding:10px 12px;font-size:14px;outline:none}
-    .input:focus, select:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--ring)}
-    button{cursor:pointer}
-    .btn{background:linear-gradient(180deg,#1a2b57,#132246);border:1px solid rgba(90,165,255,.3)}
-    .btn:hover{filter:brightness(1.08)}
-    .btn.ghost{background:transparent}
-    .btn.brand{background:linear-gradient(180deg,#3a79ff,#2b5be9);border:1px solid rgba(49,99,255,.6)}
-    .btn.ok{background:linear-gradient(180deg,#12c885,#10a56f);border-color:rgba(16,185,129,.6)}
-    .btn.warn{background:linear-gradient(180deg,#f9b64c,#e49a15);border-color:rgba(245,158,11,.6);color:#1a1200}
-    .btn.danger{background:linear-gradient(180deg,#ff6b6b,#ef4444)}
-    .table{width:100%;border-collapse:separate;border-spacing:0 8px}
-    .table th{font-weight:600;color:#cbd8f7;text-align:left;font-size:12px;padding:0 8px}
-    .table td{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:8px;border-left:none;border-right:none}
-    .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);font-size:12px}
-    .badge.a{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.45)}
-    .badge.b{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.45)}
-    .panel{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px}
-    .help{font-size:12px;color:#b7c5ea}
-    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:10px 0}
-    .center-wrap{display:flex;justify-content:center}
-    .content-narrow{width:min(860px,92vw)}
-    .pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);}
-    .hidden{display:none}
-  </style>
-  <!-- CSV, ZIP utilities -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ガンバレジェンズ 排出順トラッカー＆LR予測（自動パターン検知）</title>
+<style>
+  :root { color-scheme: dark; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; background:#0f172a; color:#e5e7eb; margin:0; }
+  /* 中央寄せ＆幅制限 */
+  .container { max-width: 960px; margin: 0 auto; width: 100%; }
+  .pad { padding:16px; box-sizing:border-box; }
+
+  header { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:12px 16px; background:#111827; border-bottom:1px solid #1f2937; position:sticky; top:0; z-index:10; }
+  h1 { font-size:16px; margin:0; }
+  .muted { color:#9ca3af; font-size:12px; }
+  .btn { background:#0ea5e9; color:#fff; border:none; border-radius:6px; padding:8px 12px; cursor:pointer; font-weight:600; }
+  .btn.secondary { background:#374151; }
+  .btn.warn { background:#ef4444; }
+  .btn:disabled { opacity:.6; cursor:not-allowed; }
+  .bar { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+
+  .tabs { display:flex; gap:8px; border-bottom:1px solid #1f2937; }
+  .tab { padding:10px 12px; border-bottom:2px solid transparent; cursor:pointer; color:#9ca3af; }
+  .tab.active { color:#e5e7eb; border-color:#0ea5e9; }
+
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width: 840px){ .grid-2 { grid-template-columns:1fr; } }
+
+  .card { background:#1f2937; border:1px solid #374151; border-radius:12px; padding:16px; }
+  label { display:block; font-size:12px; color:#9ca3af; margin-bottom:6px; }
+  input[type="text"], input[type="password"], select, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #374151; background:#0b1220; color:#e5e7eb; }
+  textarea { min-height:240px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:13px; }
+  table { width:100%; border-collapse:collapse; }
+  th, td { padding:8px; border-bottom:1px solid #374151; font-size:13px; }
+  th { text-align:left; color:#9ca3af; font-weight:600; }
+  .list { max-height:220px; overflow:auto; border:1px solid #374151; border-radius:10px; }
+  .hidden { display:none !important; }
+  .ok { color:#34d399; }
+  .warntext { color:#f59e0b; }
+  .err { color:#ef4444; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid #374151; background:#111827; }
+  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="center-wrap"><div class="content-narrow card"><div class="card-inner">
-      <header class="top">
-        <div class="brand">
-          <div class="dot"></div>
-          <h1>カードゲームツール</h1>
-          <span class="muted">検索（運用）を従来のまま維持／管理はGitHub連携</span>
-        </div>
-        <div class="tabs" role="tablist" aria-label="モード切替">
-          <div id="tab-run" class="tab active" role="tab" aria-selected="true">運用モード</div>
-          <div id="tab-admin" class="tab" role="tab" aria-selected="false">管理者モード</div>
-        </div>
-      </header>
+<header class="container">
+  <div>
+    <h1>ガンバレジェンズ 排出順トラッカー＆LR予測</h1>
+    <div class="muted">A/B各100枚 × 12パターン｜CSV/JSON対応｜運用は自動パターン検知</div>
+  </div>
+  <div class="bar">
+    <button id="btnLoginOpen" class="btn secondary">管理者ログイン</button>
+    <span id="loginState" class="pill">未ログイン</span>
+    <button id="btnLogout" class="btn warn hidden">ログアウト</button>
+  </div>
+</header>
 
-      <!-- 運用モード（従来どおり・検索UIは変更なし） -->
-      <section id="run-section" class="grid" aria-labelledby="tab-run">
-        <div class="panel">
-          <div class="row">
-            <input id="q" class="input" placeholder="カード番号やコードを入力（例: A023 / P07-B-076 / 76b）" style="flex:1" />
-            <select id="filter-pattern">
-              <option value="">パターン（すべて）</option>
-              <option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option>
-              <option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option>
-              <option value="11">11</option><option value="12">12</option>
-            </select>
-            <select id="filter-cylinder">
-              <option value="">シリンダー（A/B）</option>
-              <option value="A">A</option><option value="B">B</option>
-            </select>
-            <button id="btn-clear" class="btn ghost">クリア</button>
-          </div>
-          <div class="help">読み込み済みデータ：<span id="data-count">0</span> 件　|　データソース：<span id="source-label" class="pill">ローカル</span></div>
-        </div>
-
-        <div class="panel">
-          <table class="table" aria-describedby="res-info">
-            <thead>
-              <tr>
-                <th>パターン</th>
-                <th>シリンダー</th>
-                <th>番号</th>
-                <th>コード</th>
-                <th>備考</th>
-              </tr>
-            </thead>
-            <tbody id="result-body"></tbody>
-          </table>
-          <div id="res-info" class="help">該当 <span id="hit-count">0</span> 件</div>
-        </div>
-
-        <div class="panel">
-          <div class="row">
-            <button id="btn-export-json" class="btn">ローカルデータをJSONで保存</button>
-            <button id="btn-reload-remote" class="btn brand">リモートを同期</button>
-            <button id="btn-reset-local" class="btn danger">ローカルデータ初期化</button>
-          </div>
-          <div class="help">※ リモート同期先は管理者モードで設定します。GitHubの raw JSON を配信先にできます。</div>
-        </div>
-      </section>
-
-      <!-- 管理者モード -->
-      <section id="admin-section" class="grid hidden" aria-labelledby="tab-admin">
-        <!-- ログイン -->
-        <div id="admin-logged-out" class="panel">
-          <div style="font-weight:700">管理者ログイン</div>
-          <div class="help">アップロード・設定は管理者のみ操作できます。初期コードは <b>admin123</b></div>
-          <div class="row" style="margin-top:8px">
-            <input type="password" id="admin-pass" class="input" placeholder="パスコード" style="flex:1" />
-            <button id="btn-admin-login" class="btn brand">ログイン</button>
-          </div>
-        </div>
-
-        <div id="admin-logged-in" class="hidden">
-          <!-- CSV 一括 -->
-          <div class="panel">
-            <div class="row" style="justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-weight:700">管理者メニュー（CSV一括）</div>
-                <div class="help">CSVヘッダ：pattern(01-12), cylinder(A/B), card_no(001-100), label(任意)</div>
-              </div>
-              <div class="row"><button id="btn-admin-logout" class="btn ghost">ログアウト</button></div>
-            </div>
-
-            <div class="row" style="margin-top:6px">
-              <input type="file" id="file-csv" accept=".csv" multiple class="input" />
-              <button id="btn-import" class="btn ok">CSV読み込み</button>
-              <button id="btn-save-local" class="btn brand">ローカル保存</button>
-              <button id="btn-clear-staged" class="btn ghost">未保存を破棄</button>
-            </div>
-            <div class="help">読み込み済み（未保存）：<span id="import-count">0</span> 件</div>
-            <div class="sep"></div>
-            <div class="row">
-              <button id="btn-gen-templates" class="btn warn">12パターンCSVを生成（ZIP）</button>
-            </div>
-          </div>
-
-          <!-- 配信先（従来のリモートURL） -->
-          <div class="panel">
-            <div style="font-weight:700;margin-bottom:6px">配信（リモート）設定</div>
-            <div class="row">
-              <input id="remote-url" class="input" placeholder="https://raw.githubusercontent.com/USER/REPO/branch/data/cards.json" style="flex:1" />
-              <label class="row" style="gap:6px"><input type="checkbox" id="remote-auto" /> 自動同期</label>
-              <button id="btn-save-remote" class="btn">保存</button>
-            </div>
-            <div class="help">ここで設定した JSON を各端末が参照します。GitHub連携を使うと自動設定できます。</div>
-          </div>
-
-          <!-- GitHub 連携 -->
-          <div class="panel">
-            <div style="font-weight:700;margin-bottom:6px">GitHub連携（CSV取り込み→ローカル保存後に公開）</div>
-            <div class="row">
-              <input id="gh-owner" class="input" placeholder="owner（例：mikaeru222）" />
-              <input id="gh-repo"  class="input" placeholder="repo（例：card-tool）" />
-              <input id="gh-branch" class="input" placeholder="branch（例：main）" value="main" />
-            </div>
-            <div class="row">
-              <input id="gh-path" class="input" placeholder="保存パス（例：data/cards.json）" value="data/cards.json" style="flex:1" />
-            </div>
-            <div class="row">
-              <input id="gh-token" class="input" placeholder="GitHub Personal Access Token（repo 権限）" type="password" style="flex:1" />
-            </div>
-            <div class="row">
-              <button id="btn-gh-save" class="btn">設定を保存</button>
-              <button id="btn-gh-publish" class="btn brand">GitHubに公開（JSONコミット）</button>
-              <button id="btn-gh-fetch" class="btn ghost">GitHubから取得 → ローカル保存</button>
-            </div>
-            <div class="help">※ ブラウザの localStorage に設定とトークンを保存します。共同PCでは使用しないでください。</div>
-          </div>
-
-          <!-- 管理者設定 -->
-          <div class="panel">
-            <div style="font-weight:700;margin-bottom:6px">管理者設定</div>
-            <div class="row">
-              <input type="password" id="admin-pass-new" class="input" placeholder="新しいパスコード（任意）" />
-              <button id="btn-change-pass" class="btn">パスコード変更</button>
-              <button id="btn-wipe-all" class="btn danger">全データ初期化</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div></div></div>
+<main class="container pad">
+  <!-- タブ -->
+  <div class="tabs">
+    <div class="tab active" data-tab="run" id="tabRun">運用モード（自動パターン検知）</div>
+    <div class="tab" data-tab="manage" id="tabManage" title="管理者ログインが必要" aria-disabled="true">管理モード（パターン管理）</div>
   </div>
 
+  <!-- 運用モード：観測から自動同定 -->
+  <section id="panel-run" class="pad" style="padding-left:0;padding-right:0;">
+    <div class="grid-2">
+      <!-- A -->
+      <div class="card">
+        <h3>シリンダーA 観測</h3>
+        <label>直近の排出カード番号（<b>番号だけでもOK</b>：015 / GG3-015）</label>
+        <div class="row">
+          <input type="text" id="obsInputA" placeholder="例: 015 / GG3-015" />
+          <button class="btn" id="btnAddA">追加</button>
+          <button class="btn secondary" id="btnUndoA">取り消し</button>
+          <button class="btn secondary" id="btnResetA">リセット</button>
+        </div>
+        <div class="row">
+          <span class="pill">観測件数: <b id="obsCountA">0</b></span>
+          <span class="pill">候補: <b id="candCountA">1200</b></span>
+        </div>
+        <div class="list" style="margin-top:8px">
+          <table><thead><tr><th>#</th><th>ID</th></tr></thead><tbody id="obsTableA"></tbody></table>
+        </div>
+        <div class="muted" id="statusA" style="margin-top:8px;">観測を追加していくと自動で候補が絞られます。</div>
+      </div>
+
+      <!-- B -->
+      <div class="card">
+        <h3>シリンダーB 観測</h3>
+        <label>直近の排出カード番号（<b>番号だけでもOK</b>：017 / GG3-017）</label>
+        <div class="row">
+          <input type="text" id="obsInputB" placeholder="例: 017 / GG3-017" />
+          <button class="btn" id="btnAddB">追加</button>
+          <button class="btn secondary" id="btnUndoB">取り消し</button>
+          <button class="btn secondary" id="btnResetB">リセット</button>
+        </div>
+        <div class="row">
+          <span class="pill">観測件数: <b id="obsCountB">0</b></span>
+          <span class="pill">候補: <b id="candCountB">1200</b></span>
+        </div>
+        <div class="list" style="margin-top:8px">
+          <table><thead><tr><th>#</th><th>ID</th></tr></thead><tbody id="obsTableB"></tbody></table>
+        </div>
+        <div class="muted" id="statusB" style="margin-top:8px;">観測を追加していくと自動で候補が絞られます。</div>
+      </div>
+    </div>
+
+    <!-- 推定まとめ -->
+    <div class="card" style="margin-top:16px;">
+      <h3>推定結果とLR予測</h3>
+      <div class="row">
+        <div class="pill">A 候補: <b id="candListA">—</b></div>
+        <div class="pill">B 候補: <b id="candListB">—</b></div>
+      </div>
+      <div class="grid-2" style="margin-top:8px;">
+        <div>
+          <h4 class="muted">Aの推定</h4>
+          <div id="estA" class="muted">—</div>
+        </div>
+        <div>
+          <h4 class="muted">Bの推定</h4>
+          <div id="estB" class="muted">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 管理モード：CSV/JSONと手動編集 -->
+  <section id="panel-manage" class="pad hidden" style="padding-left:0;padding-right:0;">
+    <div class="card">
+      <div class="row" style="justify-content:space-between;">
+        <div class="row">
+          <label style="margin:0;">編集中のパターン</label>
+          <select id="patternSelect"></select>
+          <button class="btn secondary" id="btnExportJSON">全パターンJSON書出</button>
+          <input type="file" id="importJSON" accept=".json" class="hidden" />
+          <button class="btn secondary" id="btnImportJSON">JSON読み込み</button>
+        </div>
+      </div>
+      <div class="muted" id="patternInfo">A/B 各100行（レア: LR/SR/R/N・省略時N）</div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="card">
+        <h3>シリンダーA（100行）</h3>
+        <label>形式：<code>ID[, rarity]</code>（例：<code>001, LR</code> / <code>GG3-001, R</code> / <code>015</code>）</label>
+        <textarea id="taA" placeholder="001, N&#10;...&#10;100, N"></textarea>
+        <div class="row" style="justify-content:space-between;">
+          <button class="btn" id="btnApplyA">Aを置き換え</button>
+          <span id="cntA" class="muted">0/100</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>シリンダーB（100行）</h3>
+        <label>形式：<code>ID[, rarity]</code></label>
+        <textarea id="taB" placeholder="001, N&#10;...&#10;100, N"></textarea>
+        <div class="row" style="justify-content:space-between;">
+          <button class="btn" id="btnApplyB">Bを置き換え</button>
+          <span id="cntB" class="muted">0/100</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>CSVインポート／エクスポート</h3>
+      <div class="grid-2">
+        <div>
+          <h4>① 単一パターンCSV読み込み</h4>
+          <div class="muted">ヘッダ：<code>cylinder,id,rarity</code>（A/B各100行）</div>
+          <div class="row" style="margin-top:8px;">
+            <input type="file" id="csvPatternFile" accept=".csv" />
+            <button class="btn" id="btnImportPatternCSV">単一パターンCSV読み込み</button>
+            <button class="btn secondary" id="btnExportPatternCSV">単一パターンCSVテンプレ出力</button>
+          </div>
+        </div>
+        <div>
+          <h4>② 全パターンCSV読み込み（12パターン一括）</h4>
+          <div class="muted">ヘッダ：<code>pattern,cylinder,position,id,rarity</code>（position=1..100）</div>
+          <div class="row" style="margin-top:8px;">
+            <input type="file" id="csvAllFile" accept=".csv" />
+            <button class="btn" id="btnImportAllCSV">全パターンCSV読み込み</button>
+            <button class="btn secondary" id="btnExportAllCSV">全パターンCSVテンプレ出力</button>
+          </div>
+        </div>
+      </div>
+      <div id="csvMsg" class="muted" style="margin-top:8px;">CSVの読み込み状況がここに表示されます</div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="card">
+        <h3>現在のA</h3>
+        <table id="tblA"><thead><tr><th>#</th><th>ID</th><th>Rarity</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="card">
+        <h3>現在のB</h3>
+        <table id="tblB"><thead><tr><th>#</th><th>ID</th><th>Rarity</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ログインモーダル -->
+<div id="loginModal" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center;">
+  <div class="card" style="width:min(420px, 92vw);">
+    <h3>管理者ログイン</h3>
+    <label>パスワード</label>
+    <input type="password" id="adminPass" placeholder="********" />
+    <div class="row" style="justify-content:flex-end; margin-top:8px;">
+      <button class="btn secondary" id="btnLoginCancel">キャンセル</button>
+      <button class="btn" id="btnLoginDo">ログイン</button>
+    </div>
+    <div class="muted" style="margin-top:8px;">仮パスワード：<code>ganba2025</code></div>
+  </div>
+</div>
+
+<script>
+/* ========= 基本定数 ========= */
+const ADMIN_PASSWORD = "ganba2025";
+const PATTERN_COUNT = 12;
+const CYL_SIZE = 100;
+const RAR_SET = new Set(["LR","SR","R","N"]);
+
+/* ========= 状態／データ ========= */
+const patterns = {}; // { "1": {A:[{id,rarity}], B:[...]}, ... }
+for (let p = 1; p <= PATTERN_COUNT; p++) patterns[String(p)] = { A: [], B: [] };
+let admin = false;
+let currentPattern = "1";
+
+/* ========= DOM ========= */
+const tabRun = document.getElementById('tabRun');
+const tabManage = document.getElementById('tabManage');
+const panelRun = document.getElementById('panel-run');
+const panelManage = document.getElementById('panel-manage');
+
+const btnLoginOpen = document.getElementById('btnLoginOpen');
+const btnLogout = document.getElementById('btnLogout');
+const loginState = document.getElementById('loginState');
+const loginModal = document.getElementById('loginModal');
+const adminPass = document.getElementById('adminPass');
+const btnLoginCancel = document.getElementById('btnLoginCancel');
+const btnLoginDo = document.getElementById('btnLoginDo');
+
+const patternSelect = document.getElementById('patternSelect');
+
+const taA = document.getElementById('taA');
+const taB = document.getElementById('taB');
+const btnApplyA = document.getElementById('btnApplyA');
+const btnApplyB = document.getElementById('btnApplyB');
+const cntA = document.getElementById('cntA');
+const cntB = document.getElementById('cntB');
+
+const tblA = document.getElementById('tblA').querySelector('tbody');
+const tblB = document.getElementById('tblB').querySelector('tbody');
+const patternInfo = document.getElementById('patternInfo');
+
+const btnExportJSON = document.getElementById('btnExportJSON');
+const btnImportJSON = document.getElementById('btnImportJSON');
+const importJSON = document.getElementById('importJSON');
+
+const csvMsg = document.getElementById('csvMsg');
+const csvPatternFile = document.getElementById('csvPatternFile');
+const csvAllFile = document.getElementById('csvAllFile');
+const btnImportPatternCSV = document.getElementById('btnImportPatternCSV');
+const btnExportPatternCSV = document.getElementById('btnExportPatternCSV');
+const btnImportAllCSV = document.getElementById('btnImportAllCSV');
+const btnExportAllCSV = document.getElementById('btnExportAllCSV');
+
+/* 運用（自動検知）DOM */
+const obsInputA = document.getElementById('obsInputA');
+const obsInputB = document.getElementById('obsInputB');
+const btnAddA = document.getElementById('btnAddA');
+const btnAddB = document.getElementById('btnAddB');
+const btnUndoA = document.getElementById('btnUndoA');
+const btnUndoB = document.getElementById('btnUndoB');
+const btnResetA = document.getElementById('btnResetA');
+const btnResetB = document.getElementById('btnResetB');
+const obsCountA = document.getElementById('obsCountA');
+const obsCountB = document.getElementById('obsCountB');
+const candCountA = document.getElementById('candCountA');
+const candCountB = document.getElementById('candCountB');
+const obsTableA = document.getElementById('obsTableA');
+const obsTableB = document.getElementById('obsTableB');
+const candListA = document.getElementById('candListA');
+const candListB = document.getElementById('candListB');
+const statusA = document.getElementById('statusA');
+const statusB = document.getElementById('statusB');
+const estA = document.getElementById('estA');
+const estB = document.getElementById('estB');
+
+/* ========= ユーティリティ ========= */
+const digits = s => String(s||'').replace(/[^0-9]/g,'');
+function normRarity(r){ r=(r||'').toUpperCase().trim(); return RAR_SET.has(r)? r:'N'; }
+function idEqualLoose(a,b){ // 完全一致 or 数字3桁一致
+  const al=String(a||'').toLowerCase().trim(), bl=String(b||'').toLowerCase().trim();
+  if(al===bl) return true;
+  const ad=digits(a), bd=digits(b);
+  return ad && bd && ad===bd;
+}
+
+/* ========= 画面反映 ========= */
+function downloadText(filename, text){
+  const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url);
+}
+function renderABTables(){
+  const a = patterns[currentPattern].A;
+  const b = patterns[currentPattern].B;
+  tblA.innerHTML = a.map((c,i)=>`<tr><td>${i+1}</td><td>${c.id}</td><td>${c.rarity}</td></tr>`).join("");
+  tblB.innerHTML = b.map((c,i)=>`<tr><td>${i+1}</td><td>${c.id}</td><td>${c.rarity}</td></tr>`).join("");
+  cntA.textContent = `${a.length}/${CYL_SIZE}`; cntB.textContent = `${b.length}/${CYL_SIZE}`;
+  patternInfo.textContent = `パターン${currentPattern}：A ${a.length}行 / B ${b.length}行`;
+}
+
+/* ========= 初期化 ========= */
+function initPatternSelects(){
+  patternSelect.innerHTML = "";
+  for (let p=1;p<=PATTERN_COUNT;p++){
+    const k=String(p);
+    patternSelect.insertAdjacentHTML("beforeend", `<option value="${k}">パターン ${p}</option>`);
+  }
+  patternSelect.value=currentPattern;
+}
+initPatternSelects(); renderABTables();
+
+/* ========= タブ制御 ========= */
+function setTab(tab){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(tab==='run'){ tabRun.classList.add('active'); panelRun.classList.remove('hidden'); panelManage.classList.add('hidden'); }
+  if(tab==='manage'){
+    if(!admin){ alert("管理者ログインが必要です"); return; }
+    tabManage.classList.add('active'); panelManage.classList.remove('hidden'); panelRun.classList.add('hidden');
+  }
+}
+tabRun.addEventListener('click',()=>setTab('run'));
+tabManage.addEventListener('click',()=>setTab('manage'));
+
+/* ========= ログイン制御 ========= */
+btnLoginOpen.addEventListener('click', ()=>{ adminPass.value=""; loginModal.classList.remove('hidden'); });
+btnLoginCancel.addEventListener('click', ()=> loginModal.classList.add('hidden'));
+btnLoginDo.addEventListener('click', ()=>{
+  if(adminPass.value===ADMIN_PASSWORD){
+    admin=true; loginModal.classList.add('hidden');
+    loginState.textContent="管理者"; btnLogout.classList.remove('hidden');
+    tabManage.removeAttribute('aria-disabled'); tabManage.title="";
+    alert("管理モードが有効になりました");
+  }else{ alert("パスワードが違います"); }
+});
+btnLogout.addEventListener('click', ()=>{
+  admin=false; setTab('run'); loginState.textContent="未ログイン"; btnLogout.classList.add('hidden');
+  tabManage.setAttribute('aria-disabled','true'); tabManage.title="管理者ログインが必要";
+  alert("ログアウトしました");
+});
+
+/* ========= 管理：テキスト貼り付け ========= */
+function parseLinesToArr(text){
+  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l.length>0);
+  const arr = [];
+  for (const l of lines) {
+    const parts = l.split(",").map(x => x.trim());
+    let rawId = parts[0] || "";
+    // 001 のような数字だけ or GG3-001 どちらも許可
+    const id = digits(rawId).padStart(3,'0');
+    const rarity = normRarity(parts[1]||"N");
+    if (!id || id==='000') throw new Error(`IDが不正: "${l}"`);
+    arr.push({id,rarity});
+  }
+  return arr;
+}
+function validate100(arr,label="A/B"){ if(arr.length!==CYL_SIZE) throw new Error(`${label} は ${CYL_SIZE} 行が必要です（現在 ${arr.length} 行）`); }
+
+btnApplyA.addEventListener('click', ()=>{
+  try{ const arr=parseLinesToArr(taA.value); validate100(arr,"A"); patterns[currentPattern].A=arr; renderABTables(); alert("Aを更新しました"); }
+  catch(e){ alert("Aの更新エラー: "+e.message); }
+});
+btnApplyB.addEventListener('click', ()=>{
+  try{ const arr=parseLinesToArr(taB.value); validate100(arr,"B"); patterns[currentPattern].B=arr; renderABTables(); alert("Bを更新しました"); }
+  catch(e){ alert("Bの更新エラー: "+e.message); }
+});
+patternSelect.addEventListener('change', ()=>{ currentPattern=patternSelect.value; renderABTables(); setTextareasFromCurrent(); });
+function setTextareasFromCurrent(){
+  const a = patterns[currentPattern].A, b = patterns[currentPattern].B;
+  taA.value = a.map(x => `${x.id}, ${x.rarity}`).join("\n");
+  taB.value = b.map(x => `${x.id}, ${x.rarity}`).join("\n");
+  cntA.textContent = `${a.length}/${CYL_SIZE}`; cntB.textContent = `${b.length}/${CYL_SIZE}`;
+}
+
+/* ========= JSON入出力 ========= */
+btnExportJSON.addEventListener('click', ()=> downloadText('ganba_patterns_12.json', JSON.stringify({patterns}, null, 2)));
+btnImportJSON.addEventListener('click', ()=> importJSON.click());
+importJSON.addEventListener('change', async (e)=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{
+    const obj=JSON.parse(await f.text());
+    if(!obj.patterns) throw new Error("patterns がありません");
+    for(let p=1;p<=PATTERN_COUNT;p++){
+      const k=String(p); const P=obj.patterns[k]; if(!P) throw new Error(`pattern ${k} がありません`);
+      patterns[k] = { A: (P.A||[]).map(x=>({id:digits(String(x.id)).padStart(3,'0'),rarity:normRarity(x.rarity)})),
+                      B: (P.B||[]).map(x=>({id:digits(String(x.id)).padStart(3,'0'),rarity:normRarity(x.rarity)})) };
+    }
+    currentPattern="1"; renderABTables(); setTextareasFromCurrent(); alert("JSON読み込み完了");
+  }catch(err){ alert("JSON読み込みエラー: "+err.message); }
+  finally{ e.target.value=""; }
+});
+
+/* ========= CSV：単一パターン ========= */
+btnExportPatternCSV.addEventListener('click', ()=>{
+  const a=patterns[currentPattern].A, b=patterns[currentPattern].B;
+  let out="cylinder,id,rarity\n"; a.forEach(x=> out+=`A,${x.id},${x.rarity}\n`); b.forEach(x=> out+=`B,${x.id},${x.rarity}\n`);
+  downloadText(`pattern_${currentPattern}_A_B.csv`, out);
+});
+btnImportPatternCSV.addEventListener('click', async ()=>{
+  const f = csvPatternFile.files?.[0]; if(!f){ alert("単一パターンCSVを選択してください"); return; }
+  try{
+    const text = await f.text();
+    const lines = text.split(/\r?\n/).filter(l=>l.trim().length>0);
+    if (!/^cylinder\s*,\s*id\s*,\s*rarity/i.test(lines[0])) throw new Error("ヘッダは cylinder,id,rarity で始まる必要があります");
+    const A=[], B=[];
+    for (let i=1;i<lines.length;i++){
+      const parts = lines[i].split(",").map(x=>x.trim());
+      if (parts.length<2) continue;
+      const cyl=(parts[0]||"").toUpperCase();
+      const id=digits(parts[1]||"").padStart(3,'0');
+      const rarity=normRarity(parts[2]||"N");
+      if (!id || id==='000') throw new Error(`IDが不正（行${i+1}）`);
+      if (!(cyl==="A"||cyl==="B")) throw new Error(`cylinder は A/B（行${i+1}）`);
+      (cyl==="A"?A:B).push({id,rarity});
+    }
+    validate100(A,"A"); validate100(B,"B");
+    patterns[currentPattern].A=A; patterns[currentPattern].B=B; renderABTables(); setTextareasFromCurrent();
+    csvMsg.innerHTML = `<span class="ok">単一パターンCSVを取り込みました（パターン${currentPattern}）</span>`;
+  }catch(err){ csvMsg.innerHTML = `<span class="err">単一パターンCSVエラー：${err.message}</span>`; }
+  finally{ csvPatternFile.value=""; }
+});
+
+/* ========= CSV：全パターン一括 ========= */
+btnExportAllCSV.addEventListener('click', ()=>{
+  let out="pattern,cylinder,position,id,rarity\n";
+  for(let p=1;p<=PATTERN_COUNT;p++){
+    const k=String(p);
+    patterns[k].A.forEach((x,i)=> out+=`${k},A,${i+1},${x.id},${x.rarity}\n`);
+    patterns[k].B.forEach((x,i)=> out+=`${k},B,${i+1},${x.id},${x.rarity}\n`);
+  }
+  downloadText(`patterns_all_${PATTERN_COUNT}p_${CYL_SIZE}x2.csv`, out);
+});
+btnImportAllCSV.addEventListener('click', async ()=>{
+  const f = csvAllFile.files?.[0]; if(!f){ alert("全パターンCSVを選択してください"); return; }
+  try{
+    const text = await f.text();
+    const lines = text.split(/\r?\n/).filter(l=>l.trim().length>0);
+    if (!/^pattern\s*,\s*cylinder\s*,\s*position\s*,\s*id\s*,\s*rarity/i.test(lines[0])) {
+      throw new Error("ヘッダは pattern,cylinder,position,id,rarity で始まる必要があります");
+    }
+    const buf={}; for(let p=1;p<=PATTERN_COUNT;p++) buf[String(p)]={A:Array(CYL_SIZE),B:Array(CYL_SIZE)};
+    for (let i=1;i<lines.length;i++){
+      const parts = lines[i].split(",").map(x=>x.trim());
+      if (parts.length<4) continue;
+      const pat=String(parseInt(parts[0],10));
+      const cyl=(parts[1]||"").toUpperCase();
+      const pos=parseInt(parts[2],10);
+      const id=digits(parts[3]||"").padStart(3,'0');
+      const rarity=normRarity(parts[4]||"N");
+      if (!(pat in buf)) throw new Error(`pattern は 1..${PATTERN_COUNT}（行${i+1}）`);
+      if (!(cyl==="A"||cyl==="B")) throw new Error(`cylinder は A/B（行${i+1}）`);
+      if (!(pos>=1 && pos<=CYL_SIZE)) throw new Error(`position は 1..${CYL_SIZE}（行${i+1}）`);
+      if (!id || id==='000') throw new Error(`IDが不正（行${i+1}）`);
+      buf[pat][cyl][pos-1] = {id,rarity};
+    }
+    for (let p=1;p<=PATTERN_COUNT;p++){
+      const k=String(p), A=buf[k].A, B=buf[k].B;
+      if (A.length!==CYL_SIZE || B.length!==CYL_SIZE || A.some(v=>!v) || B.some(v=>!v)) {
+        throw new Error(`pattern ${k} の A/B に欠損があります（各${CYL_SIZE}行必要）`);
+      }
+      patterns[k].A=A; patterns[k].B=B;
+    }
+    currentPattern="1"; renderABTables(); setTextareasFromCurrent();
+    csvMsg.innerHTML = `<span class="ok">全パターンCSVを取り込みました（12パターン一括）</span>`;
+  }catch(err){ csvMsg.innerHTML = `<span class="err">全パターンCSVエラー：${err.message}</span>`; }
+  finally{ csvAllFile.value=""; }
+});
+
+/* ========= 運用：自動パターン検知 & LR予測 ========= */
+let obsA = [], obsB = [];
+let candidatesA = null; // [{p, off}]
+let candidatesB = null;
+
+function candidateAll(){
+  const list=[]; for(let p=1;p<=PATTERN_COUNT;p++){ for(let off=0; off<CYL_SIZE; off++){ list.push({p, off}); } }
+  return list; // 12*100 = 1200候補
+}
+function fitsAt(seq, off, obs){
+  for(let t=0;t<obs.length;t++){
+    const idx = (off + t) % seq.length;
+    if(!idEqualLoose(seq[idx].id, obs[t])) return false;
+  }
+  return true;
+}
+function narrow(cyl, obs, prev){
+  const base = prev || candidateAll();
+  const out=[];
+  for(const c of base){
+    const seq = patterns[String(c.p)][cyl];
+    if(seq.length!==CYL_SIZE) continue; // 未設定はスキップ
+    if(fitsAt(seq, c.off, obs)) out.push(c);
+  }
+  return out;
+}
+function nextLRInfo(cyl, cand, obs){
+  if(!cand || !cand.length) return null;
+  if(cand.length!==1) return {note:'候補が複数のため、LR距離は未確定'};
+  const {p, off} = cand[0];
+  const seq = patterns[String(p)][cyl];
+  const k = obs.length;
+  const start = (off + k - 1 + seq.length) % seq.length;
+  for(let step=1; step<=seq.length; step++){
+    const idx = (start + step) % seq.length;
+    if((seq[idx].rarity||'N').toUpperCase()==='LR'){
+      return {distance:step, next:seq[idx], pattern:p, offset:off};
+    }
+  }
+  return {distance:null};
+}
+function renderObs(which){
+  const arr = which==='A'? obsA: obsB;
+  const tbody = which==='A'? obsTableA: obsTableB;
+  tbody.innerHTML = arr.map((id,i)=>`<tr><td>${i+1}</td><td>${id}</td></tr>`).join('');
+  (which==='A'? obsCountA: obsCountB).textContent = arr.length;
+
+  const cands = which==='A'? candidatesA: candidatesB;
+  (which==='A'? candCountA: candCountB).textContent = cands? cands.length: 1200;
+  const list = (cands||[]).slice(0,12).map(c=>`P${c.p}@${c.off}`).join(', ');
+  (which==='A'? candListA: candListB).textContent = list || '—';
+
+  const info = nextLRInfo(which, cands, arr);
+  const statusEl = which==='A'? statusA: statusB;
+  const estEl = which==='A'? estA: estB;
+
+  if(!arr.length){
+    statusEl.innerHTML = '観測を追加すると自動で候補が絞られます。';
+    estEl.textContent = '—';
+    return;
+  }
+  if(!cands || !cands.length){
+    statusEl.innerHTML = '<span class="err">候補なし：入力に誤りがある可能性があります</span>';
+    estEl.textContent = '—';
+    return;
+  }
+  if(info && info.distance!=null){
+    statusEl.innerHTML = (cands.length===1)
+      ? `確定：パターン <b class="ok">P${info.pattern}</b>（オフセット ${info.offset}）。次のLRまで <b class="ok">${info.distance}枚</b>（ID: ${info.next.id}）`
+      : `候補 <b>${cands.length}</b>。さらに観測を増やしてください。`;
+    estEl.textContent = (cands.length===1) ? `P${info.pattern} / offset ${info.offset}` : '—';
+  }else{
+    statusEl.innerHTML = 'LRが登録されていません（管理モードでレア設定を確認）';
+    estEl.textContent = '—';
+  }
+}
+function addObs(which, value){
+  const v = String(value||'').trim();
+  if(!v) return;
+  (which==='A'? obsA: obsB).push(v);
+  const now = narrow(which, (which==='A'? obsA: obsB), (which==='A'? candidatesA: candidatesB));
+  if(which==='A') candidatesA = now; else candidatesB = now;
+  renderObs(which);
+}
+
+/* ボタン紐付け（運用） */
+btnAddA.addEventListener('click', ()=>{ addObs('A', obsInputA.value); obsInputA.value=''; obsInputA.focus(); });
+btnAddB.addEventListener('click', ()=>{ addObs('B', obsInputB.value); obsInputB.value=''; obsInputB.focus(); });
+obsInputA.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); btnAddA.click(); }});
+obsInputB.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); btnAddB.click(); }});
+btnUndoA.addEventListener('click', ()=>{ obsA.pop(); candidatesA = narrow('A', obsA, null); renderObs('A'); });
+btnUndoB.addEventListener('click', ()=>{ obsB.pop(); candidatesB = narrow('B', obsB, null); renderObs('B'); });
+btnResetA.addEventListener('click', ()=>{ obsA=[]; candidatesA=null; renderObs('A'); });
+btnResetB.addEventListener('click', ()=>{ obsB=[]; candidatesB=null; renderObs('B'); });
+
+/* 初期表示 */
+renderObs('A'); renderObs('B');
+setTimeout(()=>setTextareasFromCurrent(), 0);
+</script>
+
+<!-- ===== Admin GitHub panel injection (does NOT touch RUN UI) ===== -->
 <script>
 (function(){
-  // --- Storage Keys
-  const KEY_DB = 'carddb/v1';
-  const KEY_REMOTE = 'carddb/remote';
-  const KEY_ADMIN = 'carddb/admin';
-  const KEY_GH = 'carddb/github';
-
-  // --- State
-  let staged = []; // 管理者アップロード後、保存前の一時領域
-  let db = [];     // 実運用データ（ローカル保存 or リモート同期後）
-
-  // --- Util
-  const $ = (sel)=>document.querySelector(sel);
-  const pad2 = (n)=> String(n).padStart(2,'0');
-  const pad3 = (n)=> String(n).padStart(3,'0');
-  const normText = (s)=> (s||'').toString().trim();
-  const toast = (msg)=>{ alert(msg); };
-
-  function updateSourceLabel(){
-    const r = getRemote();
-    $('#source-label').textContent = r.url ? 'リモート＋ローカル' : 'ローカル';
-  }
-
-  // --- Local DB
-  function loadLocal(){
-    try{ db = JSON.parse(localStorage.getItem(KEY_DB) || '[]'); }catch{ db = []; }
-    $('#data-count').textContent = db.length;
-  }
-  function saveLocal(data){
-    localStorage.setItem(KEY_DB, JSON.stringify(data));
-    db = data;
-    $('#data-count').textContent = db.length;
-  }
-
-  // --- Admin settings
-  function loadAdmin(){
-    const def={ pass:'admin123', remoteUrl:'', remoteAuto:false };
-    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_ADMIN)||'{}')); }
-    catch{ return def; }
-  }
-  function saveAdmin(a){ localStorage.setItem(KEY_ADMIN, JSON.stringify(a)); }
-
-  // --- Remote
-  function getRemote(){
-    const def={ url:'', auto:false };
-    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_REMOTE)||'{}')); }
-    catch{ return def; }
-  }
-  function setRemote(url, auto){
-    localStorage.setItem(KEY_REMOTE, JSON.stringify({url,auto}));
-    updateSourceLabel();
-  }
-
-  // --- CSV 取込
-  function parseCsvFiles(fileList, done){
-    let all = []; let remaining = (fileList&&fileList.length)||0;
-    if(!remaining){ toast('CSVファイルを選択してください'); return; }
-    Array.from(fileList).forEach(file=>{
-      Papa.parse(file,{
-        header:true, skipEmptyLines:true,
-        complete:(res)=>{
-          const rows = (res.data||[]).map(normalizeRow).filter(Boolean);
-          all = all.concat(rows);
-          remaining--; if(remaining===0) done(all);
-        },
-        error:()=>{ remaining--; if(remaining===0) done(all); }
-      });
-    });
-  }
-  function normalizeRow(r){
-    const p = normText(r.pattern).replace(/^(?:p|P)/,'');
-    const pattern = pad2(parseInt(p||'0',10));
-    if(!(+pattern>=1 && +pattern<=12)) return null;
-    let cylinder = normText(r.cylinder).toUpperCase();
-    if(!(cylinder==='A'||cylinder==='B')) return null;
-    let num = normText(r.card_no).replace(/\D/g,'');
-    const card_no = pad3(parseInt(num||'0',10));
-    if(!(+card_no>=1 && +card_no<=100)) return null;
-    const label = normText(r.label||'');
-    const code = `P${pattern}-${cylinder}-${card_no}`;
-    return {pattern, cylinder, card_no, label, code};
-  }
-
-  // --- Search
-  function queryToFilter(q){
-    q = (q||'').toString().trim().toUpperCase();
-    if(!q) return {};
-    // 例: P07-B-076 / A023 / 76b
-    const m = q.match(/P?(\d{1,2})?\s*[- ]?\s*([AB])?\s*[- ]?\s*(\d{1,3})?/i);
-    let pattern = m && m[1] ? pad2(m[1]) : '';
-    let cylinder = m && m[2] ? m[2].toUpperCase() : '';
-    let card_no = m && m[3] ? pad3(m[3]) : '';
-    if(!cylinder){
-      const tail = q.match(/([AB])$/);
-      if(tail) cylinder = tail[1].toUpperCase();
-    }
-    return {pattern, cylinder, card_no};
-  }
-  function search(){
-    const q = $('#q').value;
-    const f = queryToFilter(q);
-    const pat = $('#filter-pattern').value || f.pattern;
-    const cyl = $('#filter-cylinder').value || f.cylinder;
-    const no  = f.card_no;
-    let rows = db;
-    if(pat) rows = rows.filter(r=>r.pattern===pat);
-    if(cyl) rows = rows.filter(r=>r.cylinder===cyl);
-    if(no)  rows = rows.filter(r=>r.card_no===no);
-    renderRows(rows);
-  }
-  function renderRows(rows){
-    const tbody = $('#result-body');
-    tbody.innerHTML = '';
-    const frag = document.createDocumentFragment();
-    rows.slice(0,500).forEach(r=>{
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><span class="badge">P${r.pattern}</span></td>
-        <td><span class="badge ${r.cylinder==='A'?'a':'b'}">${r.cylinder}</span></td>
-        <td>${r.card_no}</td>
-        <td class="help">${r.code}</td>
-        <td>${r.label||''}</td>
-      `;
-      frag.appendChild(tr);
-    });
-    tbody.appendChild(frag);
-    $('#hit-count').textContent = rows.length;
-  }
-
-  // --- エクスポート
-  function exportJson(){
-    const blob = new Blob([JSON.stringify(db,null,2)], {type:'application/json'});
-    saveAs(blob, 'cards.json');
-  }
-
-  // --- リモート同期
-  async function syncRemote(){
-    const r = getRemote();
-    if(!r.url){ toast('リモートURLが未設定です（管理者モードで設定）'); return; }
-    try{
-      const res = await fetch(r.url,{cache:'no-store'});
-      if(!res.ok) throw new Error(res.statusText);
-      const json = await res.json();
-      if(!Array.isArray(json)) throw new Error('JSON配列ではありません');
-      const map = new Map(db.map(x=>[x.code,x]));
-      json.forEach(x=>{ if(x && x.code) map.set(x.code, x); });
-      const merged = Array.from(map.values());
-      saveLocal(merged);
-      toast(`リモート同期完了：${json.length} 件 / 総計 ${merged.length} 件`);
-      search();
-    }catch(e){
-      toast('同期に失敗しました：'+ e.message);
-    }
-  }
-
-  // --- タブ & ログイン
-  function activateTab(which){
-    if(which==='run'){
-      $('#tab-run').classList.add('active');
-      $('#tab-admin').classList.remove('active');
-      $('#run-section').classList.remove('hidden');
-      $('#admin-section').classList.add('hidden');
-    }else{
-      $('#tab-admin').classList.add('active');
-      $('#tab-run').classList.remove('active');
-      $('#admin-section').classList.remove('hidden');
-      $('#run-section').classList.add('hidden');
-    }
-  }
-  function isLoggedIn(){ return sessionStorage.getItem(KEY_ADMIN+':in')==='1'; }
-  function requireLogin(){
-    const logged = isLoggedIn();
-    $('#admin-logged-out').classList.toggle('hidden', logged);
-    $('#admin-logged-in').classList.toggle('hidden', !logged);
-  }
-  function login(pass){
-    const a = loadAdmin();
-    if(pass===a.pass){
-      sessionStorage.setItem(KEY_ADMIN+':in','1'); requireLogin(); toast('管理者ログインしました');
-    }else{
-      toast('パスコードが違います');
-    }
-  }
-  function logout(){ sessionStorage.removeItem(KEY_ADMIN+':in'); requireLogin(); }
-
-  // --- GitHub API
+  // use unique IDs to avoid collisions
+  const KEY_GH = 'ganba/github/v1';
   function loadGH(){
-    const def={owner:'',repo:'',branch:'main',path:'data/cards.json',token:''};
-    try{ return Object.assign(def, JSON.parse(localStorage.getItem(KEY_GH)||'{}')); }
-    catch{ return def; }
+    try{ return Object.assign({owner:'',repo:'',branch:'main',path:'data/cards.json',token:''}, JSON.parse(localStorage.getItem(KEY_GH)||'{}')); }
+    catch{ return {owner:'',repo:'',branch:'main',path:'data/cards.json',token:''}; }
   }
   function saveGH(v){ localStorage.setItem(KEY_GH, JSON.stringify(v)); }
-
-  function getGHHeaders(token){
-    return {
-      'Authorization': 'token '+token,
-      'Accept': 'application/vnd.github+json',
-      'Content-Type': 'application/json'
-    };
-  }
-  function b64(str){ return btoa(unescape(encodeURIComponent(str))); }
-  async function ghGetContent(owner,repo,path,branch,token){
+  function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
+  function ghHeaders(t){ return {'Authorization':'token '+t, 'Accept':'application/vnd.github+json', 'Content-Type':'application/json'}; }
+  async function ghGet(owner,repo,path,branch,token){
     const u=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
-    const r=await fetch(u,{headers:getGHHeaders(token)});
+    const r=await fetch(u,{headers:ghHeaders(token)});
     if(r.status===404) return null;
-    if(!r.ok) throw new Error('GitHub API error '+r.status);
-    return await r.json(); // may include .sha
+    if(!r.ok) throw new Error('GitHub API '+r.status);
+    return await r.json();
   }
-  async function ghPutContent(owner,repo,path,branch,token,content, message, sha){
+  async function ghPut(owner,repo,path,branch,token,content,message,sha){
     const u=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
     const body={message, content:b64(content), branch}; if(sha) body.sha=sha;
-    const r=await fetch(u,{method:'PUT', headers:getGHHeaders(token), body:JSON.stringify(body)});
-    if(!r.ok){ const t=await r.text(); throw new Error('GitHub PUT失敗：'+t); }
+    const r=await fetch(u,{method:'PUT', headers:ghHeaders(token), body:JSON.stringify(body)});
+    if(!r.ok){ const t=await r.text(); throw new Error('PUT失敗: '+t); }
     return await r.json();
   }
 
-  async function ghPublish(){
-    const gh={
-      owner: $('#gh-owner').value.trim(),
-      repo: $('#gh-repo').value.trim(),
-      branch: $('#gh-branch').value.trim()||'main',
-      path: $('#gh-path').value.trim()||'data/cards.json',
-      token: $('#gh-token').value.trim()
-    };
-    if(!gh.owner||!gh.repo||!gh.branch||!gh.path||!gh.token){ toast('GitHub設定を入力して保存してください'); return; }
-    try{
-      const current = await ghGetContent(gh.owner, gh.repo, gh.path, gh.branch, gh.token);
-      const sha = current && current.sha;
-      const payload = JSON.stringify(db, null, 2);
-      await ghPutContent(gh.owner, gh.repo, gh.path, gh.branch, gh.token, payload, 'feat: cards.json を更新（管理画面から自動公開）', sha);
-      const raw = `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${gh.path}`;
-      // 配信先に自動設定
-      const a = loadAdmin(); a.remoteUrl = raw; saveAdmin(a); setRemote(raw, a.remoteAuto||false);
-      $('#remote-url').value = raw;
-      toast('GitHubに公開しました。配信先URLを自動設定しました。運用端末は「リモートを同期」で反映されます。');
-    }catch(e){ toast('GitHub公開エラー：'+e.message); }
-  }
+  function toast(msg){ try{ alert(msg); }catch(e){} }
 
-  async function ghFetchIntoLocal(){
-    const gh=loadGH();
-    if(!gh.owner||!gh.repo||!gh.branch||!gh.path){ toast('GitHub設定が不足しています'); return; }
-    const raw = `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${gh.path}`;
-    try{
-      const r=await fetch(raw,{cache:'no-store'}); if(!r.ok) throw new Error(r.statusText);
-      const arr=await r.json(); if(!Array.isArray(arr)) throw new Error('配列JSONではありません');
-      const map=new Map(db.map(x=>[x.code,x])); arr.forEach(x=>{ if(x&&x.code) map.set(x.code,x); });
-      saveLocal([...map.values()]);
-      const a=loadAdmin(); a.remoteUrl=raw; saveAdmin(a); setRemote(raw, a.remoteAuto||false); $('#remote-url').value=raw;
-      toast(`GitHubから取り込みました（${arr.length}件）。`);
-      search();
-    }catch(e){ toast('GitHub取得エラー：'+e.message); }
-  }
+  function ensurePanel(){
+    const host = document.querySelector('#panel-manage');
+    if(!host) return;
+    // Build panel HTML
+    const wrap = document.createElement('div');
+    wrap.className = 'card';
+    wrap.innerHTML = `
+      <h3>GitHub連携（JSONコミット）</h3>
+      <div class="row" style="margin-bottom:8px">
+        <input id="gh2-owner" class="" placeholder="owner（例：yourname）" />
+        <input id="gh2-repo"  class="" placeholder="repo（例：yourrepo）" />
+        <input id="gh2-branch" class="" placeholder="branch（例：main）" value="main" />
+      </div>
+      <div class="row" style="margin-bottom:8px">
+        <input id="gh2-path" class="" placeholder="保存パス（例：data/cards.json）" value="data/cards.json" style="flex:1" />
+      </div>
+      <div class="row" style="margin-bottom:8px">
+        <input id="gh2-token" class="" placeholder="GitHub Personal Access Token（repo 権限）" type="password" style="flex:1" />
+      </div>
+      <div class="row">
+        <button id="btn-gh2-save" class="btn secondary">設定を保存</button>
+        <button id="btn-gh2-publish" class="btn">GitHubに公開（JSONコミット）</button>
+      </div>
+      <div class="muted" style="margin-top:6px">※ 共同PCでのトークン保存は避けてください（localStorage保存）。</div>
+    `;
+    host.appendChild(wrap);
 
-  // --- 初期化
-  function init(){
-    // Tabs
-    $('#tab-run').addEventListener('click',()=>activateTab('run'));
-    $('#tab-admin').addEventListener('click',()=>activateTab('admin'));
+    // bind
+    const gh = loadGH();
+    const $ = (s)=>wrap.querySelector(s);
+    $('#gh2-owner').value = gh.owner;
+    $('#gh2-repo').value  = gh.repo;
+    $('#gh2-branch').value= gh.branch;
+    $('#gh2-path').value  = gh.path;
+    $('#gh2-token').value = gh.token;
 
-    // 運用：検索UIイベント
-    loadLocal(); updateSourceLabel(); renderRows(db.slice(0,50)); search();
-    $('#q').addEventListener('input', search);
-    $('#filter-pattern').addEventListener('change', search);
-    $('#filter-cylinder').addEventListener('change', search);
-    $('#btn-clear').addEventListener('click', ()=>{ $('#q').value=''; $('#filter-pattern').value=''; $('#filter-cylinder').value=''; search(); });
-    $('#btn-export-json').addEventListener('click', exportJson);
-    $('#btn-reload-remote').addEventListener('click', syncRemote);
-    $('#btn-reset-local').addEventListener('click', ()=>{ if(confirm('ローカル保存のカードデータを全て削除します。よろしいですか？')){ saveLocal([]); renderRows([]); search(); }});
-
-    // 管理：ログイン
-    requireLogin();
-    $('#btn-admin-login').addEventListener('click', ()=>login($('#admin-pass').value));
-    $('#btn-admin-logout').addEventListener('click', logout);
-
-    // 管理：CSV
-    $('#btn-import').addEventListener('click', ()=>{
-      const files = $('#file-csv').files;
-      parseCsvFiles(files,(rows)=>{
-        staged = rows; $('#import-count').textContent = staged.length;
-        toast(`読み込み完了：${staged.length} 件`);
-      });
-    });
-    $('#btn-save-local').addEventListener('click', ()=>{
-      if(staged.length===0){ toast('読み込みデータがありません'); return; }
-      const map = new Map(db.map(x=>[x.code,x]));
-      staged.forEach(x=>map.set(x.code,x));
-      const merged = Array.from(map.values());
-      saveLocal(merged);
-      staged = []; $('#import-count').textContent = '0';
-      toast('ローカル保存しました'); search();
-    });
-    $('#btn-clear-staged').addEventListener('click', ()=>{ staged=[]; $('#import-count').textContent='0'; });
-
-    // 管理：テンプレ生成
-    $('#btn-gen-templates').addEventListener('click', generateAllPatterns);
-
-    // リモート設定
-    const a = loadAdmin();
-    $('#remote-url').value = a.remoteUrl||'';
-    $('#remote-auto').checked = !!a.remoteAuto;
-    if(a.remoteUrl){ setRemote(a.remoteUrl, !!a.remoteAuto); }
-    if(a.remoteAuto && a.remoteUrl){ syncRemote(); }
-    $('#btn-save-remote').addEventListener('click', ()=>{
-      const url = $('#remote-url').value.trim();
-      const auto = $('#remote-auto').checked;
-      const a2 = loadAdmin(); a2.remoteUrl = url; a2.remoteAuto = auto; saveAdmin(a2);
-      setRemote(url, auto);
-      toast('リモート設定を保存しました');
+    $('#btn-gh2-save').addEventListener('click', ()=>{
+      const v={owner:$('#gh2-owner').value.trim(), repo:$('#gh2-repo').value.trim(), branch:$('#gh2-branch').value.trim()||'main', path:$('#gh2-path').value.trim()||'data/cards.json', token:$('#gh2-token').value.trim()};
+      saveGH(v); toast('GitHub設定を保存しました');
     });
 
-    // GitHub 連携
-    const gh = (function(){ try{return JSON.parse(localStorage.getItem(KEY_GH)||'{}')}catch{return{}} })();
-    $('#gh-owner').value = gh.owner||'';
-    $('#gh-repo').value  = gh.repo||'';
-    $('#gh-branch').value= gh.branch||'main';
-    $('#gh-path').value  = gh.path||'data/cards.json';
-    $('#gh-token').value = gh.token||'';
-
-    $('#btn-gh-save').addEventListener('click', ()=>{
-      const v={owner:$('#gh-owner').value.trim(),repo:$('#gh-repo').value.trim(),branch:$('#gh-branch').value.trim()||'main',path:$('#gh-path').value.trim()||'data/cards.json',token:$('#gh-token').value.trim()};
-      localStorage.setItem(KEY_GH, JSON.stringify(v));
-      toast('GitHub設定を保存しました');
+    $('#btn-gh2-publish').addEventListener('click', async ()=>{
+      const v={owner:$('#gh2-owner').value.trim(), repo:$('#gh2-repo').value.trim(), branch:$('#gh2-branch').value.trim()||'main', path:$('#gh2-path').value.trim()||'data/cards.json', token:$('#gh2-token').value.trim()};
+      if(!v.owner||!v.repo||!v.branch||!v.path||!v.token){ toast('GitHub設定を入力して保存してください'); return; }
+      try{
+        // patterns が存在する前提（管理モードのJSON書出と同形）
+        const payload = JSON.stringify({patterns}, null, 2);
+        const cur = await ghGet(v.owner,v.repo,v.path,v.branch,v.token);
+        const sha = cur && cur.sha;
+        await ghPut(v.owner,v.repo,v.path,v.branch,v.token,payload,'feat: patterns JSON を更新（管理画面から自動公開）',sha);
+        toast('GitHubに公開しました');
+      }catch(e){ toast('GitHub公開エラー：'+e.message); }
     });
-    $('#btn-gh-publish').addEventListener('click', ghPublish);
-    $('#btn-gh-fetch').addEventListener('click', ghFetchIntoLocal);
-
-    // 初回検索
-    search();
   }
 
-  // --- 12パターン生成（ZIP）
-  function generateAllPatterns(){
-    const zip = new JSZip();
-    for(let p=1;p<=12;p++){
-      const pattern = pad2(p);
-      const csv = [ 'pattern,cylinder,card_no,label' ];
-      ['A','B'].forEach(C=>{
-        const nums = Array.from({length:100}, (_,i)=>pad3(i+1));
-        for(let i=nums.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [nums[i],nums[j]]=[nums[j],nums[i]]; }
-        nums.forEach(n=> csv.push(`${pattern},${C},${n},`));
-      });
-      zip.file(`pattern_${pattern}.csv`, csv.join('\n'));
-    }
-    zip.generateAsync({type:'blob'}).then(content=> saveAs(content, `card_patterns_12csv_${Date.now()}.zip`));
-  }
-
-  // --- Boot
-  document.addEventListener('DOMContentLoaded', init);
+  // wait DOM
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', ensurePanel); }
+  else{ ensurePanel(); }
 })();
 </script>
+
 </body>
 </html>
