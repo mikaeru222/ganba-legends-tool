@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ガンバレジェンズ 管理ツール（黒UI + モバイル最適化 + CSV自動読込）</title>
+<title>ガンバレジェンズ 管理ツール（管理画面で一括CSVアップロード）</title>
 <style>
   :root{
     --bg:#0f1115; --panel:#161a22; --text:#e8eaed; --muted:#a3a6ad;
@@ -17,205 +17,101 @@
   h1{margin:0;font-size:20px;font-weight:650}
   .muted{color:var(--muted);font-size:13px;margin-top:4px}
   .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-  input[type="text"], input[type="password"], select{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
-  input[type="text"]{min-width:280px;flex:1}
+  input[type="text"], input[type="password"], input[type="number"], select{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
   button{cursor:pointer;background:var(--btn-bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 14px}
   button:hover{background:var(--btn-bg-hover)}
   .btn-accent{border-color:transparent;background:var(--accent)}
   .btn-green{border-color:transparent;background:var(--accent-2);color:#0a0f14}
   .btn-danger{border-color:transparent;background:var(--danger)}
-  .grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:16px}
   table{width:100%;border-collapse:collapse;margin-top:8px}
   th,td{border-bottom:1px solid var(--border);padding:8px 10px;font-size:14px}
   th{color:#cfd3da;text-align:left}
-  code{background:#0b0e13;border:1px solid var(--border);padding:2px 6px;border-radius:6px}
-  .pill{display:inline-block;background:#1f2633;border:1px solid var(--border);padding:2px 8px;border-radius:999px;font-size:12px;color:#cfd3da}
   .ok{color:#7bd88f}.err{color:#ff9aa2;white-space:pre-wrap}
-  .footer{color:var(--muted);font-size:12px;margin:24px 0 40px}
-  /* モバイル最適化 */
-  @media (max-width: 820px){
-    .grid{grid-template-columns:1fr}
-    .row{gap:8px}
-    input[type="text"]{min-width:unset;width:100%}
-    .stack-sm{display:flex;flex-direction:column;gap:10px}
-    header .wrap{padding:12px}
-    .wrap{padding:12px}
-    button{width:auto}
-  }
-  /* モーダル */
-  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:30}
-  .modal{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;max-width:500px;width:92vw}
-  .modal h3{margin-top:0}
+  .pill{display:inline-block;background:#1f2633;border:1px solid var(--border);padding:2px 8px;border-radius:999px;font-size:12px;color:#cfd3da}
+  @media (max-width: 820px){ .wrap{padding:12px} .row{gap:8px} }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
     <h1>ガンバレジェンズ 管理ツール</h1>
-    <div class="muted">GitHubのCSVを自動取得 → 黒UIに連動。<span class="pill">ヘッダ: pattern,cylinder,position,id,rarity</span></div>
+    <div class="muted">管理者モードの画面内で <b>一括CSVアップロード</b> ができます。<span class="pill">pattern,cylinder,position,id,rarity</span></div>
   </div>
 </header>
 
 <main class="wrap">
-  <!-- 管理ログイン -->
-  <div id="adminBox" class="card" style="margin-bottom:16px;">
-    <div class="row stack-sm">
-      <div class="pill">管理者ログイン</div>
-      <input id="adminPass" type="password" placeholder="管理パスワード" />
-      <button id="btnLogin" class="btn-accent">ログイン</button>
-      <span id="loginStatus" class="muted"></span>
-    </div>
-    <div class="muted">既定: <code>LEGENDS2025</code>（ソース内 <code>ADMIN_PASSWORD</code> を変更してご利用ください）</div>
-  </div>
-
-  <!-- CSV設定 -->
+  <!-- CSV設定（表示側） -->
   <div class="card">
-    <div class="row stack-sm">
-      <label for="rawUrl"><strong>CSV Raw URL</strong></label>
-      <input id="rawUrl" type="text" placeholder="https://raw.githubusercontent.com/.../main/xxx.csv"/>
+    <div class="row">
+      <label for="rawUrl"><strong>CSV Raw URL（読取用）</strong></label>
+      <input id="rawUrl" type="text" placeholder="https://raw.githubusercontent.com/.../main/xxx.csv"
+        value="https://raw.githubusercontent.com/mikaeru222/ganba-legends-tool/main/test_patterns_full.csv"/>
       <button id="reloadBtn" class="btn-accent">最新を再読込</button>
-      <button id="btnSaveUrl">URL保存</button>
       <span id="status" class="muted"></span>
     </div>
     <div id="message" class="muted" style="margin-top:8px;"></div>
+
+    <h3 style="margin-top:12px;">プレビュー（先頭100行）</h3>
+    <div id="preview"></div>
   </div>
 
-  <section class="grid" style="margin-top:16px;">
-    <div class="card">
-      <div class="row">
-        <div class="pill">概要</div>
-      </div>
-      <div id="stats" style="margin-top:8px;">CSV未読み込み</div>
-
-      <div class="row" style="margin-top:12px;">
-        <label for="patternSel">パターン：</label>
-        <select id="patternSel"></select>
-
-        <label for="raritySel">レアリティ：</label>
-        <select id="raritySel">
-          <option value="">(すべて)</option>
-          <option>N</option><option>R</option><option>SR</option><option>UR</option><option>SEC</option>
-        </select>
-
-        <button id="dlCurrent" class="btn-green">このパターンをCSV保存</button>
-        <button id="dlAll">全データCSV保存</button>
-      </div>
-
-      <div class="grid" style="margin-top:12px;">
-        <div>
-          <h3>L（左）</h3>
-          <div id="listL"></div>
-        </div>
-        <div>
-          <h3>R（右）</h3>
-          <div id="listR"></div>
-        </div>
-      </div>
+  <!-- 管理者モード -->
+  <div class="card">
+    <div class="row">
+      <div class="pill">管理者モード</div>
+      <input id="adminPass" type="password" placeholder="管理パスワード"/>
+      <button id="btnLogin" class="btn-accent">ログイン</button>
+      <span id="loginStatus" class="muted"></span>
     </div>
 
-    <div class="card">
+    <div id="adminArea" style="display:none">
+      <h3 style="margin-top:8px;">① 一括CSVアップロード（この画面に即反映）</h3>
       <div class="row">
-        <div class="pill">ID検索 & 編集</div>
+        <input id="filePicker" type="file" accept=".csv"/>
+        <button id="btnApplyLocal" class="btn-green">このCSVを画面に反映</button>
       </div>
-      <div class="row stack-sm" style="margin-top:8px;">
-        <input id="searchId" type="text" placeholder="例: 038" />
-        <button id="btnFind">検索</button>
-        <button id="btnEdit" disabled>編集</button>
-      </div>
-      <div id="findResult" class="muted"></div>
+      <div class="muted">※これは <b>この端末の画面内だけの反映</b> です。他の端末へ共有したい場合は、下の②でGitHubへ上書きしてください。</div>
 
-      <h3 style="margin-top:16px;">プレビュー（先頭100行）</h3>
-      <div id="preview"></div>
+      <h3 style="margin-top:16px;">② GitHubへ上書きアップロード（任意・安全に取扱）</h3>
+      <div class="muted">GitHubの <b>Contents API</b> を使って、CSVをリポジトリに上書きします。トークンはこの画面内だけで使い、保存しません。</div>
+      <div class="row" style="margin-top:8px;">
+        <input id="ghOwner" type="text" placeholder="owner（例: mikaeru222）" value="mikaeru222"/>
+        <input id="ghRepo" type="text" placeholder="repo（例: ganba-legends-tool）" value="ganba-legends-tool"/>
+        <input id="ghBranch" type="text" placeholder="branch" value="main"/>
+        <input id="ghPath" type="text" placeholder="path（例: test_patterns_full.csv）" value="test_patterns_full.csv"/>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input id="ghToken" type="password" placeholder="GitHub Personal Access Token（repo権限）"/>
+        <input id="ghMessage" type="text" placeholder="commit message" value="update csv via admin panel"/>
+        <button id="btnPush" class="btn-danger">GitHubに上書きアップロード</button>
+      </div>
+      <div id="pushStatus" class="muted"></div>
     </div>
-  </section>
-
-  <div class="footer">© GANBA LEGENDS Ops</div>
+  </div>
 </main>
 
-<!-- 編集モーダル -->
-<div id="modalBackdrop" class="modal-backdrop">
-  <div class="modal">
-    <h3>行の編集</h3>
-    <div class="row stack-sm">
-      <label>ID</label>
-      <input id="editId" type="text" readonly />
-    </div>
-    <div class="row stack-sm">
-      <label>pattern</label>
-      <input id="editPattern" type="text" />
-    </div>
-    <div class="row stack-sm">
-      <label>cylinder</label>
-      <select id="editCylinder"><option>L</option><option>R</option></select>
-    </div>
-    <div class="row stack-sm">
-      <label>position</label>
-      <input id="editPosition" type="number" min="0" />
-    </div>
-    <div class="row stack-sm">
-      <label>rarity</label>
-      <input id="editRarity" type="text" />
-    </div>
-    <div class="row" style="margin-top:10px;">
-      <button id="btnSaveEdit" class="btn-green">保存</button>
-      <button id="btnCancelEdit">キャンセル</button>
-    </div>
-  </div>
-</div>
-
 <script>
-/* ===== 設定 ===== */
-const ADMIN_PASSWORD = "LEGENDS2025"; // ← 公開前に変更推奨
+/* ====== 簡易状態 ====== */
+const ADMIN_PASSWORD = "LEGENDS2025"; // 公開前に変更してください
 const $ = (q)=>document.querySelector(q);
-
 const els = {
+  rawUrl: $("#rawUrl"), reloadBtn: $("#reloadBtn"), status: $("#status"), message: $("#message"),
+  preview: $("#preview"),
   adminPass: $("#adminPass"), btnLogin: $("#btnLogin"), loginStatus: $("#loginStatus"),
-  rawUrl: $("#rawUrl"), reloadBtn: $("#reloadBtn"), btnSaveUrl: $("#btnSaveUrl"),
-  status: $("#status"), message: $("#message"),
-  stats: $("#stats"), patternSel: $("#patternSel"), raritySel: $("#raritySel"),
-  listL: $("#listL"), listR: $("#listR"),
-  searchId: $("#searchId"), btnFind: $("#btnFind"), btnEdit: $("#btnEdit"),
-  findResult: $("#findResult"), preview: $("#preview"),
-  modalBackdrop: $("#modalBackdrop"), editId: $("#editId"), editPattern: $("#editPattern"),
-  editCylinder: $("#editCylinder"), editPosition: $("#editPosition"), editRarity: $("#editRarity"),
-  btnSaveEdit: $("#btnSaveEdit"), btnCancelEdit: $("#btnCancelEdit"),
+  adminArea: $("#adminArea"), filePicker: $("#filePicker"), btnApplyLocal: $("#btnApplyLocal"),
+  ghOwner: $("#ghOwner"), ghRepo: $("#ghRepo"), ghBranch: $("#ghBranch"), ghPath: $("#ghPath"),
+  ghToken: $("#ghToken"), ghMessage: $("#ghMessage"), btnPush: $("#btnPush"), pushStatus: $("#pushStatus"),
 };
 
-let isAdmin = false;
-let store = { header:[], rows:[], byId:new Map(), byPattern:new Map() };
+let latestCSVText = ""; // 直近で読み込んだCSVテキスト（GitHub or ローカル）
 
-/* ===== ログイン ===== */
-els.btnLogin.addEventListener("click", ()=>{
-  if(els.adminPass.value === ADMIN_PASSWORD){
-    isAdmin = true;
-    els.loginStatus.textContent = "ログイン中（管理編集が有効）";
-    els.btnEdit.disabled = false;
-  }else{
-    els.loginStatus.textContent = "パスワードが違います";
-  }
-});
-
-/* ===== URL保存（localStorage） ===== */
-const URL_KEY = "gl_csv_raw_url";
-els.btnSaveUrl.addEventListener("click", ()=>{
-  const v = (els.rawUrl.value||"").trim();
-  if(!v){ alert("URLを入力してください"); return; }
-  localStorage.setItem(URL_KEY, v);
-  toast("URLを保存しました（この端末で記憶）");
-});
-
-/* ===== 初期化 ===== */
-document.addEventListener("DOMContentLoaded", ()=>{
-  const saved = localStorage.getItem(URL_KEY);
-  if(saved) els.rawUrl.value = saved;
-  autoLoadFromGitHub();
-});
+/* ====== 起動・再読込 ====== */
+document.addEventListener("DOMContentLoaded", ()=>autoLoadFromGitHub());
 els.reloadBtn.addEventListener("click", ()=>autoLoadFromGitHub(true));
 
-/* ===== GitHub CSV 取得 ===== */
 async function autoLoadFromGitHub(){
-  const baseUrl = (els.rawUrl.value||"").trim();
+  const baseUrl=(els.rawUrl.value||"").trim();
   if(!baseUrl){ setError("Raw URL を入力してください。"); return; }
   const url = baseUrl + (baseUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
   setStatus("GitHubから取得中…");
@@ -223,13 +119,86 @@ async function autoLoadFromGitHub(){
     const res = await fetch(url, { cache:"no-store" });
     if(!res.ok) throw new Error("HTTP " + res.status);
     const text = await res.text();
-    applyCSVText(text, { url: baseUrl });
-  }catch(e){
-    setError("CSVの取得に失敗しました。URLを確認してください。\\n" + e.message);
-  }
+    latestCSVText = text;
+    renderPreview(parseCSV(text));
+    setStatus("GitHubから最新を取得しました", true);
+  }catch(e){ setError("CSVの取得に失敗しました。\\n" + e.message); }
 }
 
-/* ===== CSVパースと適用 ===== */
+/* ====== 管理ログイン ====== */
+els.btnLogin.addEventListener("click", ()=>{
+  if(els.adminPass.value === ADMIN_PASSWORD){
+    els.loginStatus.textContent = "管理者ログインOK";
+    els.adminArea.style.display = "block";
+  }else{
+    els.loginStatus.textContent = "パスワードが違います";
+  }
+});
+
+/* ====== ① 画面内に一括反映（ローカル） ====== */
+els.btnApplyLocal.addEventListener("click", async ()=>{
+  const file = els.filePicker.files?.[0];
+  if(!file){ alert("CSVファイルを選択してください"); return; }
+  try{
+    const text = await file.text();
+    latestCSVText = text;
+    renderPreview(parseCSV(text));
+    toast("CSVを画面に反映しました（この端末のみ）");
+  }catch(e){
+    setError("ローカルCSVの読み込みに失敗しました。\\n" + e.message);
+  }finally{
+    els.filePicker.value = "";
+  }
+});
+
+/* ====== ② GitHubに上書きアップロード（任意） ====== */
+els.btnPush.addEventListener("click", async ()=>{
+  if(!latestCSVText){ alert("先にCSVを読み込んでください（GitHubから読込 or ①で反映）"); return; }
+  const owner=(els.ghOwner.value||"").trim();
+  const repo =(els.ghRepo.value||"").trim();
+  const branch=(els.ghBranch.value||"main").trim()||"main";
+  const path  =(els.ghPath.value||"").trim();
+  const token =(els.ghToken.value||"").trim();
+  const message=(els.ghMessage.value||"update csv via admin panel").trim();
+  if(!owner || !repo || !path || !token){ alert("owner/repo/path/token を入力してください"); return; }
+
+  els.pushStatus.textContent = "GitHubにアップロード中…";
+  try{
+    // 1) 既存SHA取得（新規の場合は404を許容）
+    let sha = null;
+    const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`, {
+      headers: { "Authorization": `token ${token}`, "Accept":"application/vnd.github+json" }
+    });
+    if(getRes.ok){
+      const info = await getRes.json();
+      sha = info.sha;
+    }
+
+    // 2) PUTでアップデート
+    const contentB64 = btoa(unescape(encodeURIComponent(latestCSVText)));
+    const body = { message, content: contentB64, branch };
+    if(sha) body.sha = sha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, {
+      method:"PUT",
+      headers:{ "Authorization": `token ${token}`, "Accept":"application/vnd.github+json" },
+      body: JSON.stringify(body)
+    });
+
+    if(!putRes.ok){
+      const t = await putRes.text();
+      throw new Error("アップロード失敗: " + t);
+    }
+
+    els.pushStatus.innerHTML = "<span class='ok'>GitHubに上書きしました。</span> 反映後は公開ページを再読込してください。";
+    toast("GitHubに上書きしました");
+
+  }catch(e){
+    els.pushStatus.innerHTML = "<span class='err'>"+escapeHTML(e.message)+"</span>";
+  }
+});
+
+/* ====== CSVユーティリティ ====== */
 function parseCSV(text){
   const rows=[]; let cur=['']; let inQ=false; let i=0;
   const pushCell=()=>cur.push(''); const pushRow=()=>{ rows.push(cur); cur=['']; };
@@ -245,159 +214,17 @@ function parseCSV(text){
   return rows;
 }
 
-function applyCSVText(text, meta){
-  const rows = parseCSV(text);
-  renderPreview(rows);
-
-  const [header,...data]=rows;
-  const hmap={}; header.forEach((h,i)=>hmap[String(h).trim().toLowerCase()]=i);
-  const norm = data.filter(r=>r&&r.length).map(r=> ({
-    pattern : getCell(r,hmap,"pattern"),
-    cylinder: getCell(r,hmap,"cylinder").toUpperCase()==="R" ? "R":"L",
-    position: Number(getCell(r,hmap,"position")),
-    id      : String(getCell(r,hmap,"id")),
-    rarity  : getCell(r,hmap,"rarity"),
-  })).filter(o=>o.id);
-
-  store.header = header; store.rows = norm; store.byId = new Map(norm.map(o=>[o.id,o]));
-
-  const byPattern = new Map();
-  for(const o of norm){
-    const key = o.pattern || "(blank)";
-    if(!byPattern.has(key)) byPattern.set(key, {L:[], R:[]});
-    const bucket = (o.cylinder==="R") ? byPattern.get(key).R : byPattern.get(key).L;
-    bucket.push(o);
-  }
-  for(const v of byPattern.values()){ v.L.sort((a,b)=>a.position-b.position); v.R.sort((a,b)=>a.position-b.position); }
-  store.byPattern = byPattern;
-
-  // UI更新
-  renderStats(norm, byPattern);
-  renderPatternOptions([...byPattern.keys()].sort());
-  renderPatternLists();
-  setStatus("GitHubから最新を取得しました", true);
-  toast("CSVを読み込みました");
-}
-
-function getCell(row,hmap,key){ const idx=hmap[key]; return idx!=null ? String(row[idx]).trim() : ""; }
-
-/* ===== UI描画 ===== */
 function renderPreview(rows){
   const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
-  const thTr=document.createElement("tr");
-  (rows[0]||[]).forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
+  const thTr=document.createElement("tr"); (rows[0]||[]).forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
   rows.slice(1,101).forEach(r=>{ const tr=document.createElement("tr"); r.forEach(c=>{ const td=document.createElement("td"); td.textContent=c; tr.appendChild(td); }); tbody.appendChild(tr); });
   table.appendChild(thead); table.appendChild(tbody);
-  els.preview.innerHTML=""; els.preview.appendChild(table);
-}
-function renderStats(norm, byPattern){
-  const rarityCount = {}; for(const o of norm){ rarityCount[o.rarity]=(rarityCount[o.rarity]||0)+1; }
-  els.stats.innerHTML = `総件数：<b>${norm.length}</b><br>パターン数：${byPattern.size}<br>レアリティ内訳：${Object.entries(rarityCount).map(([k,v])=>`${k}:${v}`).join(" / ")}`;
-}
-function renderPatternOptions(keys){
-  els.patternSel.innerHTML = ""; keys.forEach(p=>{ const opt=document.createElement("option"); opt.value=p; opt.textContent=p; els.patternSel.appendChild(opt); });
-}
-els.patternSel.addEventListener("change", renderPatternLists);
-els.raritySel.addEventListener("change", renderPatternLists);
-
-function renderPatternLists(){
-  const key = els.patternSel.value;
-  const filterRarity = (els.raritySel.value||"").trim();
-  const group = store.byPattern.get(key) || {L:[],R:[]};
-  const f = (arr)=>arr.filter(o=>!filterRarity || o.rarity===filterRarity);
-
-  els.listL.innerHTML = toHtmlList(f(group.L), "L");
-  els.listR.innerHTML = toHtmlList(f(group.R), "R");
+  document.querySelector("#preview").innerHTML=""; document.querySelector("#preview").appendChild(table);
 }
 
-function toHtmlList(arr, cyl){
-  const table=document.createElement("table"); const thead=document.createElement("thead"); const tbody=document.createElement("tbody");
-  const thTr=document.createElement("tr"); ["position","id","rarity","操作"].forEach(h=>{ const th=document.createElement("th"); th.textContent=h; thTr.appendChild(th);}); thead.appendChild(thTr);
-  arr.forEach(o=>{
-    const tr=document.createElement("tr");
-    [["position",o.position],["id",o.id],["rarity",o.rarity]].forEach(([k,v])=>{
-      const td=document.createElement("td"); td.textContent=String(v); tr.appendChild(td);
-    });
-    const tdOp=document.createElement("td");
-    const btn=document.createElement("button"); btn.textContent="編集"; btn.onclick=()=>openEdit(o);
-    tdOp.appendChild(btn); tr.appendChild(tdOp);
-    tbody.appendChild(tr);
-  });
-  table.appendChild(thead); table.appendChild(tbody);
-  return table.outerHTML;
-}
-
-/* ===== 検索 & 編集 ===== */
-els.btnFind.addEventListener("click", ()=>{
-  const key=(els.searchId.value||"").trim();
-  if(!key){ els.findResult.textContent="IDを入力してください。"; return; }
-  const v=store.byId.get(key);
-  if(!v){ els.findResult.textContent="見つかりませんでした。"; els.btnEdit.disabled=true; return; }
-  els.findResult.innerHTML = `ID <code>${key}</code> → pattern: <b>${v.pattern}</b>, cylinder: <b>${v.cylinder}</b>, position: <b>${v.position}</b>, rarity: <b>${v.rarity}</b>`;
-  els.btnEdit.disabled = !isAdmin;
-  els.btnEdit.onclick = ()=>openEdit(v);
-});
-
-function openEdit(o){
-  if(!isAdmin){ alert("編集は管理者のみです。"); return; }
-  els.editId.value = o.id; els.editPattern.value = o.pattern; els.editCylinder.value = o.cylinder; els.editPosition.value = String(o.position); els.editRarity.value = o.rarity;
-  els.modalBackdrop.style.display="flex";
-}
-els.btnCancelEdit.addEventListener("click", ()=>{ els.modalBackdrop.style.display="none"; });
-els.btnSaveEdit.addEventListener("click", ()=>{
-  const id=els.editId.value;
-  const v=store.byId.get(id); if(!v) return;
-  v.pattern = els.editPattern.value.trim();
-  v.cylinder = els.editCylinder.value.trim().toUpperCase()==="R" ? "R":"L";
-  v.position = Number(els.editPosition.value)||0;
-  v.rarity = els.editRarity.value.trim();
-
-  // 再構築
-  const byPattern = new Map();
-  for(const x of store.rows){
-    const src = (x.id===id) ? v : x;
-    const key = src.pattern || "(blank)";
-    if(!byPattern.has(key)) byPattern.set(key, {L:[],R:[]});
-    const bucket = (src.cylinder==="R") ? byPattern.get(key).R : byPattern.get(key).L;
-    bucket.push(src);
-  }
-  for(const g of byPattern.values()){ g.L.sort((a,b)=>a.position-b.position); g.R.sort((a,b)=>a.position-b.position); }
-  store.byPattern = byPattern;
-  store.byId.set(id, v);
-  renderPatternOptions([...byPattern.keys()].sort());
-  renderPatternLists();
-  els.modalBackdrop.style.display="none";
-  toast("編集を反映しました。必要ならCSV保存してGitHubに上書きしてください。");
-});
-
-/* ===== エクスポート ===== */
-function toCSV(rows){
-  const header=["pattern","cylinder","position","id","rarity"];
-  const lines=[header, ...rows.map(o=>[o.pattern,o.cylinder,o.position,o.id,o.rarity])].map(r=>r.map(s=>{
-    const str=String(s);
-    return /[",\n\r]/.test(str) ? '"' + str.replace(/"/g,'""') + '"' : str;
-  }).join(",")).join("\r\n");
-  return lines;
-}
-document.getElementById("dlAll").addEventListener("click", ()=>{
-  const csv=toCSV(store.rows);
-  downloadBlob(csv, "all_data.csv");
-});
-document.getElementById("dlCurrent").addEventListener("click", ()=>{
-  const key = els.patternSel.value;
-  const g = store.byPattern.get(key); if(!g) return;
-  const rows=[...g.L, ...g.R];
-  const csv=toCSV(rows);
-  downloadBlob(csv, `pattern_${key}.csv`);
-});
-function downloadBlob(text, name){
-  const blob = new Blob([text], {type:"text/csv"});
-  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove();
-}
-
-/* ===== ステータス / トースト ===== */
-function setStatus(text, ok=false){ els.status.textContent=text; els.status.className = ok? "ok muted":"muted"; }
-function setError(text){ els.message.innerHTML=`<span class="err">${text}</span>`; }
+/* ====== ステータス/トースト ====== */
+function setStatus(text, ok=false){ els.status.textContent=text; els.status.className= ok? "ok muted":"muted"; }
+function setError(text){ els.message.innerHTML=`<span class='err'>${text}</span>`; }
 function toast(text){
   const div=document.createElement("div");
   div.textContent=text;
@@ -405,8 +232,9 @@ function toast(text){
   div.style.background="#1e252f"; div.style.color="#e8eaed"; div.style.border="1px solid #2a2f3a";
   div.style.padding="10px 14px"; div.style.borderRadius="10px"; div.style.zIndex=50;
   document.body.appendChild(div);
-  setTimeout(()=>div.remove(), 2200);
+  setTimeout(()=>div.remove(), 2000);
 }
+function escapeHTML(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;"); }
 </script>
 </body>
 </html>
